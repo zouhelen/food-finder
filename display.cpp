@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include "display.h"
-
+#include "dropdown.h"
 
 // create methods for each page. submit button reloads to reccs, then a quiz retake option, a see reccs option, and a browse option
 void Display::render(){ // puts everything together, onclick stuff
