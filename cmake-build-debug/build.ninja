@@ -49,17 +49,33 @@ cmake_ninja_workdir = C$:/Users/beiyu/food-finder/cmake-build-debug/
 
 build cmake_object_order_depends_target_food: phony || CMakeFiles/food.dir
 
-build CMakeFiles/food.dir/main.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/main.cpp || cmake_object_order_depends_target_food
+build CMakeFiles/food.dir/display.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/display.cpp || cmake_object_order_depends_target_food
   DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\food.dir\main.cpp.obj.d
+  DEP_FILE = CMakeFiles\food.dir\display.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -Ic:/Libraries/SFML-2.5.1/include/SFML -isystem C:/Libraries/SFML-2.5.1/include
   OBJECT_DIR = CMakeFiles\food.dir
   OBJECT_FILE_DIR = CMakeFiles\food.dir
 
-build CMakeFiles/food.dir/display.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/display.cpp || cmake_object_order_depends_target_food
+build CMakeFiles/food.dir/button.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/button.cpp || cmake_object_order_depends_target_food
   DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\food.dir\display.cpp.obj.d
+  DEP_FILE = CMakeFiles\food.dir\button.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -Ic:/Libraries/SFML-2.5.1/include/SFML -isystem C:/Libraries/SFML-2.5.1/include
+  OBJECT_DIR = CMakeFiles\food.dir
+  OBJECT_FILE_DIR = CMakeFiles\food.dir
+
+build CMakeFiles/food.dir/recipe.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/recipe.cpp || cmake_object_order_depends_target_food
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\food.dir\recipe.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -Ic:/Libraries/SFML-2.5.1/include/SFML -isystem C:/Libraries/SFML-2.5.1/include
+  OBJECT_DIR = CMakeFiles\food.dir
+  OBJECT_FILE_DIR = CMakeFiles\food.dir
+
+build CMakeFiles/food.dir/dropdown.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/dropdown.cpp || cmake_object_order_depends_target_food
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\food.dir\dropdown.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -Ic:/Libraries/SFML-2.5.1/include/SFML -isystem C:/Libraries/SFML-2.5.1/include
   OBJECT_DIR = CMakeFiles\food.dir
@@ -73,7 +89,7 @@ build CMakeFiles/food.dir/display.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$
 #############################################
 # Link the executable food.exe
 
-build food.exe: CXX_EXECUTABLE_LINKER__food_Debug CMakeFiles/food.dir/main.cpp.obj CMakeFiles/food.dir/display.cpp.obj | C$:/Libraries/SFML-2.5.1/lib/libsfml-graphics-s-d.a C$:/Libraries/SFML-2.5.1/lib/libsfml-audio-s-d.a C$:/Libraries/SFML-2.5.1/lib/libsfml-window-s-d.a C$:/Libraries/SFML-2.5.1/lib/libfreetype.a C$:/Libraries/SFML-2.5.1/lib/libopenal32.a C$:/Libraries/SFML-2.5.1/lib/libsfml-system-s-d.a C$:/Libraries/SFML-2.5.1/lib/libvorbisfile.a C$:/Libraries/SFML-2.5.1/lib/libvorbisenc.a C$:/Libraries/SFML-2.5.1/lib/libvorbis.a C$:/Libraries/SFML-2.5.1/lib/libogg.a C$:/Libraries/SFML-2.5.1/lib/libFLAC.a
+build food.exe: CXX_EXECUTABLE_LINKER__food_Debug CMakeFiles/food.dir/display.cpp.obj CMakeFiles/food.dir/button.cpp.obj CMakeFiles/food.dir/recipe.cpp.obj CMakeFiles/food.dir/dropdown.cpp.obj | C$:/Libraries/SFML-2.5.1/lib/libsfml-graphics-s-d.a C$:/Libraries/SFML-2.5.1/lib/libsfml-audio-s-d.a C$:/Libraries/SFML-2.5.1/lib/libsfml-window-s-d.a C$:/Libraries/SFML-2.5.1/lib/libfreetype.a C$:/Libraries/SFML-2.5.1/lib/libopenal32.a C$:/Libraries/SFML-2.5.1/lib/libsfml-system-s-d.a C$:/Libraries/SFML-2.5.1/lib/libvorbisfile.a C$:/Libraries/SFML-2.5.1/lib/libvorbisenc.a C$:/Libraries/SFML-2.5.1/lib/libvorbis.a C$:/Libraries/SFML-2.5.1/lib/libogg.a C$:/Libraries/SFML-2.5.1/lib/libFLAC.a
   FLAGS = -g
   LINK_LIBRARIES = C:/Libraries/SFML-2.5.1/lib/libsfml-graphics-s-d.a  C:/Libraries/SFML-2.5.1/lib/libsfml-audio-s-d.a  C:/Libraries/SFML-2.5.1/lib/libsfml-window-s-d.a  -lgdi32  -lOpenGL32  C:/Libraries/SFML-2.5.1/lib/libfreetype.a  C:/Libraries/SFML-2.5.1/lib/libopenal32.a  C:/Libraries/SFML-2.5.1/lib/libsfml-system-s-d.a  -lwinmm  C:/Libraries/SFML-2.5.1/lib/libvorbisfile.a  C:/Libraries/SFML-2.5.1/lib/libvorbisenc.a  C:/Libraries/SFML-2.5.1/lib/libvorbis.a  C:/Libraries/SFML-2.5.1/lib/libogg.a  C:/Libraries/SFML-2.5.1/lib/libFLAC.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\food.dir
