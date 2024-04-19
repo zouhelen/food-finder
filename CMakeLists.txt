@@ -8,6 +8,7 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
 include_directories(c:/Libraries/SFML-2.5.1/include/SFML)
 
-add_executable(main main.cpp
-        display.cpp)
-target_link_libraries(main sfml-graphics sfml-audio)
+add_executable(food main.cpp
+        display.cpp
+)
+target_link_libraries(food sfml-graphics sfml-audio)
