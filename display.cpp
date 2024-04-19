@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include <functional>
 #include <vector>
 #include <string>
 #include <iostream>
+#include <functional>
 
 int main(){
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
