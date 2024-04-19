@@ -16,26 +16,40 @@ class recipeStorage {
 public:
     // recipe structure
     struct recipeData {
-        string recipeName;
-        vector<string> ingMeasurements;
-        vector<string> directions;
-        vector<string> ingList;
+        string recipeName; //name of each recipe
+        vector<string> ingMeasurements; //vector of ingredients and their amounts for each recipe
+        vector<string> directions; //vector of directions/steps for each recipe
+        vector<string> ingList; //vector of just the ingredients for each recipe
     };
 
     // public variables
-    unordered_map<string, recipeData> recipeMap;
-    unordered_map<string, recipeData> ingredientMap;
+    unordered_map<string, recipeData> recipeMap; //contains all the recipes and their data
+    unordered_map<string, recipeData> ingredientMap; //contains all ingredients and vectors of the recipes the ingredients are in
 
-    unordered_set<string> chosenIng;
+    unordered_set<string> chosenIng; //set of the chosen ingredients
     unordered_set<string> restrictedIng;
     set<string> chosenRecipe;
 
-    vector<pair<string, int>> freq; // pair: ingredient name, frequency
-    vector<pair<string, string>> leastIngre; // pair: ingredient name,
-    vector<pair<string, string>> leastSteps; // pair: ingredient name,
+    //contains the names of the ingredients that are chosen
+    vector<pair<string, int>> clickFreq; //pair: ingredient name, click frequency 
+    vector<pair<string, int>> leastIng; //pair: recipe name, least ingredients
+    vector<pair<string, int>> leastSteps; //pair: recipe name,  least steps
+    
+    vector<string> hadIngre; //contains the names of the ingredients that are chosen    
 
     // methods
     void readFile();
+
+    //sorts all the vectors with the corresponding algorithm
+    //returns the length of time the function took
+    auto clickFreqShell();
+    auto clickFreqRadix();
+
+    auto leastIngShell();
+    auto leastIngRadix();
+    
+    auto leastStepsShell();
+    auto leastRadix();
 
 private:
     string readBrackSeg(std::istream& input);
