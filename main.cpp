@@ -3,10 +3,10 @@
 #include <sstream>
 #include <vector>
 #include <string>
-#include "dataInput/readFile.h"
+//#include "dataInput/readFile.h"
 
 int main() {
-    readFile();
-
+    //readFile();
+    std::cout << "plz";
     return 0;
 }
