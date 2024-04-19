@@ -3,10 +3,12 @@
 #include <sstream>
 #include <vector>
 #include <string>
-//#include "dataInput/readFile.h"
+#include "recipeStorage/recipeStorage.h"
 
 int main() {
-    //readFile();
-    std::cout << "plz";
+    recipeStorage recipes = recipeStorage();
+
+    recipes.readFile();
+    
     return 0;
 }

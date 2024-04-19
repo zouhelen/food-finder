@@ -14,12 +14,15 @@ using std::pair;
 
 class recipeStorage {
 public:
+    // recipe structure
     struct recipeData {
         string recipeName;
         vector<string> ingredients;
         vector<string> directions;
         vector<string> ingList;
     };
+
+    // public variables
     unordered_map<string, recipeData> recipeList;
     map<string, recipeData> ingredientList;
 
@@ -29,9 +32,8 @@ public:
     vector<pair<string, string>> leastIngre; //pair: ingredient name,  
     vector<pair<string, string>> leastSteps; //pair: ingredient name,  
 
-private:
+    // methods
     void readFile();
-    
 
     
 };
