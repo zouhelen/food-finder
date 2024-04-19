@@ -7,16 +7,15 @@
 
 // create methods for each page. submit button reloads to reccs, then a quiz retake option, a see reccs option, and a browse option
 void Display::render(){ // puts everything together, onclick stuff
-    this -> video.height = 1000;
-    this -> video.width = 1000;
+    video = sf::VideoMode::getDesktopMode();
 
     this -> window.create(this -> video, "Food Finder", sf::Style::Titlebar | sf::Style::Close);
 
 
     this -> font.loadFromFile("Cave-Story.ttf");
 
-    dropdown d1(window, sortOptions, 100.f, 100.f);
-    dropdown d2(window, menuOptions, 100.f, 100.f);
+    dropdown d1(window, sortOptions, 100.f, 100.f, "Sort By");
+    dropdown d2(window, menuOptions, 200.f, 200.f, "Menu");
 
 
     while(this -> window.isOpen()) {
@@ -40,12 +39,19 @@ void Display::render(){ // puts everything together, onclick stuff
                                ev.mouseButton.y >= d1.menu.getPosition().y && ev.mouseButton.y <= d1.menu.getPosition().y + d1.menu.getSize().y) {
                         d1.toggle();
                     }
+
+                    if (d2.isOpen()) {
+                        d2.toggle();
+                    } else if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
+                               ev.mouseButton.y >= d2.menu.getPosition().y && ev.mouseButton.y <= d2.menu.getPosition().y + d2.menu.getSize().y) {
+                        d2.toggle();
+                    }
                 }
             }
         }
         this -> window.clear();
         d1.draw();
-        //d2.draw();
+        d2.draw();
         this -> window.display();
     }
 }

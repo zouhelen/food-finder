@@ -1,7 +1,3 @@
-//
-// Created by beiyu on 4/19/2024.
-//
-
 #ifndef FOOD_FINDER_DROPDOWN_H
 #define FOOD_FINDER_DROPDOWN_H
 #include <SFML/Graphics.hpp>
@@ -10,7 +6,7 @@
 
 class dropdown {
 public:
-    dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y);
+    dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, std::string top);
     void draw();
     void toggle();
     bool isOpen() const;

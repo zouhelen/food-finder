@@ -3,7 +3,7 @@
 #include <vector>
 #include "dropdown.h"
 
-dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y): window(window), options(options), m_isOpen(false) {
+dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, std::string top): window(window), options(options), m_isOpen(false) {
         menu.setSize(sf::Vector2f(150.f, 30.f));
         menu.setFillColor(sf::Color::White);
         menu.setOutlineColor(sf::Color::Black);
@@ -14,7 +14,7 @@ dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& opt
         select.setFont(font);
         select.setCharacterSize(16);
         select.setFillColor(sf::Color::Black);
-        select.setString("Select an option");
+        select.setString(top);
         select.setPosition(x + 5.f, y + 5.f);
 
         float optionHeight = 30.f;
