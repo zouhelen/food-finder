@@ -24,9 +24,9 @@ class recipeStorage {
 
     set<string, recipeData> ingreSet;
 
-    vector<pair<string, string>> freq; //pair: ingredient name, frequency 
-    vector<pair<string, string>> leastIngre; //pair: ingredient name,  
-    vector<pair<string, string>> leastSteps; //pair: ingredient name,  
+    vector<pair<string, int>> freq; //pair: ingredient name, click frequency 
+    vector<pair<string, int>> leastIngre; //pair: ingredient name, least ingredients
+    vector<pair<string, int>> leastSteps; //pair: ingredient name,  least steps
 
-    
+    vector<string> hadIngre; //contains the name of the ingredients that are chosen
 };
