@@ -1,0 +1,7 @@
+# ninja log v5
+1	2203	7352401184054571	CMakeFiles/food.dir/main.cpp.obj	10da9041ccbc3afc
+8	932	7352401732500016	CMakeFiles/food.dir/display.cpp.obj	e82c47428aad414b
+2	276	7352404745775273	build.ninja	57c779eb2ad8ae81
+2	255	7352404745775273	build.ninja	57c779eb2ad8ae81
+1	630	7352404752922582	CMakeFiles/main.dir/main.cpp.obj	d4376a9a6cf4cd5b
+5	704	7352404753657520	CMakeFiles/main.dir/display.cpp.obj	bf723c20b1061690
