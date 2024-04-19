@@ -6,9 +6,10 @@
 using std::string;
 using std::endl;
 
+
 void readFile() {
     /* read file in */
-    std::ifstream data("testData.csv");
+    std::ifstream data("../testData.csv");
 
     // check if file opened successfully
     if (!data.is_open()) {
