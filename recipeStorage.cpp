@@ -14,15 +14,16 @@ string readBrackSeg(std::istream& input) {
 }
 
 /* read a segment starting with '[' and ending with ']' */
-string readQuoteSeg(std::istream& input) {
-    std::string result;
+string readQuoteSeg(std::string& input) {
+    std::string result = "";
+    std::istringstream inputStream(input);
     char ch;
-    while (input.get(ch) && ch != '"'); // read until '['
-    input.get(ch); // read second '"'
-    while (input.get(ch) && ch != '"') {
+    while (inputStream.get(ch) && ch != '"'); // read until '['
+    inputStream.get(ch); // read second '"'
+    while (inputStream.get(ch) && ch != '"') {
         result += ch;
     }
-    input.get(ch); // read second '"'
+    inputStream.get(ch); // read second '"'
     return result;
 }
 
@@ -35,7 +36,7 @@ void recipeStorage::readFile() {
         std::cerr << "Error opening test file.\n";
     }
 
-    // read first line with no recipe data
+    // read and scrap first line which has no recipe data
     string scrap;
     std::getline(data, scrap);
     std::cout << scrap << std::endl;
@@ -46,7 +47,7 @@ void recipeStorage::readFile() {
     while (std::getline(data, line)) {
         string segment;
         std::stringstream lineStream(line); // put line into a string stream
-        recipeData* recipe = new recipeData;
+        recipeData* recipe = new recipeData; // new recipe struc allocated to heap
 
         // load title + save as var (comma to comma)
         std::getline(lineStream, scrap, ',');
@@ -54,6 +55,20 @@ void recipeStorage::readFile() {
         recipe->recipeName = segment;
 
         // load ingredients with measurements
+        string fullIng = readBrackSeg(lineStream);
+        bool moreIng = true;
+        while(moreIng) {
+            string oneIng = "";
+            oneIng = readQuoteSeg(fullIng);
+            // if
+            if(oneIng == "") {
+                moreIng = false;
+            }
+            else {
+                recipe->ingMeasurements.push_back(oneIng);
+            }
+        }
+
 
         // load directions
         // load link

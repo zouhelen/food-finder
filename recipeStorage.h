@@ -38,6 +38,6 @@ public:
     void readFile();
 
 private:
-    string readBrackSection(std::istream& input);
-    string readCommaSection(std::istream& input);
+    string readBrackSeg(std::istream& input);
+    string readQuoteSeg(std::string& input);
 };
