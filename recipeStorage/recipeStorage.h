@@ -13,6 +13,7 @@ using std::set;
 using std::pair;
 
 class recipeStorage {
+public:
     struct recipeData {
         string recipeName;
         vector<string> ingredients;
@@ -24,9 +25,13 @@ class recipeStorage {
 
     set<string, recipeData> ingreSet;
 
-    vector<pair<string, string>> freq; //pair: ingredient name, frequency 
+    vector<pair<string, int>> freq; //pair: ingredient name, frequency 
     vector<pair<string, string>> leastIngre; //pair: ingredient name,  
     vector<pair<string, string>> leastSteps; //pair: ingredient name,  
+
+private:
+    void readFile();
+    
 
     
 };
