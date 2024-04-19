@@ -17,7 +17,7 @@ public:
     // recipe structure
     struct recipeData {
         string recipeName;
-        vector<string> ingredients;
+        vector<string> ingMeasurements;
         vector<string> directions;
         vector<string> ingList;
     };
@@ -37,5 +37,7 @@ public:
     // methods
     void readFile();
 
-    
+private:
+    string readBrackSection(std::istream& input);
+    string readCommaSection(std::istream& input);
 };
