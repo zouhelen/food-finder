@@ -6,7 +6,7 @@
 using std::string;
 using std::endl;
 
-int main() {
+void readFile() {
     /* read file in */
     std::ifstream data("testData.csv");
 
@@ -14,7 +14,7 @@ int main() {
     if (!data.is_open()) {
         std::cerr << "Error opening test file.\n";
     }
-    
+
     // print out line by line
     string line;
     string cell;
@@ -26,6 +26,5 @@ int main() {
         std::cout << line << endl;
     }
     data.close();
-
-    return 0;
 }
+
