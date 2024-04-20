@@ -133,6 +133,7 @@ void recipeStorage::readFile() {
         std::istringstream dirStream(fullDir);
 
         bool moreSteps = true;
+        int i = 1;
         while(moreSteps) {
             string oneStep;
             oneStep = readQuoteSeg(dirStream);
@@ -141,8 +142,10 @@ void recipeStorage::readFile() {
                 moreSteps = false;
             }
             else {
-                recipe->directions.push_back(oneStep);
+                string labeledStep = "(" + std::to_string(i ) + ") " + oneStep;
+                recipe->directions.push_back(labeledStep);
             }
+            i++;
         }
         std::cout << "directions: \n";
         for (string step: recipe->directions) {
