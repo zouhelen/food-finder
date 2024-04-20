@@ -7,15 +7,27 @@
 
 // create methods for each page. submit button reloads to reccs, then a quiz retake option, a see reccs option, and a browse option
 void Display::render(){ // puts everything together, onclick stuff
+    sf::Color bgGreen(230, 250, 245);
+
+    sf::Image icon;
+    icon.loadFromFile("icon.png");
+
     video = sf::VideoMode::getDesktopMode();
 
     this -> window.create(this -> video, "Food Finder", sf::Style::Titlebar | sf::Style::Close);
-
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     this -> font.loadFromFile("Cave-Story.ttf");
 
-    dropdown d1(window, sortOptions, 100.f, 100.f, "Sort By");
-    dropdown d2(window, menuOptions, 200.f, 200.f, "Menu");
+    // Load image into texture
+    sf::Texture* sortT = new sf::Texture();
+    sortT -> loadFromFile("sort by.png");
+
+    sf::Texture* menuT = new sf::Texture();
+    menuT -> loadFromFile("menu.png");
+
+    dropdown d1(window, sortOptions, 500.f, 500.f, sortT);
+    dropdown d2(window, menuOptions, 5.f, 5.f, menuT);
 
 
     while(this -> window.isOpen()) {
@@ -49,7 +61,8 @@ void Display::render(){ // puts everything together, onclick stuff
                 }
             }
         }
-        this -> window.clear();
+        this -> window.clear(bgGreen);
+
         d1.draw();
         d2.draw();
         this -> window.display();
