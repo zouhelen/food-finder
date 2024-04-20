@@ -93,7 +93,7 @@ void recipeStorage::readFile() {
     // read all other recipe lines
     string line;
     string cell;
-    //while (std::getline(data, line)) {
+    while (std::getline(data, line)) {
     std::getline(data, line);
         string name;
         std::stringstream lineStream(line); // put line into a string stream
@@ -192,7 +192,7 @@ void recipeStorage::readFile() {
             std::cout << "\n\n";
         }
         //std::cout << line << std::endl;
-    //}
+    }
     data.close();
 }
 
