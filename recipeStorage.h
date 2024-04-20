@@ -31,14 +31,13 @@ public:
     set<string> chosenRecipe;
 
     //contains the names of the ingredients that are chosen
-    vector<pair<string, int>> clickFreq; //pair: ingredient name, click frequency 
-    vector<pair<string, int>> leastIng; //pair: recipe name, least ingredients
-    vector<pair<string, int>> leastSteps; //pair: recipe name,  least steps
+    vector<pair<string, int>> clickFreq; //pair: ingredient name, click frequency (greater first)
+    vector<pair<string, int>> leastIng; //pair: recipe name, least ingredients (lesser first)
+    vector<pair<string, int>> leastSteps; //pair: recipe name,  least steps (lesser first)
+    //percentage of recipes' ingredients that are chosen
+    vector<pair<string, int>> recipePercent; //pair: recipe, percent chosen (greater first)
     
     vector<string> hadIngre; //contains the names of the ingredients that are chosen    
-
-    //percentage of recipes' ingredients that are chosen
-    vector<pair<string, int>> recipePercent; //pair: recipe, percent chosen
     
 
     // methods
@@ -46,11 +45,13 @@ public:
     string readBrackSeg(std::istream& input); // short for read segment surrounded by brackets
     string readQuoteSeg(std::istringstream& input); // short for segment surrounded by quotes
 
+
+
     //sorts all the vectors with the corresponding algorithm
     //returns the length of time the function took
-    auto clickFreqShell();
-    auto clickFreqRadix();
-    void clickFreqCountingSort(int placeVal);
+    auto clickFreqShell(); //performs shell sort on clickFreq
+    auto clickFreqRadix(); //performs radix sort on clickFreq
+    void clickFreqCountingSort(int placeVal); //helper function for radix sort
 
     auto leastIngShell();
     auto leastIngRadix();
