@@ -8,10 +8,14 @@
 // create methods for each page. submit button reloads to reccs, then a quiz retake option, a see reccs option, and a browse option
 void Display::render(){ // puts everything together, onclick stuff
     sf::Color bgGreen(230, 250, 245);
+
+    sf::Image icon;
+    icon.loadFromFile("icon.png");
+
     video = sf::VideoMode::getDesktopMode();
 
     this -> window.create(this -> video, "Food Finder", sf::Style::Titlebar | sf::Style::Close);
-
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     this -> font.loadFromFile("Cave-Story.ttf");
 
