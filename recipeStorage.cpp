@@ -95,15 +95,15 @@ void recipeStorage::readFile() {
     string cell;
     //while (std::getline(data, line)) {
     std::getline(data, line);
-        string segment;
+        string name;
         std::stringstream lineStream(line); // put line into a string stream
         recipeData* recipe = new recipeData; // new recipe struc allocated to heap
 
         /* load title + save as var (comma to comma) */
 
         std::getline(lineStream, scrap, ',');
-        std::getline(lineStream, segment, ',');
-        recipe->recipeName = segment;
+        std::getline(lineStream, name, ',');
+        recipe->recipeName = name;
         std::cout << "recipe name: " << recipe->recipeName << std::endl;
 
         /* load ingredients including measurements */
@@ -152,9 +152,45 @@ void recipeStorage::readFile() {
             std::cout << step << std::endl;
         }
 
-        // load link
-        // load source
-        // load NER aka ingredients + add to ingredient-recipe map
+        /* load NER aka ingredients and
+         * add to ingredient-recipe map */
+        string ingList = readBrackSeg(lineStream);
+        std::istringstream ingStream(ingList);
+
+        bool moreIngredients = true;
+        while(moreIngredients) { // keep adding ingredients until end
+            string oneIng;
+            oneIng = readQuoteSeg(ingStream);
+
+            if(oneIng.empty()) {
+                moreIngredients = false;
+            }
+            else {
+                recipe->ingList.push_back(oneIng);
+                // add recipe to corresponding ingredient map
+                if (ingredientMap.find(oneIng) != ingredientMap.end()) {
+                    vector<string> recipeList;
+                    recipeList.push_back(recipe->recipeName);
+                    ingredientMap[oneIng] = recipeList;
+                }
+                else {
+                    ingredientMap[oneIng].push_back(recipe->recipeName);
+                }
+            }
+        }
+        std::cout << "ingredients: \n";
+        for (string ing: recipe->ingList) {
+            std::cout << ing << std::endl;
+        }
+
+        for (auto& pair: ingredientMap) {
+            std::cout << "ingredient: " << pair.first << "\n";
+            std::cout << "recipes: ";
+            for (string recipe: pair.second) {
+                std::cout << recipe << ", ";
+            }
+            std::cout << "\n\n";
+        }
         //std::cout << line << std::endl;
     //}
     data.close();

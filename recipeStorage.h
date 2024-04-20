@@ -23,10 +23,10 @@ public:
     };
 
     // public variables
-    unordered_map<string, recipeData> recipeMap; //contains all the recipes and their data
-    unordered_map<string, recipeData> ingredientMap; //contains all ingredients and vectors of the recipes the ingredients are in
+    unordered_map<string, recipeData> recipeMap; // contains all the recipes and their data
+    unordered_map<string, vector<string>> ingredientMap; // contains all ingredients and vectors of the recipes the ingredients are in
 
-    unordered_set<string> chosenIng; //set of the chosen ingredients
+    //unordered_set<string> chosenIng; //set of the chosen ingredients
     unordered_set<string> restrictedIng;
     set<string> chosenRecipe;
 
