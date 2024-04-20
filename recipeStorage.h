@@ -37,6 +37,10 @@ public:
     
     vector<string> hadIngre; //contains the names of the ingredients that are chosen    
 
+    //percentage of recipes' ingredients that are chosen
+    vector<pair<string, int>> recipePercent; //pair: recipe, percent chosen
+    
+
     // methods
     void readFile();
 
@@ -44,12 +48,19 @@ public:
     //returns the length of time the function took
     auto clickFreqShell();
     auto clickFreqRadix();
+    void clickFreqCountingSort(int placeVal);
 
     auto leastIngShell();
     auto leastIngRadix();
     
     auto leastStepsShell();
-    auto leastRadix();
+    auto leastStepsRadix();
+
+    auto recipePercentShell();
+    auto recipePercentRadix();
+
+    //used for radix; returns the largest num in an array
+    int largest();
 
 private:
     string readBrackSection(std::istream& input);
