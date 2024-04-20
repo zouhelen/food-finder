@@ -53,7 +53,7 @@ auto leastStepsShell();
 auto leastRadix();
 
 /* read a segment starting with '[' and ending with ']' */
-string readBrackSeg(std::istream& input) {
+string recipeStorage::readBrackSeg(std::istream& input) {
     std::string result;
     char ch;
     while (input.get(ch) && ch != '['); // read until '['
@@ -64,9 +64,8 @@ string readBrackSeg(std::istream& input) {
 }
 
 /* read a segment starting with '[' and ending with ']' */
-string readQuoteSeg(std::string& input) {
+string recipeStorage::readQuoteSeg(std::istringstream& inputStream) {
     std::string result = "";
-    std::istringstream inputStream(input);
     char ch;
     while (inputStream.get(ch) && ch != '"'); // read until '['
     inputStream.get(ch); // read second '"'
@@ -94,7 +93,8 @@ void recipeStorage::readFile() {
     // read all other recipe lines
     string line;
     string cell;
-    while (std::getline(data, line)) {
+    //while (std::getline(data, line)) {
+    std::getline(data, line);
         string segment;
         std::stringstream lineStream(line); // put line into a string stream
         recipeData* recipe = new recipeData; // new recipe struc allocated to heap
@@ -103,20 +103,27 @@ void recipeStorage::readFile() {
         std::getline(lineStream, scrap, ',');
         std::getline(lineStream, segment, ',');
         recipe->recipeName = segment;
+        std::cout << "recipe name: " << recipe->recipeName << std::endl;
 
         // load ingredients with measurements
         string fullIng = readBrackSeg(lineStream);
+        std::istringstream fullIngStream(fullIng);
+
         bool moreIng = true;
         while(moreIng) {
-            string oneIng = "";
-            oneIng = readQuoteSeg(fullIng);
+            string oneIng;
+            oneIng = readQuoteSeg(fullIngStream);
             // if
-            if(oneIng == "") {
+            if(oneIng.empty()) {
                 moreIng = false;
             }
             else {
                 recipe->ingMeasurements.push_back(oneIng);
             }
+        }
+        std::cout << "ingredients: \n";
+        for (string ing: recipe->ingMeasurements) {
+            std::cout << ing << std::endl;
         }
 
 
@@ -124,8 +131,8 @@ void recipeStorage::readFile() {
         // load link
         // load source
         // load NER aka ingredients + add to ingredient-recipe map
-        std::cout << line << std::endl;
-    }
+        //std::cout << line << std::endl;
+    //}
     data.close();
 }
 

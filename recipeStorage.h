@@ -39,6 +39,8 @@ public:
 
     // methods
     void readFile();
+    string readBrackSeg(std::istream& input);
+    string readQuoteSeg(std::istringstream& input);
 
     //sorts all the vectors with the corresponding algorithm
     //returns the length of time the function took
@@ -51,7 +53,5 @@ public:
     auto leastStepsShell();
     auto leastRadix();
 
-private:
-    string readBrackSeg(std::istream& input);
-    string readQuoteSeg(std::string& input);
+
 };
