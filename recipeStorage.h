@@ -23,10 +23,10 @@ public:
     };
 
     // public variables
-    unordered_map<string, recipeData> recipeMap; //contains all the recipes and their data
-    unordered_map<string, recipeData> ingredientMap; //contains all ingredients and vectors of the recipes the ingredients are in
+    unordered_map<string, recipeData> recipeMap; // contains all the recipes and their data
+    unordered_map<string, vector<string>> ingredientMap; // contains all ingredients and vectors of the recipes the ingredients are in
 
-    unordered_set<string> chosenIng; //set of the chosen ingredients
+    //unordered_set<string> chosenIng; //set of the chosen ingredients
     unordered_set<string> restrictedIng;
     set<string> chosenRecipe;
 
@@ -43,6 +43,8 @@ public:
 
     // methods
     void readFile();
+    string readBrackSeg(std::istream& input); // short for read segment surrounded by brackets
+    string readQuoteSeg(std::istringstream& input); // short for segment surrounded by quotes
 
     //sorts all the vectors with the corresponding algorithm
     //returns the length of time the function took
@@ -52,17 +54,15 @@ public:
 
     auto leastIngShell();
     auto leastIngRadix();
+    void leastIngCountingSort(int placeVal);
     
     auto leastStepsShell();
     auto leastStepsRadix();
+    void leastStepsCountingSort(int placeVal);
 
     auto recipePercentShell();
     auto recipePercentRadix();
+    void recipePercentCountingSort(int placeVal);
 
-    //used for radix; returns the largest num in an array
-    int largest();
 
-private:
-    string readBrackSection(std::istream& input);
-    string readCommaSection(std::istream& input);
 };
