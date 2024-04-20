@@ -39,8 +39,8 @@ public:
 
     // methods
     void readFile();
-    string readBrackSeg(std::istream& input);
-    string readQuoteSeg(std::istringstream& input);
+    string readBrackSeg(std::istream& input); // short for read segment surrounded by brackets
+    string readQuoteSeg(std::istringstream& input); // short for segment surrounded by quotes
 
     //sorts all the vectors with the corresponding algorithm
     //returns the length of time the function took

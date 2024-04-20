@@ -99,21 +99,23 @@ void recipeStorage::readFile() {
         std::stringstream lineStream(line); // put line into a string stream
         recipeData* recipe = new recipeData; // new recipe struc allocated to heap
 
-        // load title + save as var (comma to comma)
+        /* load title + save as var (comma to comma) */
+
         std::getline(lineStream, scrap, ',');
         std::getline(lineStream, segment, ',');
         recipe->recipeName = segment;
         std::cout << "recipe name: " << recipe->recipeName << std::endl;
 
-        // load ingredients with measurements
+        /* load ingredients including measurements */
+
         string fullIng = readBrackSeg(lineStream);
         std::istringstream fullIngStream(fullIng);
 
         bool moreIng = true;
-        while(moreIng) {
+        while(moreIng) { // keep adding ingredients until end
             string oneIng;
             oneIng = readQuoteSeg(fullIngStream);
-            // if
+
             if(oneIng.empty()) {
                 moreIng = false;
             }
@@ -126,8 +128,27 @@ void recipeStorage::readFile() {
             std::cout << ing << std::endl;
         }
 
+        /* load directions */
+        string fullDir = readBrackSeg(lineStream);
+        std::istringstream dirStream(fullDir);
 
-        // load directions
+        bool moreSteps = true;
+        while(moreSteps) {
+            string oneStep;
+            oneStep = readQuoteSeg(dirStream);
+            // keep adding steps until the end
+            if(oneStep.empty()) {
+                moreSteps = false;
+            }
+            else {
+                recipe->directions.push_back(oneStep);
+            }
+        }
+        std::cout << "directions: \n";
+        for (string step: recipe->directions) {
+            std::cout << step << std::endl;
+        }
+
         // load link
         // load source
         // load NER aka ingredients + add to ingredient-recipe map
