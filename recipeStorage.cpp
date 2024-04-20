@@ -149,6 +149,54 @@ string recipeStorage::readQuoteSeg(std::istringstream& inputStream) {
 }
 
 
+
+void recipeStorage::chooseIngre(string ingredient) {
+    //for chosenIng
+    chosenIng.insert(ingredient);
+    //for chosenRecipe
+    for (int i = 0; i < ingredientMap[ingredient].size(); i++) {
+        chosenRecipe.insert(ingredientMap[ingredient][i]); //duplicate ingredients are ignored
+    }
+
+    //for clickFreq
+    bool hasAlrBeenClicked = false;
+    for (auto ingrePair : clickFreq) {
+        if (ingrePair.first == ingredient) {
+            ingrePair.second++;
+            hasAlrBeenClicked = true;
+        }
+    }
+    if (!hasAlrBeenClicked)
+        clickFreq.push_back(pair<string, int> (ingredient, 1));
+
+    
+    //set containing recipes needing ingredient
+    unordered_set<string> recipes;
+    for (string recipe : ingredientMap[ingredient]) {
+        recipes.insert(recipe);
+    }
+    //for leastIng, leastSteps, and recipePercent
+    //removes the recipes from recipes (the set) that are already in leastIng/leastSteps/recipePercent
+    for (pair<string, int> recipePair : leastIng) {
+        if (recipes.find(recipePair.first) != recipes.end()) {
+            recipes.erase(recipePair.first);
+        }
+    }
+    //adds the recipes containing the ingredient and the value the vectors are sorted by
+    for (string aRecipe : recipes) {
+        leastIng.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe].ingList.size()));
+        leastSteps.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe].directions.size()));
+        //number of ingredients in a recipe that have been chosen
+        int chosenCounter = 0;
+        for (string ingre : recipeMap[aRecipe].ingList) {
+            if (chosenIng.find(ingre) != chosenIng.end())
+                chosenCounter++;
+        }
+        recipePercent.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe].ingList.size())));
+    }
+}
+
+
 // all the sorts
 auto recipeStorage::clickFreqShell() {
     auto start = std::chrono::high_resolution_clock::now();
