@@ -168,30 +168,6 @@ auto recipePercentRadix() {
 
 }
 
-/* read a segment starting with '[' and ending with ']' */
-string readBrackSeg(std::istream& input) {
-    std::string result;
-    char ch;
-    while (input.get(ch) && ch != '['); // read until '['
-    while (input.get(ch) && ch != ']') {
-        result += ch;
-    }
-    return result;
-}
-
-/* read a segment starting with '[' and ending with ']' */
-string readQuoteSeg(std::istream& input) {
-    std::string result;
-    char ch;
-    while (input.get(ch) && ch != '"'); // read until '['
-    input.get(ch); // read second '"'
-    while (input.get(ch) && ch != '"') {
-        result += ch;
-    }
-    input.get(ch); // read second '"'
-    return result;
-}
-
 /* read file in */
 void recipeStorage::readFile() {
     std::ifstream data("../testData.csv");
@@ -230,3 +206,26 @@ void recipeStorage::readFile() {
     data.close();
 }
 
+/* read a segment starting with '[' and ending with ']' */
+string readBrackSeg(std::istream& input) {
+    std::string result;
+    char ch;
+    while (input.get(ch) && ch != '['); // read until '['
+    while (input.get(ch) && ch != ']') {
+        result += ch;
+    }
+    return result;
+}
+
+/* read a segment starting with '[' and ending with ']' */
+string readQuoteSeg(std::istream& input) {
+    std::string result;
+    char ch;
+    while (input.get(ch) && ch != '"'); // read until '['
+    input.get(ch); // read second '"'
+    while (input.get(ch) && ch != '"') {
+        result += ch;
+    }
+    input.get(ch); // read second '"'
+    return result;
+}
