@@ -3,35 +3,34 @@
 #include <vector>
 #include "dropdown.h"
 
-dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, std::string top): window(window), options(options), m_isOpen(false) {
-        menu.setSize(sf::Vector2f(150.f, 30.f));
-        menu.setFillColor(sf::Color::White);
-        menu.setOutlineColor(sf::Color::Black);
-        menu.setOutlineThickness(1.f);
-        menu.setPosition(x, y);
+dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, const sf::Texture* top): window(window), options(options), m_isOpen(false) {
+    sf::Color dblue(77, 208, 225);
+    sf::Color lblue(178, 235, 242);
 
-        this -> font.loadFromFile("Cave-Story.ttf");
-        select.setFont(font);
-        select.setCharacterSize(16);
-        select.setFillColor(sf::Color::Black);
-        select.setString(top);
-        select.setPosition(x + 5.f, y + 5.f);
+    menu.setSize(sf::Vector2f(175.f, 75.f));
+    menu.setTexture(top);
+    menu.setPosition(x,y);
 
-        float optionHeight = 30.f;
-        for (size_t i = 0; i < options.size(); ++i) {
-            sf::RectangleShape optionRect(sf::Vector2f(150.f, optionHeight));
-            optionRect.setFillColor(sf::Color::White);
-            optionRect.setOutlineColor(sf::Color::Black);
-            optionRect.setOutlineThickness(1.f);
-            optionRect.setPosition(x, y + (i + 1) * optionHeight);
+    this -> font.loadFromFile("Cave-Story.ttf");
 
-            sf::Text optionText(options[i], font, 16);
-            optionText.setFillColor(sf::Color::Black);
-            optionText.setPosition(x + 5.f, y + (i + 1) * optionHeight + 5.f);
+    for (size_t i = 0; i < options.size(); ++i) {
+        sf::RectangleShape optionRect(sf::Vector2f(175.f, 75.f));
+        optionRect.setFillColor(lblue);
+        optionRect.setOutlineColor(dblue);
+        optionRect.setOutlineThickness(1.f);
+        optionRect.setPosition(x, y + (i + 1) * 75.f);
 
-            rects.push_back(optionRect);
-            optionsText.push_back(optionText);
-        }
+        sf::Text optionText(options[i], font, 27);
+        optionText.setFillColor(dblue);
+        optionText.setOrigin(optionText.getLocalBounds().width / 2.f, optionText.getLocalBounds().height / 2.f);
+
+        // Calculate the position to center the text vertically within the option rectangle
+        sf::FloatRect textBounds = optionText.getLocalBounds();
+        optionText.setPosition(optionRect.getPosition().x + optionRect.getSize().x / 2.f, optionRect.getPosition().y + optionRect.getSize().y / 2.f - textBounds.height / 2.f);
+
+        rects.push_back(optionRect);
+        optionsText.push_back(optionText);
+    }
 }
 
 void dropdown::draw() {
