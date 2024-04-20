@@ -23,10 +23,40 @@ auto recipeStorage::clickFreqShell() {
     return duration;
 }
 
-auto clickFreqRadix() {
+auto recipeStorage::clickFreqRadix() {
+    auto start = std::chrono::high_resolution_clock::now();
+    int max = clickFreq[0].second;
+    for (pair<string, int> pairItr : clickFreq) {
+        max = std::max(max, pairItr.second);
+    }
 
+    for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
+        clickFreqCountingSort(placeVal);
+    }
+
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start).count();
+    return duration;
 }
 
+void recipeStorage::clickFreqCountingSort(int placeVal) {
+    int count[] = {0,0,0,0,0,0,0,0,0,0};
+    pair<string, int> output[clickFreq.size()];
+    for (int i = 0; i < clickFreq.size(); i++) {
+        count[(clickFreq[i].second / placeVal) % 10] = count[(clickFreq[i].second / placeVal) % 10] + 1;
+    }
+    for (int j = 1; j < 10; j++) {
+        count[j] += count[j-1];
+    }
+    for (int k = clickFreq.size()-1; k >= 0; k--) {
+        output[count[(clickFreq[k].second / placeVal) % 10] - 1] = clickFreq[k];
+        count[(clickFreq[k].second / placeVal) % 10]--;
+    }
+    for (int l = 0; l < clickFreq.size(); l++) {
+        clickFreq[l] = output[l];
+    }
+}
 
 auto recipeStorage::leastIngShell() {
     auto start = std::chrono::high_resolution_clock::now();
@@ -51,6 +81,11 @@ auto leastIngRadix();
 
 auto leastStepsShell();
 auto leastRadix();
+
+auto recipePercentShell() {
+
+}
+auto recipePercentRadix();
 
 /* read a segment starting with '[' and ending with ']' */
 string readBrackSeg(std::istream& input) {
