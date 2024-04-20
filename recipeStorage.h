@@ -52,15 +52,15 @@ public:
 
     auto leastIngShell();
     auto leastIngRadix();
+    void leastIngCountingSort(int placeVal);
     
     auto leastStepsShell();
     auto leastStepsRadix();
+    void leastStepsCountingSort(int placeVal);
 
     auto recipePercentShell();
     auto recipePercentRadix();
-
-    //used for radix; returns the largest num in an array
-    int largest();
+    void recipePercentCountingSort(int placeVal);
 
 private:
     string readBrackSection(std::istream& input);
