@@ -74,7 +74,7 @@ public:
 
     bool quizDone = false;
 
-    std::map<std::string, int> choices = {{"banana", 0}, {"beef", 1}, {"carrot", 2}, {"cheese", 3}, {"chicken", 4}, {"coconut", 5}, {"cucumber", 6}, {"egg", 7}, {"milk", 8}, {"mushroom", 9}, {"pork", 10}, {"potato", 11}, {"peanut butter", 12}, {"strawberry", 13}, {"tomato", 14}};
+    std::map<std::string, int> choices = {{"banana", 0}, {"beef", 1}, {"carrot", 2}, {"cheese", 3}, {"chicken", 4}, {"coconut", 5}, {"cucumber", 6}, {"egg", 7}, {"milk", 8}, {"mushroom", 9}, {"pb", 10}, {"pork", 11}, {"potato", 12}, {"strawberry", 13}, {"tomato", 14}};
     std::vector<bool> added = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
     std::vector<bool> removed = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
     void render(); // combine everything

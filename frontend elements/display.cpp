@@ -277,6 +277,8 @@ std::function<void(void)> Display::changeIngre(int i){
 
 std::function<void(void)> Display::submitB(){
     return [this]() {
+        cPage = R;
+        quizDone = true;
     };
 }
 
@@ -356,6 +358,9 @@ void Display::render(){ // puts everything together, onclick stuff
                     }
                     if(enter.getSprite().getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         enter.onClick();
+                    }
+                    if(submit.getSprite().getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
+                        submit.onClick();
                     }
 
                     if(!quizDone && cPage == Q) {
