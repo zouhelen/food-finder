@@ -1,12 +1,10 @@
 # ninja log v5
-3	908	7353716526762877	CMakeFiles/food.dir/main.cpp.obj	10da9041ccbc3afc
+3	755	7353791966738803	CMakeFiles/food.dir/main.cpp.obj	10da9041ccbc3afc
 6	1529	7353697081432892	CMakeFiles/food.dir/button.cpp.obj	736879baacb3cf2e
-4	1157	7353789566878328	CMakeFiles/food.dir/display.cpp.obj	e82c47428aad414b
-3	408	7353698564104507	build.ninja	57c779eb2ad8ae81
+7	655	7353791965738907	CMakeFiles/food.dir/display.cpp.obj	e82c47428aad414b
+3	408	7354232012020728	build.ninja	57c779eb2ad8ae81
 44	1758	7353697083704997	CMakeFiles/food.dir/dropdown.cpp.obj	25a9793c9fc22f75
-1157	2211	7353789577341215	food.exe	b4047d7fcd826dac
+755	1369	7353791972794673	food.exe	b4047d7fcd826dac
 36	166	7353697067746642	CMakeFiles/food.dir/recipe.cpp.obj	4bc1342f847ca73d
 27	3169	7353697097759119	CMakeFiles/food.dir/recipeStorage.cpp.obj	20389743cc7a89ed
-7	655	7353791965738907	CMakeFiles/food.dir/display.cpp.obj	e82c47428aad414b
-3	755	7353791966738803	CMakeFiles/food.dir/main.cpp.obj	10da9041ccbc3afc
-755	1369	7353791972794673	food.exe	b4047d7fcd826dac
+8	1899	7354236065874889	CMakeFiles/food.dir/main.cpp.obj	10da9041ccbc3afc

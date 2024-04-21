@@ -28,7 +28,6 @@ void Display::welcome(){
     secondary.setFillColor(borderBlue);
     secondary.setPosition(window.getSize().x/5, window.getSize().y/2.5);
 
-    Button enter(swapPage());
     enter.setSprite(enterImg);
 
     this -> window.draw(welcomeText);
@@ -189,35 +188,20 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     fridge.scale(1.5,1.5);
     fridge.setPosition(window.getSize().x/4.35, window.getSize().y/5+100);
 
-    Button banana(swapPage());
     banana.setSprite(bananaImg);
-    Button beef(swapPage());
     beef.setSprite(beefImg);
-    Button carrot(swapPage());
     carrot.setSprite(carrotImg);
-    Button cheese(swapPage());
     cheese.setSprite(cheeseImg);
-    Button chicken(swapPage());
     chicken.setSprite(chickenImg);
-    Button egg(swapPage());
     egg.setSprite(eggImg);
-    Button mushroom(swapPage());
     mushroom.setSprite(mushroomImg);
-    Button pork(swapPage());
     pork.setSprite(porkImg);
-    Button potato(swapPage());
     potato.setSprite(potatoImg);
-    Button strawberry(swapPage());
     strawberry.setSprite(strawberryImg);
-    Button tomato(swapPage());
     tomato.setSprite(tomatoImg);
-    Button cucumber(swapPage());
     cucumber.setSprite(cucumberImg);
-    Button coconut(swapPage());
     coconut.setSprite(coconutImg);
-    Button milk(swapPage());
     milk.setSprite(milkImg);
-    Button pb(swapPage());
     pb.setSprite(pbImg);
 
     this -> window.draw(quizText);

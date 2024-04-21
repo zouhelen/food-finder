@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <functional>
+#include "button.h"
 #ifndef FOOD_FINDER_DISPLAY_H
 #define FOOD_FINDER_DISPLAY_H
 class Display{
@@ -18,12 +19,29 @@ class Display{
     sf::Color fontC;
     sf::Color borderBlue;
 
+    Button enter;
+    Button banana;
+    Button beef;
+    Button carrot;
+    Button cheese;
+    Button chicken;
+    Button coconut;
+    Button cucumber;
+    Button egg;
+    Button milk;
+    Button mushroom;
+    Button pb;
+    Button pork;
+    Button potato;
+    Button strawberry;
+    Button tomato;
+
     void welcome();
     void quiz();
     void reccs();
     //void browse(); // implement last
 public:
-    Display(): bgGreen(201, 201, 201), fontC(95, 90, 98), borderBlue(131, 125, 135){
+    Display(): bgGreen(201, 201, 201), fontC(95, 90, 98), borderBlue(131, 125, 135), enter(swapPage()), banana(swapPage()), beef(swapPage()), carrot(swapPage()), cheese(swapPage()), chicken(swapPage()), coconut(swapPage()), cucumber(swapPage()), egg(swapPage()), milk(swapPage()), mushroom(swapPage()), pb(swapPage()), pork(swapPage()), potato(swapPage()), strawberry(swapPage()), tomato(swapPage()){
     };
     void render(); // combine everything?
     std::vector<std::string> choices = {"banana", "beef", "carrot", "cheese", "chicken", "coconut", "cucumber", "egg", "milk", "mushroom", "pork", "potato", "peanut butter", "strawberry", "tomato"};
