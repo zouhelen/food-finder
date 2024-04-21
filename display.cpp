@@ -13,30 +13,26 @@ std::function<void(void)> Display::swapPage(){
 }
 
 void Display::welcome(){
-    sf::Color dark(20, 131, 143);
-    sf::Color dblue(28, 168, 184);
-
     sf::Texture enterB;
-    enterB.loadFromFile("enter.png");
+    enterB.loadFromFile("images/enter.png");
     sf::Sprite enterImg;
     enterImg.setTexture(enterB);
     enterImg.scale(.5,.37);
     enterImg.setPosition(window.getSize().x/2 - enterB.getSize().x/4,window.getSize().y/2);
 
     sf::Text welcomeText("Welcome to Food Finder!", font, 150);
-    welcomeText.setFillColor(dark);
+    welcomeText.setFillColor(fontC);
     welcomeText.setPosition(window.getSize().x/5,window.getSize().y/4);
 
-    sf::Text secondary("Please click enter to begin your preference quiz.", font, 70);
-    secondary.setFillColor(dblue);
+    sf::Text secondary("Please click enter to begin your preference quiz.", font, 60);
+    secondary.setFillColor(borderBlue);
     secondary.setPosition(window.getSize().x/5, window.getSize().y/2.5);
 
     Button enter(swapPage());
-
     enter.setSprite(enterImg);
+
     this -> window.draw(welcomeText);
     this -> window.draw(secondary);
-
     this -> window.draw(enter.getSprite());
 }
 
@@ -50,10 +46,7 @@ void Display::reccs() {
 
 // create methods for each page. submit button reloads to reccs, then a quiz retake option, a see reccs option, and a browse option
 void Display::render(){ // puts everything together, onclick stuff
-    sf::Color bgGreen(230, 250, 245);
-
-    sf::Image icon;
-    icon.loadFromFile("icon.png");
+    icon.loadFromFile("images/icon.png");
 
     video = sf::VideoMode::getDesktopMode();
 
@@ -63,12 +56,12 @@ void Display::render(){ // puts everything together, onclick stuff
     this -> font.loadFromFile("Cave-Story.ttf");
 
     sf::Texture* sortT = new sf::Texture();
-    sortT -> loadFromFile("sort by.png");
+    sortT -> loadFromFile("images/sort by.png");
 
     dropdown d1(window, sortOptions, 500.f, 500.f, sortT);
 
     sf::Texture* menuT = new sf::Texture();
-    menuT -> loadFromFile("menu.png");
+    menuT -> loadFromFile("images/menu.png");
     dropdown d2(window, menuOptions, 5.f, 5.f, menuT);
 
     while(this -> window.isOpen()) {
