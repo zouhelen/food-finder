@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "recipeStorage.h"
-#include "display.h"
+#include "frontend elements/display.h"
 
 int main() {
     recipeStorage recipes = recipeStorage();
