@@ -32,7 +32,9 @@ void recipeStorage::readFile() {
         std::getline(lineStream, scrap, ',');
         std::getline(lineStream, name, ',');
         recipe->recipeName = name;
+        /* recupe name test
         std::cout << "recipe name: " << recipe->recipeName << std::endl;
+        */
 
         /* load ingredients including measurements */
 
@@ -51,10 +53,12 @@ void recipeStorage::readFile() {
                 recipe->ingMeasurements.push_back(oneIng);
             }
         }
+        /* ingredients testing
         std::cout << "ingredients: \n";
         for (string ing: recipe->ingMeasurements) {
             std::cout << ing << std::endl;
         }
+         */
 
         /* load directions */
         string fullDir = readBrackSeg(lineStream);
@@ -75,10 +79,12 @@ void recipeStorage::readFile() {
             }
             i++;
         }
+        /* directions testing
         std::cout << "directions: \n";
         for (string step: recipe->directions) {
             std::cout << step << std::endl;
         }
+         */
 
         /* load NER aka ingredients and
          * add to ingredient-recipe map */
@@ -96,7 +102,7 @@ void recipeStorage::readFile() {
             else {
                 recipe->ingList.push_back(oneIng);
                 // add recipe to corresponding ingredient map
-                if (ingredientMap.find(oneIng) != ingredientMap.end()) {
+                if (ingredientMap.find(oneIng) == ingredientMap.end()) {
                     vector<string> recipeList;
                     recipeList.push_back(recipe->recipeName);
                     ingredientMap[oneIng] = recipeList;
@@ -106,21 +112,27 @@ void recipeStorage::readFile() {
                 }
             }
         }
+
+        /* ingredient testing
         std::cout << "ingredients: \n";
         for (string ing: recipe->ingList) {
             std::cout << ing << std::endl;
         }
+         */
 
-        for (auto& pair: ingredientMap) {
-            std::cout << "ingredient: " << pair.first << "\n";
-            std::cout << "recipes: ";
-            for (string recipe: pair.second) {
-                std::cout << recipe << ", ";
-            }
-            std::cout << "\n\n";
-        }
+
         //std::cout << line << std::endl;
     }
+    // print out ingredient map to test
+    for (auto& pair: ingredientMap) {
+        std::cout << "ingredient: " << pair.first << "\n";
+        std::cout << "recipes: ";
+        for (string recipe: pair.second) {
+            std::cout << recipe << ", ";
+        }
+        std::cout << "\n\n";
+    }
+
     data.close();
 }
 
@@ -146,6 +158,54 @@ string recipeStorage::readQuoteSeg(std::istringstream& inputStream) {
     }
     inputStream.get(ch); // read second '"'
     return result;
+}
+
+
+
+void recipeStorage::chooseIngre(string ingredient) {
+    //for chosenIng
+    chosenIng.insert(ingredient);
+    //for chosenRecipe
+    for (int i = 0; i < ingredientMap[ingredient].size(); i++) {
+        chosenRecipe.insert(ingredientMap[ingredient][i]); //duplicate ingredients are ignored
+    }
+
+    //for clickFreq
+    bool hasAlrBeenClicked = false;
+    for (auto ingrePair : clickFreq) {
+        if (ingrePair.first == ingredient) {
+            ingrePair.second++;
+            hasAlrBeenClicked = true;
+        }
+    }
+    if (!hasAlrBeenClicked)
+        clickFreq.push_back(pair<string, int> (ingredient, 1));
+
+    
+    //set containing recipes needing ingredient
+    unordered_set<string> recipes;
+    for (string recipe : ingredientMap[ingredient]) {
+        recipes.insert(recipe);
+    }
+    //for leastIng, leastSteps, and recipePercent
+    //removes the recipes from recipes (the set) that are already in leastIng/leastSteps/recipePercent
+    for (pair<string, int> recipePair : leastIng) {
+        if (recipes.find(recipePair.first) != recipes.end()) {
+            recipes.erase(recipePair.first);
+        }
+    }
+    //adds the recipes containing the ingredient and the value the vectors are sorted by
+    for (string aRecipe : recipes) {
+        leastIng.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe].ingList.size()));
+        leastSteps.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe].directions.size()));
+        //number of ingredients in a recipe that have been chosen
+        int chosenCounter = 0;
+        for (string ingre : recipeMap[aRecipe].ingList) {
+            if (chosenIng.find(ingre) != chosenIng.end())
+                chosenCounter++;
+        }
+        recipePercent.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe].ingList.size())));
+    }
 }
 
 

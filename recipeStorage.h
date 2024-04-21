@@ -26,14 +26,14 @@ public:
     unordered_map<string, recipeData> recipeMap; // contains all the recipes and their data
     unordered_map<string, vector<string>> ingredientMap; // contains all ingredients and vectors of the recipes the ingredients are in
 
-    //unordered_set<string> chosenIng; //set of the chosen ingredients
-    unordered_set<string> restrictedIng;
-    set<string> chosenRecipe;
+    unordered_set<string> chosenIng; //set of the chosen ingredients
+    unordered_set<string> restrictedIng; //set of the restricted ingredients
+    set<string> chosenRecipe; //set of recipes containing at least 1 chosen ingredient (and no restricted ingredients)
 
     //contains the names of the ingredients that are chosen
     vector<pair<string, int>> clickFreq; //pair: ingredient name, click frequency (greater first)
-    vector<pair<string, int>> leastIng; //pair: recipe name, least ingredients (lesser first)
-    vector<pair<string, int>> leastSteps; //pair: recipe name,  least steps (lesser first)
+    vector<pair<string, int>> leastIng; //pair: recipe name, num of ingredients (lesser first)
+    vector<pair<string, int>> leastSteps; //pair: recipe name, num of steps (lesser first)
     //percentage of recipes' ingredients that are chosen
     vector<pair<string, int>> recipePercent; //pair: recipe, percent chosen (greater first)
     
@@ -45,7 +45,16 @@ public:
     string readBrackSeg(std::istream& input); // short for read segment surrounded by brackets
     string readQuoteSeg(std::istringstream& input); // short for segment surrounded by quotes
 
+    //function called on click to add values from unord_maps to the unord_set, set, and vectors
+    void chooseIngre(string ingredient);
+    //function called on click to remove values from unord_maps to the unord_set, set, and vectors
+    void restrictIngre(string ingredient);
+    void removeRestrictRecipes(); //idk if we need but could be a helper function
 
+    //search recipes
+    void search(); //makes sure all restricted ingredients/recipes aren't chosen
+    //^would need to go through everything--what if a chosen ingredient was unchosen and then was restricted
+    void sortVects(); //sorts all of the vectors
 
     //sorts all the vectors with the corresponding algorithm
     //returns the length of time the function took
