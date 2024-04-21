@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/Users/beiyu/food-finder/cmake-build-debug/
+cmake_ninja_workdir = C$:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target food
 
@@ -49,15 +49,15 @@ cmake_ninja_workdir = C$:/Users/beiyu/food-finder/cmake-build-debug/
 
 build cmake_object_order_depends_target_food: phony || CMakeFiles/food.dir
 
-build CMakeFiles/food.dir/display.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/display.cpp || cmake_object_order_depends_target_food
+build CMakeFiles/food.dir/main.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/main.cpp || cmake_object_order_depends_target_food
   DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\food.dir\display.cpp.obj.d
+  DEP_FILE = CMakeFiles\food.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -Ic:/Libraries/SFML-2.5.1/include/SFML -isystem C:/Libraries/SFML-2.5.1/include
   OBJECT_DIR = CMakeFiles\food.dir
   OBJECT_FILE_DIR = CMakeFiles\food.dir
 
-build CMakeFiles/food.dir/button.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/button.cpp || cmake_object_order_depends_target_food
+build CMakeFiles/food.dir/button.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/button.cpp || cmake_object_order_depends_target_food
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\food.dir\button.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
@@ -65,7 +65,7 @@ build CMakeFiles/food.dir/button.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:
   OBJECT_DIR = CMakeFiles\food.dir
   OBJECT_FILE_DIR = CMakeFiles\food.dir
 
-build CMakeFiles/food.dir/recipe.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/recipe.cpp || cmake_object_order_depends_target_food
+build CMakeFiles/food.dir/recipe.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/recipe.cpp || cmake_object_order_depends_target_food
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\food.dir\recipe.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
@@ -73,7 +73,7 @@ build CMakeFiles/food.dir/recipe.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:
   OBJECT_DIR = CMakeFiles\food.dir
   OBJECT_FILE_DIR = CMakeFiles\food.dir
 
-build CMakeFiles/food.dir/dropdown.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/dropdown.cpp || cmake_object_order_depends_target_food
+build CMakeFiles/food.dir/dropdown.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/dropdown.cpp || cmake_object_order_depends_target_food
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\food.dir\dropdown.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
@@ -81,7 +81,7 @@ build CMakeFiles/food.dir/dropdown.cpp.obj: CXX_COMPILER__food_unscanned_Debug C
   OBJECT_DIR = CMakeFiles\food.dir
   OBJECT_FILE_DIR = CMakeFiles\food.dir
 
-build CMakeFiles/food.dir/recipeStorage.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/beiyu/food-finder/recipeStorage.cpp || cmake_object_order_depends_target_food
+build CMakeFiles/food.dir/recipeStorage.cpp.obj: CXX_COMPILER__food_unscanned_Debug C$:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/recipeStorage.cpp || cmake_object_order_depends_target_food
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\food.dir\recipeStorage.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
@@ -97,7 +97,7 @@ build CMakeFiles/food.dir/recipeStorage.cpp.obj: CXX_COMPILER__food_unscanned_De
 #############################################
 # Link the executable food.exe
 
-build food.exe: CXX_EXECUTABLE_LINKER__food_Debug CMakeFiles/food.dir/display.cpp.obj CMakeFiles/food.dir/button.cpp.obj CMakeFiles/food.dir/recipe.cpp.obj CMakeFiles/food.dir/dropdown.cpp.obj CMakeFiles/food.dir/recipeStorage.cpp.obj | C$:/Libraries/SFML-2.5.1/lib/libsfml-graphics-s-d.a C$:/Libraries/SFML-2.5.1/lib/libsfml-audio-s-d.a C$:/Libraries/SFML-2.5.1/lib/libsfml-window-s-d.a C$:/Libraries/SFML-2.5.1/lib/libfreetype.a C$:/Libraries/SFML-2.5.1/lib/libopenal32.a C$:/Libraries/SFML-2.5.1/lib/libsfml-system-s-d.a C$:/Libraries/SFML-2.5.1/lib/libvorbisfile.a C$:/Libraries/SFML-2.5.1/lib/libvorbisenc.a C$:/Libraries/SFML-2.5.1/lib/libvorbis.a C$:/Libraries/SFML-2.5.1/lib/libogg.a C$:/Libraries/SFML-2.5.1/lib/libFLAC.a
+build food.exe: CXX_EXECUTABLE_LINKER__food_Debug CMakeFiles/food.dir/main.cpp.obj CMakeFiles/food.dir/button.cpp.obj CMakeFiles/food.dir/recipe.cpp.obj CMakeFiles/food.dir/dropdown.cpp.obj CMakeFiles/food.dir/recipeStorage.cpp.obj | C$:/Libraries/SFML-2.5.1/lib/libsfml-graphics-s-d.a C$:/Libraries/SFML-2.5.1/lib/libsfml-audio-s-d.a C$:/Libraries/SFML-2.5.1/lib/libsfml-window-s-d.a C$:/Libraries/SFML-2.5.1/lib/libfreetype.a C$:/Libraries/SFML-2.5.1/lib/libopenal32.a C$:/Libraries/SFML-2.5.1/lib/libsfml-system-s-d.a C$:/Libraries/SFML-2.5.1/lib/libvorbisfile.a C$:/Libraries/SFML-2.5.1/lib/libvorbisenc.a C$:/Libraries/SFML-2.5.1/lib/libvorbis.a C$:/Libraries/SFML-2.5.1/lib/libogg.a C$:/Libraries/SFML-2.5.1/lib/libFLAC.a
   FLAGS = -g
   LINK_LIBRARIES = C:/Libraries/SFML-2.5.1/lib/libsfml-graphics-s-d.a  C:/Libraries/SFML-2.5.1/lib/libsfml-audio-s-d.a  C:/Libraries/SFML-2.5.1/lib/libsfml-window-s-d.a  -lgdi32  -lOpenGL32  C:/Libraries/SFML-2.5.1/lib/libfreetype.a  C:/Libraries/SFML-2.5.1/lib/libopenal32.a  C:/Libraries/SFML-2.5.1/lib/libsfml-system-s-d.a  -lwinmm  C:/Libraries/SFML-2.5.1/lib/libvorbisfile.a  C:/Libraries/SFML-2.5.1/lib/libvorbisenc.a  C:/Libraries/SFML-2.5.1/lib/libvorbis.a  C:/Libraries/SFML-2.5.1/lib/libogg.a  C:/Libraries/SFML-2.5.1/lib/libFLAC.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\food.dir
@@ -112,7 +112,7 @@ build food.exe: CXX_EXECUTABLE_LINKER__food_Debug CMakeFiles/food.dir/display.cp
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\beiyu\food-finder\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2023.2.1\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Helen\.uf\2024_spring\dsa\projectThreee\saturday\food-finder\cmake-build-debug && C:\Users\Helen\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -123,7 +123,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\beiyu\food-finder\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2023.2.1\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\beiyu\food-finder -BC:\Users\beiyu\food-finder\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Helen\.uf\2024_spring\dsa\projectThreee\saturday\food-finder\cmake-build-debug && C:\Users\Helen\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe --regenerate-during-build -SC:\Users\Helen\.uf\2024_spring\dsa\projectThreee\saturday\food-finder -BC:\Users\Helen\.uf\2024_spring\dsa\projectThreee\saturday\food-finder\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -141,7 +141,7 @@ build food: phony food.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/beiyu/food-finder/cmake-build-debug
+# Folder: C:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/cmake-build-debug
 
 build all: phony food.exe
 
@@ -152,14 +152,14 @@ build all: phony food.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfig.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigDependencies.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigVersion.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets-debug.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets-release.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/beiyu/food-finder/CMakeLists.txt CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfig.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigDependencies.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigVersion.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets-debug.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets-release.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets.cmake C$:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/CMakeLists.txt C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfig.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigDependencies.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigVersion.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets-debug.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets-release.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/beiyu/food-finder/CMakeLists.txt CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
+build C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfig.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigDependencies.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigVersion.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets-debug.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets-release.cmake C$:/Libraries/SFML-2.5.1/lib/cmake/SFML/SFMLStaticTargets.cmake C$:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/CMakeLists.txt C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Users/Helen/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
 
 
 #############################################
