@@ -26,7 +26,6 @@ dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& opt
         optionText.setFillColor(dblue);
         optionText.setOrigin(optionText.getLocalBounds().width / 2.f, optionText.getLocalBounds().height / 2.f);
 
-        // Calculate the position to center the text vertically within the option rectangle
         sf::FloatRect textBounds = optionText.getLocalBounds();
         optionText.setPosition(optionRect.getPosition().x + optionRect.getSize().x / 2.f, optionRect.getPosition().y + optionRect.getSize().y / 2.f - textBounds.height / 2.f);
 

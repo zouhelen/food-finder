@@ -3,8 +3,6 @@
 #include <string>
 #include <iostream>
 #include "display.h"
-#include "dropdown.h"
-#include "button.h"
 
 void Display::welcome(){
     sf::Texture enterB;
@@ -239,10 +237,9 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     this -> d2.draw();
 }
 
-std::function<void(void)> Display::swapPage(){
+std::function<void(void)> Display::swapQuiz(){
     return [this]() {
         cPage = Q;
-        quiz();
     };
 }
 
@@ -289,17 +286,11 @@ void Display::render(){ // puts everything together, onclick stuff
             }
             else if (ev.type == sf::Event::MouseButtonPressed) {
                 if (ev.mouseButton.button == sf::Mouse::Left || ev.mouseButton.button == sf::Mouse::Right) {
-                    if (d1.isOpen()) {
-                        d1.toggle();
-                    }
-                    else if (ev.mouseButton.x >= d1.menu.getPosition().x && ev.mouseButton.x <= d1.menu.getPosition().x + d1.menu.getSize().x &&
+                    if (ev.mouseButton.x >= d1.menu.getPosition().x && ev.mouseButton.x <= d1.menu.getPosition().x + d1.menu.getSize().x &&
                                ev.mouseButton.y >= d1.menu.getPosition().y && ev.mouseButton.y <= d1.menu.getPosition().y + d1.menu.getSize().y) {
                         d1.toggle();
                     }
-                    if (d2.isOpen()) {
-                        d2.toggle();
-                    }
-                    else if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
+                    if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
                                ev.mouseButton.y >= d2.menu.getPosition().y && ev.mouseButton.y <= d2.menu.getPosition().y + d2.menu.getSize().y) {
                         d2.toggle();
                     }
