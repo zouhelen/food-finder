@@ -1,12 +1,11 @@
 #include "recipeStorage.h"
 #include <fstream>
 #include <sstream>
-#include <chrono>
 
 
 /* read file in */
 void recipeStorage::readFile() {
-    std::ifstream data("../testData.csv");
+    std::ifstream data("testData.csv");
 
     // check if file opened successfully
     if (!data.is_open()) {
@@ -22,7 +21,7 @@ void recipeStorage::readFile() {
     string line;
     string cell;
     while (std::getline(data, line)) {
-    std::getline(data, line);
+        std::getline(data, line);
         string name;
         std::stringstream lineStream(line); // put line into a string stream
         recipeData* recipe = new recipeData; // new recipe struc allocated to heap
@@ -100,15 +99,16 @@ void recipeStorage::readFile() {
                 moreIngredients = false;
             }
             else {
-                recipe->ingList.push_back(oneIng);
+                recipe->ingList.insert(oneIng);
                 // add recipe to corresponding ingredient map
                 if (ingredientMap.find(oneIng) == ingredientMap.end()) {
-                    vector<string> recipeList;
-                    recipeList.push_back(recipe->recipeName);
+                    unordered_set<string> recipeList;
+                    recipeList.insert(recipe->recipeName);
                     ingredientMap[oneIng] = recipeList;
                 }
                 else {
-                    ingredientMap[oneIng].push_back(recipe->recipeName);
+                    //if(ingredientMap[oneIng])
+                    ingredientMap[oneIng].insert(recipe->recipeName);
                 }
             }
         }
@@ -119,10 +119,12 @@ void recipeStorage::readFile() {
             std::cout << ing << std::endl;
         }
          */
-
+        recipeMap[recipe->recipeName] = recipe;
 
         //std::cout << line << std::endl;
     }
+
+    /*
     // print out ingredient map to test
     for (auto& pair: ingredientMap) {
         std::cout << "ingredient: " << pair.first << "\n";
@@ -132,6 +134,7 @@ void recipeStorage::readFile() {
         }
         std::cout << "\n\n";
     }
+     */
 
     data.close();
 }
@@ -165,47 +168,72 @@ void recipeStorage::addChosenIngre(string ingredient) {
     chosenIng.insert(ingredient);
 }
 void recipeStorage::chooseIngreUpdater() {
+    //updates the other functions for every chosen ingredient
     for (string ingredient : chosenIng) {
         //for chosenRecipe
-        for (int i = 0; i < ingredientMap[ingredient].size(); i++) {
-            chosenRecipe.insert(ingredientMap[ingredient][i]); //duplicate ingredients are ignored
+        for (string recipe: ingredientMap[ingredient]) {
+            chosenRecipe.insert(recipe);
         }
-
+        
         //for clickFreq
+        //for shell sort
         bool hasAlrBeenClicked = false;
-        for (auto ingrePair : clickFreq) {
+        for (pair<string, int> ingrePair : clickFreqS) {
             if (ingrePair.first == ingredient) {
                 ingrePair.second++;
                 hasAlrBeenClicked = true;
             }
         }
         if (!hasAlrBeenClicked)
-            clickFreq.push_back(pair<string, int> (ingredient, 1));
+            clickFreqS.push_back(pair<string, int> (ingredient, 1));
+        //for radix sort
+        for (pair<string, int> ingrePair : clickFreqR) {
+            if (ingrePair.first == ingredient) {
+                ingrePair.second++;
+                hasAlrBeenClicked = true;
+            }
+        }
+        if (!hasAlrBeenClicked)
+            clickFreqR.push_back(pair<string, int> (ingredient, 1));
 
-        
-        //set containing recipes needing ingredient
+
+        //set containing recipes needing this ingredient
         unordered_set<string> recipes;
         for (string recipe : ingredientMap[ingredient]) {
             recipes.insert(recipe);
         }
         //for leastIng, leastSteps, and recipePercent
-        //removes the recipes from recipes (the set) that are already in leastIng/leastSteps/recipePercent
-        for (pair<string, int> recipePair : leastIng) {
+        //removes the recipes from recipes (the set) that are already in leastIng/leastSteps/recipePercent so only new values are added
+        //for shell sort
+        for (pair<string, int> recipePair : leastIngS) {
+            if (recipes.find(recipePair.first) != recipes.end()) {
+                recipes.erase(recipePair.first);
+            }
+        }
+        //for radix sort
+        for (pair<string, int> recipePair : leastIngR) {
             if (recipes.find(recipePair.first) != recipes.end()) {
                 recipes.erase(recipePair.first);
             }
         }
         //adds the recipes containing the ingredient and the value the vectors are sorted by
+        //for every recipe that's not added yet, add it to each vector
         for (string aRecipe : recipes) {
-            leastIng.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe].ingList.size()));
-            leastSteps.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe].directions.size()));
+            //for shell sort
+            leastIngS.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->ingList.size()));
+            leastStepsS.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->directions.size()));
             //number of ingredients in a recipe that have been chosen
             int chosenCounter = 0;
-            for (string ingre : recipeMap[aRecipe].ingList) {
+            for (string ingre : recipeMap[aRecipe]->ingList) {
                 if (chosenIng.find(ingre) != chosenIng.end())
                     chosenCounter++;
             }
-            recipePercent.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe].ingList.size())));
+            recipePercentS.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe]->ingList.size())));
+            //for radix sort
+            leastIngR.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->ingList.size()));
+            leastStepsR.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->directions.size()));
+            //number of ingredients in a recipe that have been chosen
+            recipePercentR.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe]->ingList.size())));
         }
     }
 }
@@ -216,194 +244,257 @@ void recipeStorage::addRestrictIngre(string ingredient) {
 void recipeStorage::restrictIngreUpdater() {
     for (string ingredient : restrictedIng) {
         //for chosenRecipe
-        for (int i = 0; i < ingredientMap[ingredient].size(); i++) {
-            chosenRecipe.erase(ingredientMap[ingredient][i]); //ingredients not there are ignored
+        for (string recipe: ingredientMap[ingredient]) {
+            chosenRecipe.erase(recipe);
         }
 
-        //set containing recipes needing ingredient
+        //set containing recipes needing this ingredient
         unordered_set<string> recipes;
         for (string recipe : ingredientMap[ingredient]) {
             recipes.insert(recipe);
         }
         //for leastIng, leastSteps, and recipePercent
-        //removes the recipes from recipes (the set) that are already in leastIng/leastSteps/recipePercent
-        for (pair<string, int> recipePair : leastIng) {
-            if (recipes.find(recipePair.first) != recipes.end()) {
-                recipes.erase(recipePair.first);
-            }
-        }
-        //adds the recipes containing the ingredient and the value the vectors are sorted by
+        //removes the recipes containing the ingredient and the value the vectors are sorted by
         for (string aRecipe : recipes) {
-            for (vector<pair<string, int>>::iterator iter = leastIng.begin(); iter < leastIng.end(); iter++) {
+            //shell sort vectors
+            for (vector<pair<string, int>>::iterator iter = leastIngS.begin(); iter < leastIngS.end(); iter++) {
                 if (aRecipe == (*iter).first)
-                    leastIng.erase(iter);
+                    leastIngS.erase(iter);
             }
-            for (vector<pair<string, int>>::iterator iter = leastSteps.begin(); iter < leastSteps.end(); iter++) {
+            for (vector<pair<string, int>>::iterator iter = leastStepsS.begin(); iter < leastStepsS.end(); iter++) {
                 if (aRecipe == (*iter).first)
-                    leastSteps.erase(iter);
+                    leastStepsS.erase(iter);
             }
-            for (vector<pair<string, int>>::iterator iter = recipePercent.begin(); iter < recipePercent.end(); iter++) {
+            for (vector<pair<string, int>>::iterator iter = recipePercentS.begin(); iter < recipePercentS.end(); iter++) {
                 if (aRecipe == (*iter).first)
-                    recipePercent.erase(iter);
+                    recipePercentS.erase(iter);
+            }
+            //radix sort vectors
+            for (vector<pair<string, int>>::iterator iter = leastIngR.begin(); iter < leastIngR.end(); iter++) {
+                if (aRecipe == (*iter).first)
+                    leastIngR.erase(iter);
+            }
+            for (vector<pair<string, int>>::iterator iter = leastStepsR.begin(); iter < leastStepsR.end(); iter++) {
+                if (aRecipe == (*iter).first)
+                    leastStepsR.erase(iter);
+            }
+            for (vector<pair<string, int>>::iterator iter = recipePercentR.begin(); iter < recipePercentR.end(); iter++) {
+                if (aRecipe == (*iter).first)
+                    recipePercentR.erase(iter);
             }
         }
     }
 }
 
 // all the sorts
-auto recipeStorage::clickFreqShell() {
+double recipeStorage::clickFreqShell() {
+    //start the clock
     auto start = std::chrono::high_resolution_clock::now();
-    int gap = clickFreq.size();
+    //the gap starts at the vector size
+    int gap = clickFreqS.size();
     while (gap > 0) {
-        for (int i = clickFreq.size(); i < gap; i--) {
-            pair<string, int> temp = clickFreq[i];
+        //does an insertions sort for this gap size
+        for (int i = gap; i < clickFreqS.size(); i++) {
+            pair<string, int> temp = clickFreqS[i];
             int j;
-            for (j = i; j < gap && clickFreq[j-gap].second > temp.second; j += gap) {
-                clickFreq[j] = clickFreq[j-gap];
+            //second condition in the second statement makes it greatest to least
+            for (j = i; j >= gap && clickFreqS[j-gap].second < temp.second; j -= gap) {
+                clickFreqS[j] = clickFreqS[j-gap];
             }
-            clickFreq[j] = temp;
+            clickFreqS[j] = temp;
         }
+        //gap halves through every passthrough
         gap /= 2;
     }
+    //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start).count();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
     return duration;
 }
 
-auto recipeStorage::clickFreqRadix() {
+double recipeStorage::clickFreqRadix() {
+    //start the clock
     auto start = std::chrono::high_resolution_clock::now();
-    int max = clickFreq[0].second;
-    for (pair<string, int> pairItr : clickFreq) {
+    //finds the maximum number
+    int max = clickFreqR[0].second;
+    for (pair<string, int> pairItr : clickFreqR) {
         max = std::max(max, pairItr.second);
     }
 
+    // run helper sort function for each place of each recipe's number of ingredients
     for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
         clickFreqCountingSort(placeVal);
     }
+    //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start).count();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
     return duration;
 }
 
 void recipeStorage::clickFreqCountingSort(int placeVal) {
-    int count[] = {0,0,0,0,0,0,0,0,0,0};
-    pair<string, int> output[clickFreq.size()];
-    for (int i = 0; i < clickFreq.size(); i++) {
-        count[(clickFreq[i].second / placeVal) % 10] = count[(clickFreq[i].second / placeVal) % 10] + 1;
+    //initializes count
+    int count[] = {0,0,0,0,0,0,0,0,0,0}; // one slot for each digit 0-9
+    // initialize array of same size and type of clickFreq - used to temporarily store sorted results
+    //will be used to store the ouput that goes into clickFreq
+    pair<string, int> output[clickFreqR.size()];
+    //gets the count of every element
+    for (int i = 0; i < clickFreqR.size(); i++) {
+        count[(clickFreqR[i].second / placeVal) % 10] = count[(clickFreqR[i].second / placeVal) % 10] + 1; // increment count at the index of the digit
     }
-    for (int j = 1; j < 10; j++) {
-        count[j] += count[j-1];
+    //makes the cumulative count and sorts the elements; this is where greatest to least or vice versa is decided
+    for (int j = 8; j >= 0; j--) {
+        count[j] += count[j+1];
     }
-    for (int k = 0; k <= clickFreq.size()-1; k++) {
-        output[count[(clickFreq[k].second / placeVal) % 10] - 1] = clickFreq[k];
-        count[(clickFreq[k].second / placeVal) % 10]--;
+    //elements are placed into the sorted order
+    for (int k = clickFreqR.size()-1; k >= 0; k--) {
+        output[count[(clickFreqR[k].second / placeVal) % 10] - 1] = clickFreqR[k];
+        count[(clickFreqR[k].second / placeVal) % 10]--;
     }
-    for (int l = 0; l < clickFreq.size(); l++) {
-        clickFreq[l] = output[l];
+    //transfers output to clickFreq
+    for (int l = 0; l < clickFreqR.size(); l++) {
+        clickFreqR[l] = output[l];        
     }
 }
 
-auto recipeStorage::leastIngShell() {
+double recipeStorage::leastIngShell() {
+    //start the clock
     auto start = std::chrono::high_resolution_clock::now();
-    int gap = leastIng.size();
+    //the gap starts at the vector size
+    int gap = leastIngS.size()/2;
     while (gap > 0) {
-        for (int i = gap; i < leastIng.size(); i++) {
-            pair<string, int> temp = leastIng[i];
+        //does an insertions sort for this gap size
+        for (int i = gap; i < leastIngS.size(); i++) {
+            pair<string, int> temp = leastIngS[i];
             int j;
-            for (j = i; j > gap && leastIng[j-gap].second > temp.second; j -= gap) {
-                leastIng[j] = leastIng[j-gap];
+            //second condition in the second statement makes it least to greatest
+            for (j = i; j >= gap && leastIngS[j-gap].second > temp.second; j -= gap) {
+                leastIngS[j] = leastIngS[j-gap];
             }
-            leastIng[j] = temp;
+            leastIngS[j] = temp;
         }
+        //gap halves through every passthrough
         gap /= 2;
     }
+    //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start).count();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
     return duration;
 }
 
-auto recipeStorage::leastIngRadix() {
+double recipeStorage::leastIngRadix() {
+    //start the clock
     auto start = std::chrono::high_resolution_clock::now();
-    int max = leastIng[0].second;
-    for (pair<string, int> pairItr : leastIng) {
+    //finds the maximum number
+    int max = leastIngR[0].second;
+    for (pair<string, int> pairItr : leastIngR) {
         max = std::max(max, pairItr.second);
     }
 
+    // run helper sort function for each place of each recipe's number of ingredients
     for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
         leastIngCountingSort(placeVal);
     }
+    //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start).count();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
     return duration;
 }
 
 void recipeStorage::leastIngCountingSort(int placeVal) {
-    int count[] = {0,0,0,0,0,0,0,0,0,0};
-    pair<string, int> output[leastIng.size()];
-    for (int i = 0; i < leastIng.size(); i++) {
-        count[(leastIng[i].second / placeVal) % 10] = count[(leastIng[i].second / placeVal) % 10] + 1;
+    int count[] = {0,0,0,0,0,0,0,0,0,0}; // one slot for each digit 0-9
+    // initialize array of same size and type of leastIng - used to temporarily store sorted results
+    //will be used to store the ouput that goes into leastFreq
+    pair<string, int> output[leastIngR.size()];
+    //gets the count of every element
+    for (int i = 0; i < leastIngR.size(); i++) {
+        count[(leastIngR[i].second / placeVal) % 10] = count[(leastIngR[i].second / placeVal) % 10] + 1; // increment count at the index of the digit
     }
+    //makes the cumulative count and sorts the elements; this is where greatest to least or vice versa is decided
     for (int j = 1; j < 10; j++) {
         count[j] += count[j-1];
     }
-    for (int k = leastIng.size()-1; k >= 0; k--) {
-        output[count[(leastIng[k].second / placeVal) % 10] - 1] = leastIng[k];
-        count[(leastIng[k].second / placeVal) % 10]--;
+    //elements are placed into the sorted order
+    for (int k = leastIngR.size()-1; k >= 0; k--) {
+        output[count[(leastIngR[k].second / placeVal) % 10] - 1] = leastIngR[k];
+        count[(leastIngR[k].second / placeVal) % 10]--;
     }
-    for (int l = 0; l < leastIng.size(); l++) {
-        leastIng[l] = output[l];        
+    //transfers output to leastIng
+    for (int l = 0; l < leastIngR.size(); l++) {
+        leastIngR[l] = output[l];        
     }
 }
 
-auto recipeStorage::leastStepsShell() {
+double recipeStorage::leastStepsShell() {
+    //start the clock
     auto start = std::chrono::high_resolution_clock::now();
-    int gap = leastSteps.size();
+    //the gap starts at the vector size
+    int gap = leastStepsS.size();
     while (gap > 0) {
-        for (int i = gap; i < leastSteps.size(); i++) {
-            pair<string, int> temp = leastSteps[i];
+        //does an insertions sort for this gap size
+        for (int i = gap; i < leastStepsS.size(); i++) {
+            pair<string, int> temp = leastStepsS[i];
             int j;
-            for (j = i; j > gap && leastSteps[j-gap].second > temp.second; j -= gap) {
-                leastSteps[j] = leastSteps[j-gap];
+            //second condition in the second statement makes it least to greatest
+            for (j = i; j > gap && leastStepsS[j-gap].second > temp.second; j -= gap) {
+                leastStepsS[j] = leastStepsS[j-gap];
             }
-            leastSteps[j] = temp;
+            leastStepsS[j] = temp;
         }
+        //gap halves through every passthrough
         gap /= 2;
     }
+    //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start).count();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
     return duration;
 }
 
-auto recipeStorage::leastStepsRadix() {
+double recipeStorage::leastStepsRadix() {
+    //start the clock
     auto start = std::chrono::high_resolution_clock::now();
-    int max = leastSteps[0].second;
-    for (pair<string, int> pairItr : leastSteps) {
+    //finds the maximum number
+    int max = leastStepsR[0].second;
+    for (pair<string, int> pairItr : leastStepsR) {
         max = std::max(max, pairItr.second);
     }
 
+    // run helper sort function for each place of each recipe's number of ingredients
     for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
         leastIngCountingSort(placeVal);
     }
+    //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start).count();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
     return duration;
 }
 
 void recipeStorage::leastStepsCountingSort(int placeVal) {
-    int count[] = {0,0,0,0,0,0,0,0,0,0};
-    pair<string, int> output[leastSteps.size()];
-    for (int i = 0; i < leastSteps.size(); i++) {
-        count[(leastSteps[i].second / placeVal) % 10] = count[(leastSteps[i].second / placeVal) % 10] + 1;
+    int count[] = {0,0,0,0,0,0,0,0,0,0}; // one slot for each digit 0-9
+    // initialize array of same size and type of leastIng - used to temporarily store sorted results
+    //will be used to store the ouput that goes into leastSteps
+    pair<string, int> output[leastStepsR.size()];
+    //gets the count of every element
+    for (int i = 0; i < leastStepsR.size(); i++) {
+        count[(leastStepsR[i].second / placeVal) % 10] = count[(leastStepsR[i].second / placeVal) % 10] + 1;
     }
+    //makes the cumulative count and sorts the elements; this is where greatest to least or vice versa is decided
     for (int j = 1; j < 10; j++) {
         count[j] += count[j-1];
     }
-    for (int k = leastSteps.size()-1; k >= 0; k--) {
-        output[count[(leastSteps[k].second / placeVal) % 10] - 1] = leastSteps[k];
-        count[(leastSteps[k].second / placeVal) % 10]--;
+    //elements are placed into the sorted order
+    for (int k = leastStepsR.size()-1; k >= 0; k--) {
+        output[count[(leastStepsR[k].second / placeVal) % 10] - 1] = leastStepsR[k];
+        count[(leastStepsR[k].second / placeVal) % 10]--;
     }
-    for (int l = 0; l < leastSteps.size(); l++) {
-        leastSteps[l] = output[l];        
+    //transfers output to leastSteps
+    for (int l = 0; l < leastStepsR.size(); l++) {
+        leastStepsR[l] = output[l];        
     }
 }
 
