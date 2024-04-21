@@ -46,9 +46,29 @@ void Display::quiz() {
     instructText.setFillColor(borderBlue);
     instructText.setPosition(window.getSize().x/4.35, window.getSize().y/5);
 
-
     this -> window.draw(quizText);
     this -> window.draw(instructText);
+
+//    Button banana(swapPage());
+//    banana.setSprite(bananaImg);
+//    Button beef(swapPage());
+//    beef.setSprite(beefImg);
+//    Button carrot(swapPage());
+//    carrot.setSprite(carrotImg);
+//    Button cheese(swapPage());
+//    cheese.setSprite(cheeseImg);
+//    Button chicken(swapPage());
+//    chicken.setSprite(chickenImg);
+//    Button egg(swapPage());
+//    egg.setSprite(eggImg);
+//    Button mushroom(swapPage());
+//    mushroom.setSprite(shroomImg);
+//    Button pork(swapPage());
+//    pork.setSprite(porkImg);
+//    Button potato(swapPage());
+//    potato.setSprite(potatoImg);
+
+
 }
 
 void Display::reccs() {

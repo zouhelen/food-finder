@@ -26,5 +26,6 @@ public:
     Display(): bgGreen(230, 250, 245), fontC(20, 131, 143), borderBlue(28, 168, 184){
     };
     void render(); // combine everything?
+    std::vector<std::string> choices = {"banana", "beef", "carrot", "cheese", "chicken", "coconut", "cucumber", "egg", "milk", "mushroom", "pork", "potato", "peanut butter", "strawberry", "tomato"};
 };
 #endif //FOOD_FINDER_DISPLAY_H
