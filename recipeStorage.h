@@ -56,7 +56,7 @@ public:
 
     //
 
-    //function called on click that adds to chosenIng
+    //function that adds to chosenIng
     void addChosenIngre(string ingredient);
     //function called when submit button is pressed to add values from unord_maps to the unord_set, set, and vectors
     void chooseIngreUpdater();
@@ -64,6 +64,8 @@ public:
     void addRestrictIngre(string ingredient);
     //function called on click to remove values from unord_maps to the unord_set, set, and vectors
     void restrictIngreUpdater();
+    // combines above functions to parse selected ingredients from front end
+    void updateIngredients(vector<bool> chosenIngre, vector<bool> restrictedIngre);
 
 
     //sorts all the vectors with the corresponding algorithm
