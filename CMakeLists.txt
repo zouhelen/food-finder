@@ -12,5 +12,6 @@ add_executable(food main.cpp
         button.cpp
         recipe.cpp
         dropdown.cpp
-        recipeStorage.cpp)
+        recipeStorage.cpp
+        display.cpp)
 target_link_libraries(food sfml-graphics sfml-audio)

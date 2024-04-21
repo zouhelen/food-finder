@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <functional>
 #ifndef FOOD_FINDER_DISPLAY_H
 #define FOOD_FINDER_DISPLAY_H
 class Display{

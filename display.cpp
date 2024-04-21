@@ -111,8 +111,3 @@ void Display::render(){ // puts everything together, onclick stuff
         this -> window.display();
     }
 }
-
-int main() {
-    Display display;
-    display.render();
-}
