@@ -45,11 +45,14 @@ public:
     string readBrackSeg(std::istream& input); // short for read segment surrounded by brackets
     string readQuoteSeg(std::istringstream& input); // short for segment surrounded by quotes
 
-    //function called on click to add values from unord_maps to the unord_set, set, and vectors
-    void chooseIngre(string ingredient);
+    //function called on click that adds to chosenIng
+    void addChosenIngre(string ingredient);
+    //function called when submit button is pressed to add values from unord_maps to the unord_set, set, and vectors
+    void chooseIngreUpdater();
+    //function called on click that adds to restrictedIng
+    void addRestrictIngre(string ingredient);
     //function called on click to remove values from unord_maps to the unord_set, set, and vectors
-    void restrictIngre(string ingredient);
-    void removeRestrictRecipes(); //idk if we need but could be a helper function
+    void restrictIngreUpdater();
 
     //search recipes
     void search(); //makes sure all restricted ingredients/recipes aren't chosen
