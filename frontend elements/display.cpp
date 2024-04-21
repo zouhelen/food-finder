@@ -28,8 +28,9 @@ void Display::welcome(){
     this -> window.draw(enter.getSprite());
 }
 
-
 void Display::quiz() { // note: probably a more efficient way to do it, but I got in too deep and didn't want to delete all my work
+    quizDone = false;
+
     sf::Text quizText("Food Preferences", font, 150);
     quizText.setFillColor(fontC);
     quizText.setPosition(window.getSize().x/4,window.getSize().y/18);
@@ -246,6 +247,20 @@ std::function<void(void)> Display::swapQuiz(){
 void Display::reccs() {
 }
 
+void Display::browse(){
+
+}
+
+std::function<void(void)> Display::changeIngre(int i){
+    return [i, this]() {
+        if (ev.mouseButton.button == sf::Mouse::Left) {
+            added[i] = !added[i];
+        } else if (ev.mouseButton.button == sf::Mouse::Right) {
+            removed[i] = !removed[i];
+        }
+    };
+}
+
 // create methods for each page. submit button reloads to reccs, then a quiz retake option, a see reccs option, and a browse option
 void Display::render(){ // puts everything together, onclick stuff
     icon.loadFromFile("images/icon.png");
@@ -290,6 +305,18 @@ void Display::render(){ // puts everything together, onclick stuff
                                ev.mouseButton.y >= d1.menu.getPosition().y && ev.mouseButton.y <= d1.menu.getPosition().y + d1.menu.getSize().y) {
                         d1.toggle();
                     }
+                    if(d1.isOpen() && d1.rects[0].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
+                        d1.toggle();
+                        cSort = LeastIngre;
+                    }
+                    if(d1.isOpen() && d1.rects[1].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
+                        d1.toggle();
+                        cSort = LeastSteps;
+                    }
+                    if(d1.isOpen() && d1.rects[2].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
+                        d1.toggle();
+                        cSort = Percent;
+                    }
 
                     if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
                                ev.mouseButton.y >= d2.menu.getPosition().y && ev.mouseButton.y <= d2.menu.getPosition().y + d2.menu.getSize().y) {
@@ -309,6 +336,99 @@ void Display::render(){ // puts everything together, onclick stuff
                     }
                     if(enter.getSprite().getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         enter.onClick();
+                    }
+
+                    if(!quizDone) {
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (banana.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                banana.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (beef.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                beef.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (carrot.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                carrot.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (cheese.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                cheese.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (chicken.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                chicken.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (coconut.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                coconut.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (cucumber.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                cucumber.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (egg.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                egg.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (milk.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                milk.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (mushroom.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                mushroom.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (pb.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                pb.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (pork.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                pork.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (potato.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                potato.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (strawberry.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                strawberry.onClick();
+                            }
+                        }
+                        if (Display::ev.type == sf::Event::MouseButtonPressed) {
+                            if (tomato.getSprite().getGlobalBounds().contains(
+                                    static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
+                                tomato.onClick();
+                            }
+                        }
                     }
                 }
             }
