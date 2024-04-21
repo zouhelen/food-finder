@@ -59,8 +59,8 @@ public:
     auto clickFreqRadix(); //performs radix sort on clickFreq
     void clickFreqCountingSort(int placeVal); //helper function for radix sort
 
-    auto leastIngShell();
-    auto leastIngRadix();
+    long long leastIngShell();
+    long long leastIngRadix();
     void leastIngCountingSort(int placeVal);
     
     auto leastStepsShell();

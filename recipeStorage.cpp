@@ -303,7 +303,7 @@ void recipeStorage::clickFreqCountingSort(int placeVal) {
     }
 }
 
-auto recipeStorage::leastIngShell() {
+long long recipeStorage::leastIngShell() {
     auto start = std::chrono::high_resolution_clock::now();
     int gap = leastIng.size();
     while (gap > 0) {
@@ -322,13 +322,15 @@ auto recipeStorage::leastIngShell() {
     return duration;
 }
 
-auto recipeStorage::leastIngRadix() {
+long long recipeStorage::leastIngRadix() {
     auto start = std::chrono::high_resolution_clock::now();
+    // find maximum number of ingredients that a recipe option has
     int max = leastIng[0].second;
     for (pair<string, int> pairItr : leastIng) {
         max = std::max(max, pairItr.second);
     }
 
+    // run helper sort function for each place of each recipe's number of ingredients
     for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
         leastIngCountingSort(placeVal);
     }
@@ -338,10 +340,12 @@ auto recipeStorage::leastIngRadix() {
 }
 
 void recipeStorage::leastIngCountingSort(int placeVal) {
-    int count[] = {0,0,0,0,0,0,0,0,0,0};
+    int count[] = {0,0,0,0,0,0,0,0,0,0}; // one slot for each digit 0-9
+    // initialize array of same size and type of leastIng - used to temporarily store sorted results
+    // <string, int> is <recipe name, ingredient count>
     pair<string, int> output[leastIng.size()];
     for (int i = 0; i < leastIng.size(); i++) {
-        count[(leastIng[i].second / placeVal) % 10] = count[(leastIng[i].second / placeVal) % 10] + 1;
+        count[(leastIng[i].second / placeVal) % 10] = count[(leastIng[i].second / placeVal) % 10] + 1; // increment count at the index of the digit
     }
     for (int j = 1; j < 10; j++) {
         count[j] += count[j-1];
