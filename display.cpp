@@ -46,29 +46,103 @@ void Display::quiz() {
     instructText.setFillColor(borderBlue);
     instructText.setPosition(window.getSize().x/4.35, window.getSize().y/5);
 
+    sf::Texture bananaT;
+    bananaT.loadFromFile("images/banana.png");
+    sf::Sprite bananaImg;
+    bananaImg.setTexture(bananaT);
+    sf::Texture beefT;
+    beefT.loadFromFile("images/beef.png");
+    sf::Sprite beefImg;
+    beefImg.setTexture(beefT);
+    sf::Texture carrotT;
+    carrotT.loadFromFile("images/carrot.png");
+    sf::Sprite carrotImg;
+    carrotImg.setTexture(carrotT);
+    sf::Texture cheeseT;
+    cheeseT.loadFromFile("images/cheese.png");
+    sf::Sprite cheeseImg;
+    cheeseImg.setTexture(cheeseT);
+    sf::Texture chickenT;
+    chickenT.loadFromFile("images/chicken.png");
+    sf::Sprite chickenImg;
+    chickenImg.setTexture(chickenT);
+    sf::Texture eggT;
+    eggT.loadFromFile("images/egg.png");
+    sf::Sprite eggImg;
+    eggImg.setTexture(eggT);
+    sf::Texture mushroomT;
+    mushroomT.loadFromFile("images/mushroom.png");
+    sf::Sprite mushroomImg;
+    mushroomImg.setTexture(mushroomT);
+    sf::Texture porkT;
+    porkT.loadFromFile("images/pork.png");
+    sf::Sprite porkImg;
+    porkImg.setTexture(porkT);
+    sf::Texture potatoT;
+    potatoT.loadFromFile("images/potato.png");
+    sf::Sprite potatoImg;
+    potatoImg.setTexture(potatoT);
+    sf::Texture strawberryT;
+    strawberryT.loadFromFile("images/strawberry.png");
+    sf::Sprite strawberryImg;
+    strawberryImg.setTexture(strawberryT);
+    sf::Texture tomatoT;
+    tomatoT.loadFromFile("images/tomato.png");
+    sf::Sprite tomatoImg;
+    tomatoImg.setTexture(tomatoT);
+    sf::Texture cucumberT;
+    cucumberT.loadFromFile("images/cucumber.png");
+    sf::Sprite cucumberImg;
+    cucumberImg.setTexture(cucumberT);
+    sf::Texture coconutT;
+    coconutT.loadFromFile("images/coconut.png");
+    sf::Sprite coconutImg;
+    coconutImg.setTexture(coconutT);
+    sf::Texture milkT;
+    milkT.loadFromFile("images/milk.png");
+    sf::Sprite milkImg;
+    milkImg.setTexture(milkT);
+    sf::Texture pbT;
+    pbT.loadFromFile("images/pb.png");
+    sf::Sprite pbImg;
+    pbImg.setTexture(pbT);
+
+
+
+    Button banana(swapPage());
+    banana.setSprite(bananaImg);
+    Button beef(swapPage());
+    beef.setSprite(beefImg);
+    Button carrot(swapPage());
+    carrot.setSprite(carrotImg);
+    Button cheese(swapPage());
+    cheese.setSprite(cheeseImg);
+    Button chicken(swapPage());
+    chicken.setSprite(chickenImg);
+    Button egg(swapPage());
+    egg.setSprite(eggImg);
+    Button mushroom(swapPage());
+    mushroom.setSprite(mushroomImg);
+    Button pork(swapPage());
+    pork.setSprite(porkImg);
+    Button potato(swapPage());
+    potato.setSprite(potatoImg);
+    Button strawberry(swapPage());
+    strawberry.setSprite(strawberryImg);
+    Button tomato(swapPage());
+    tomato.setSprite(tomatoImg);
+    Button cucumber(swapPage());
+    cucumber.setSprite(cucumberImg);
+    Button coconut(swapPage());
+    coconut.setSprite(coconutImg);
+    Button milk(swapPage());
+    milk.setSprite(milkImg);
+    Button pb(swapPage());
+    pb.setSprite(pbImg);
+
     this -> window.draw(quizText);
     this -> window.draw(instructText);
-
-//    Button banana(swapPage());
-//    banana.setSprite(bananaImg);
-//    Button beef(swapPage());
-//    beef.setSprite(beefImg);
-//    Button carrot(swapPage());
-//    carrot.setSprite(carrotImg);
-//    Button cheese(swapPage());
-//    cheese.setSprite(cheeseImg);
-//    Button chicken(swapPage());
-//    chicken.setSprite(chickenImg);
-//    Button egg(swapPage());
-//    egg.setSprite(eggImg);
-//    Button mushroom(swapPage());
-//    mushroom.setSprite(shroomImg);
-//    Button pork(swapPage());
-//    pork.setSprite(porkImg);
-//    Button potato(swapPage());
-//    potato.setSprite(potatoImg);
-
-
+    this -> window.draw(cucumber.getSprite());
 }
 
 void Display::reccs() {
