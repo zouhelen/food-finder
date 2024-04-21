@@ -10,5 +10,10 @@ int main() {
 
     recipes.readFile();
 
+    recipes.addChosenIngre("egg");
+    recipes.addChosenIngre("tomato");
+    recipes.addChosenIngre("brown sugar");
+    recipes.addChosenIngre("chicken");
+
     return 0;
 }
