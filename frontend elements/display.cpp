@@ -1,18 +1,17 @@
 #include <SFML/Graphics.hpp>
 #include <functional>
-#include <string>
-#include <iostream>
-#include "display.h"
+#include "display.h" // include statements
 
-void Display::welcome(){
-    sf::Texture enterB;
+void Display::welcome(){ // welcome page
+    sf::Texture enterB; // enter button, set dimensions and sprite
     enterB.loadFromFile("images/enter.png");
     sf::Sprite enterImg;
     enterImg.setTexture(enterB);
     enterImg.scale(.5,.37);
     enterImg.setPosition(window.getSize().x/2 - enterB.getSize().x/4,window.getSize().y/2);
+    enter.setSprite(enterImg);
 
-    sf::Text welcomeText("Welcome to Food Finder!", font, 150);
+    sf::Text welcomeText("Welcome to Food Finder!", font, 150); // welcome text, set size, font, color, etc
     welcomeText.setFillColor(fontC);
     welcomeText.setPosition(window.getSize().x/5,window.getSize().y/4);
 
@@ -20,17 +19,15 @@ void Display::welcome(){
     secondary.setFillColor(borderBlue);
     secondary.setPosition(window.getSize().x/5, window.getSize().y/2.5);
 
-    enter.setSprite(enterImg);
-
-    this -> window.clear(bgGreen);
-    this -> window.draw(welcomeText);
+    this -> window.clear(bg); // clear with background color
+    this -> window.draw(welcomeText); // draw elements
     this -> window.draw(secondary);
     this -> window.draw(enter.getSprite());
 }
 
-void Display::quiz() { // note: probably a more efficient way to do it, but I got in too deep and didn't want to delete all my work
-    quizDone = false;
-    sf::Texture subB;
+void Display::quiz() { // quiz page, a bit long because can't initialize the buttons with a loop (very diff positions on the sprite fridge)
+    quizDone = false; // set quiz to unfinished
+    sf::Texture subB; // submit button logistics: sets sprite, position, etc
     subB.loadFromFile("images/submit.png");
     sf::Sprite subImg;
     subImg.setTexture(subB);
@@ -38,7 +35,7 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     subImg.setPosition(window.getSize().x/2 - subB.getSize().x/3, window.getSize().y - 135);
     submit.setSprite(subImg);
 
-    sf::Text quizText("Food Preferences", font, 150);
+    sf::Text quizText("Food Preferences", font, 150); // instruction text
     quizText.setFillColor(fontC);
     quizText.setPosition(window.getSize().x/4,window.getSize().y/18);
 
@@ -46,7 +43,7 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     instructText.setFillColor(borderBlue);
     instructText.setPosition(window.getSize().x/4.35, window.getSize().y/5);
 
-    sf::Text bananaText("Banana", font, 30);
+    sf::Text bananaText("Banana", font, 30); // label text for each item, position set here
     bananaText.setFillColor(fontC);
     bananaText.setPosition(window.getSize().x/1.9 - 10, 465);
     sf::Text beefText("Beef", font, 30);
@@ -92,7 +89,7 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     tomatoText.setFillColor(fontC);
     tomatoText.setPosition(window.getSize().x/1.9 + 210, 465);
 
-    sf::Texture bananaT;
+    sf::Texture bananaT; // sets texture, size, and position for each ingredient button
     bananaT.loadFromFile("images/banana.png");
     sf::Sprite bananaImg;
     bananaImg.setTexture(bananaT);
@@ -189,7 +186,7 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     fridge.scale(1.5,1.5);
     fridge.setPosition(window.getSize().x/4.35, window.getSize().y/5+100);
 
-    banana.setSprite(bananaImg);
+    banana.setSprite(bananaImg); // set sprite for each button
     beef.setSprite(beefImg);
     carrot.setSprite(carrotImg);
     cheese.setSprite(cheeseImg);
@@ -205,13 +202,13 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     milk.setSprite(milkImg);
     pb.setSprite(pbImg);
 
-    this -> window.clear(bgGreen);
+    this -> window.clear(bg); // clears the bg with background color
 
-    this -> window.draw(quizText);
+    this -> window.draw(quizText); // draw the base layer (texts and fridge graphic)
     this -> window.draw(instructText);
     this -> window.draw(fridge);
 
-    this -> window.draw(bananaText);
+    this -> window.draw(bananaText); // draws ingredient labels
     this -> window.draw(beefText);
     this -> window.draw(carrotText);
     this -> window.draw(cheeseText);
@@ -227,7 +224,7 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     this -> window.draw(strawberryText);
     this -> window.draw(tomatoText);
 
-    this -> window.draw(banana.getSprite());
+    this -> window.draw(banana.getSprite()); // draws ingredient sprites
     this -> window.draw(beef.getSprite());
     this -> window.draw(carrot.getSprite());
     this -> window.draw(cheese.getSprite());
@@ -242,68 +239,69 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     this -> window.draw(potato.getSprite());
     this -> window.draw(strawberry.getSprite());
     this -> window.draw(tomato.getSprite());
-    this -> d2.draw();
-    this -> window.draw(submit.getSprite());
+
+    this -> d2.draw(); // draw dropdown menu
+    this -> window.draw(submit.getSprite()); // draw submit button
 }
 
-void Display::reccs() {
-    this -> window.clear(bgGreen);
+void Display::reccs() { // unfinished
+    this -> window.clear(bg);
     this -> d1.draw();
     this -> d2.draw();
 }
 
-void Display::browse(){
-    this -> window.clear(bgGreen);
+void Display::browse(){ // unfinished
+    this -> window.clear(bg);
     this -> d2.draw();
 }
 
-std::function<void(void)> Display::changeIngre(int i){
-    return [i, this]() {
-        if (ev.mouseButton.button == sf::Mouse::Left) {
-            added[i] = !added[i];
-            if(removed[i]){
+std::function<void(void)> Display::changeIngre(int i){ // onclick to select/deselect the ingredient button
+    return [i, this]() { // lambda, passes in an index i and the current display
+        if (ev.mouseButton.button == sf::Mouse::Left) { // if left click = add to user's ingredients
+            added[i] = !added[i]; // sets to opposite of selection
+            if(removed[i] && added[i]){ // set removed to false if added == true
                 removed[i] = false;
             }
-        } else if (ev.mouseButton.button == sf::Mouse::Right) {
-            removed[i] = !removed[i];
-            if(added[i]){
+        } else if (ev.mouseButton.button == sf::Mouse::Right) { // if right click = remove from ingredient list
+            removed[i] = !removed[i]; // set to opposite of selection
+            if(added[i] && removed[i]){ // set added to false if removed == true
                 added[i] = false;
             }
         }
     };
 }
 
-std::function<void(void)> Display::submitB(){
+std::function<void(void)> Display::submitB(){ // onclick to change page and submit the quiz
     return [this]() {
-        cPage = R;
+        cPage = R; // change page to reccs, mark the quiz as done
         quizDone = true;
     };
 }
 
-std::function<void(void)> Display::swapQuiz(){
+std::function<void(void)> Display::swapQuiz(){ // onclick to swap pages
     return [this]() {
-        cPage = Q;
+        cPage = Q; // when user clicks enter, swap to quiz page
     };
 }
 
-void Display::render(){ // puts everything together, onclick stuff
-    icon.loadFromFile("images/icon.png");
+void Display::render(){ // puts everything together
+    icon.loadFromFile("images/icon.png"); // load icon image
 
-    video = sf::VideoMode::getDesktopMode();
+    video = sf::VideoMode::getDesktopMode(); // set videomode to be desktop size (might change later)
 
-    this -> window.create(this -> video, "Food Finder", sf::Style::Titlebar | sf::Style::Close);
-    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    this -> window.create(this -> video, "Food Finder", sf::Style::Titlebar | sf::Style::Close); // create the window
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr()); // set app icon
 
-    this -> font.loadFromFile("Cave-Story.ttf");
+    this -> font.loadFromFile("Cave-Story.ttf"); // set font
 
-    sf::Texture* sortT = new sf::Texture();
+    sf::Texture* sortT = new sf::Texture(); // set menu top images
     sortT -> loadFromFile("images/sort by.png");
 
     sf::Texture* menuT = new sf::Texture();
     menuT -> loadFromFile("images/menu.png");
 
-    while(this -> window.isOpen()) {
-        if(cPage == W){
+    while(this -> window.isOpen()) { // loop to update the window: while the user does not click out
+        if(cPage == W){ // load page based on the current page saved in the enum
             welcome();
         }
         else if(cPage == Q){
@@ -315,23 +313,25 @@ void Display::render(){ // puts everything together, onclick stuff
         else if(cPage == B){
             browse();
         }
-        while (this -> window.pollEvent(this -> ev)) {
-            if (ev.type == sf::Event::Closed) {
+        while (this -> window.pollEvent(this -> ev)) { // poll for event
+            if (ev.type == sf::Event::Closed) { // if closed: close the window and exit
                 this -> window.close();
                 break;
             }
-            else if(ev.type == sf::Event::KeyPressed){
+            else if(ev.type == sf::Event::KeyPressed){ // if escape pressed: close the window and exit
                 if(ev.key.code == sf::Keyboard::Escape){
                     this -> window.close();
                 }
                 break;
             }
-            else if (ev.type == sf::Event::MouseButtonPressed) {
-                if (ev.mouseButton.button == sf::Mouse::Left || ev.mouseButton.button == sf::Mouse::Right) {
+            else if (ev.type == sf::Event::MouseButtonPressed) { // if a mouse button is pressed
+                if (ev.mouseButton.button == sf::Mouse::Left || ev.mouseButton.button == sf::Mouse::Right) { // if its a left or right click
+                    // toggle menu options for sort menu
                     if (ev.mouseButton.x >= d1.menu.getPosition().x && ev.mouseButton.x <= d1.menu.getPosition().x + d1.menu.getSize().x &&
                                ev.mouseButton.y >= d1.menu.getPosition().y && ev.mouseButton.y <= d1.menu.getPosition().y + d1.menu.getSize().y) {
                         d1.toggle();
                     }
+                    // if clicked in one of the options, toggle the enum that chooses which sort
                     if(d1.isOpen() && d1.rects[0].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         d1.toggle();
                         cSort = LeastIngre;
@@ -344,11 +344,12 @@ void Display::render(){ // puts everything together, onclick stuff
                         d1.toggle();
                         cSort = Percent;
                     }
-
+                    //toggle menu options for menu dropdown
                     if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
                                ev.mouseButton.y >= d2.menu.getPosition().y && ev.mouseButton.y <= d2.menu.getPosition().y + d2.menu.getSize().y) {
                         d2.toggle();
                     }
+                    // if clicked in one of the options, toggle enum that chooses page
                     if(d2.isOpen() && d2.rects[0].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         d2.toggle();
                         cPage = Q;
@@ -361,6 +362,7 @@ void Display::render(){ // puts everything together, onclick stuff
                         d2.toggle();
                         cPage = B;
                     }
+                    // onclicks for each submit and enter button, just calls onclick for them if it's in bounds
                     if(enter.getSprite().getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         enter.onClick();
                     }
@@ -368,6 +370,7 @@ void Display::render(){ // puts everything together, onclick stuff
                         submit.onClick();
                     }
 
+                    // if the page is on quiz, and it's not done, toggle whichever ingredient button the user clicks with the built-in onclick function
                     if(!quizDone && cPage == Q) {
                         if (banana.getSprite().getGlobalBounds().contains(
                                 static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
@@ -447,6 +450,6 @@ void Display::render(){ // puts everything together, onclick stuff
                 }
             }
         }
-        this -> window.display();
+        this -> window.display(); // display the window
     }
 }
