@@ -46,6 +46,52 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     instructText.setFillColor(borderBlue);
     instructText.setPosition(window.getSize().x/4.35, window.getSize().y/5);
 
+    sf::Text bananaText("Banana", font, 30);
+    bananaText.setFillColor(fontC);
+    bananaText.setPosition(window.getSize().x/1.9 - 10, 465);
+    sf::Text beefText("Beef", font, 30);
+    beefText.setFillColor(fontC);
+    beefText.setPosition(window.getSize().x/1.9 - 10, 625);
+    sf::Text carrotText("Carrot", font, 30);
+    carrotText.setFillColor(fontC);
+    carrotText.setPosition(window.getSize().x/1.9 + 150, 780);
+    sf::Text cheeseText("Cheese", font, 30);
+    cheeseText.setFillColor(fontC);
+    cheeseText.setPosition(window.getSize().x/4 + 330, 575);
+    sf::Text chickenText("Chicken", font, 30);
+    chickenText.setFillColor(fontC);
+    chickenText.setPosition(window.getSize().x/1.9 + 95, 625);
+    sf::Text cocoText("Coconut", font, 30);
+    cocoText.setFillColor(fontC);
+    cocoText.setPosition(window.getSize().x/1.9 + 300, 465);
+    sf::Text cucumberText("Cucumber", font, 30);
+    cucumberText.setFillColor(fontC);
+    cucumberText.setPosition(window.getSize().x/1.9 + 250, 780);
+    sf::Text eggText("Egg", font, 30);
+    eggText.setFillColor(fontC);
+    eggText.setPosition(window.getSize().x/4 + 240, 575);
+    sf::Text milkText("Milk", font, 30);
+    milkText.setFillColor(fontC);
+    milkText.setPosition(window.getSize().x/4 + 20, 575);
+    sf::Text mushroomText("Mushroom", font, 30);
+    mushroomText.setFillColor(fontC);
+    mushroomText.setPosition(window.getSize().x/1.9 + 300, 625);
+    sf::Text pbText("Peanut Butter", font, 30);
+    pbText.setFillColor(fontC);
+    pbText.setPosition(window.getSize().x/4 + 90, 575);
+    sf::Text porkText("Pork", font, 30);
+    porkText.setFillColor(fontC);
+    porkText.setPosition(window.getSize().x/1.9 + 220, 625);
+    sf::Text potatoText("Potato", font, 30);
+    potatoText.setFillColor(fontC);
+    potatoText.setPosition(window.getSize().x/1.9 + 55, 780);
+    sf::Text strawberryText("Strawberry", font, 30);
+    strawberryText.setFillColor(fontC);
+    strawberryText.setPosition(window.getSize().x/1.9 + 80, 465);
+    sf::Text tomatoText("Tomato", font, 30);
+    tomatoText.setFillColor(fontC);
+    tomatoText.setPosition(window.getSize().x/1.9 + 210, 465);
+
     sf::Texture bananaT;
     bananaT.loadFromFile("images/banana.png");
     sf::Sprite bananaImg;
@@ -62,7 +108,7 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     carrotT.loadFromFile("images/carrot.png");
     sf::Sprite carrotImg;
     carrotImg.setTexture(carrotT);
-    carrotImg.setPosition(window.getSize().x/1.9 + 150, 720);
+    carrotImg.setPosition(window.getSize().x/1.9 + 150, 710);
 
     sf::Texture cheeseT;
     cheeseT.loadFromFile("images/cheese.png");
@@ -98,7 +144,7 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     potatoT.loadFromFile("images/potato.png");
     sf::Sprite potatoImg;
     potatoImg.setTexture(potatoT);
-    potatoImg.setPosition(window.getSize().x/1.9 + 50, 720);
+    potatoImg.setPosition(window.getSize().x/1.9 + 50, 710);
 
     sf::Texture strawberryT;
     strawberryT.loadFromFile("images/strawberry.png");
@@ -116,7 +162,7 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     cucumberT.loadFromFile("images/cucumber.png");
     sf::Sprite cucumberImg;
     cucumberImg.setTexture(cucumberT);
-    cucumberImg.setPosition(window.getSize().x/1.9 + 250, 720);
+    cucumberImg.setPosition(window.getSize().x/1.9 + 250, 710);
 
     sf::Texture coconutT;
     coconutT.loadFromFile("images/coconut.png");
@@ -177,6 +223,23 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     this -> window.draw(quizText);
     this -> window.draw(instructText);
     this -> window.draw(fridge);
+
+    this -> window.draw(bananaText);
+    this -> window.draw(beefText);
+    this -> window.draw(carrotText);
+    this -> window.draw(cheeseText);
+    this -> window.draw(chickenText);
+    this -> window.draw(cocoText);
+    this -> window.draw(cucumberText);
+    this -> window.draw(eggText);
+    this -> window.draw(milkText);
+    this -> window.draw(mushroomText);
+    this -> window.draw(pbText);
+    this -> window.draw(porkText);
+    this -> window.draw(potatoText);
+    this -> window.draw(strawberryText);
+    this -> window.draw(tomatoText);
+
     this -> window.draw(banana.getSprite());
     this -> window.draw(beef.getSprite());
     this -> window.draw(carrot.getSprite());
