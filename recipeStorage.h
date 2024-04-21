@@ -19,12 +19,12 @@ public:
         string recipeName; //name of each recipe
         vector<string> ingMeasurements; //vector of ingredients and their amounts for each recipe
         vector<string> directions; //vector of directions/steps for each recipe
-        vector<string> ingList; //vector of just the ingredients for each recipe
+        unordered_set<string> ingList; //vector of just the ingredients for each recipe
     };
 
     // public variables
-    unordered_map<string, recipeData> recipeMap; // contains all the recipes and their data
-    unordered_map<string, vector<string>> ingredientMap; // contains all ingredients and vectors of the recipes the ingredients are in
+    unordered_map<string, recipeData*> recipeMap; // contains all the recipes and their data
+    unordered_map<string, unordered_set<string>> ingredientMap; // contains all ingredients and vectors of the recipes the ingredients are in
 
     unordered_set<string> chosenIng; //set of the chosen ingredients
     unordered_set<string> restrictedIng; //set of the restricted ingredients

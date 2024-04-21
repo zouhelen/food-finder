@@ -22,7 +22,7 @@ void recipeStorage::readFile() {
     string line;
     string cell;
     while (std::getline(data, line)) {
-    std::getline(data, line);
+        std::getline(data, line);
         string name;
         std::stringstream lineStream(line); // put line into a string stream
         recipeData* recipe = new recipeData; // new recipe struc allocated to heap
@@ -100,15 +100,16 @@ void recipeStorage::readFile() {
                 moreIngredients = false;
             }
             else {
-                recipe->ingList.push_back(oneIng);
+                recipe->ingList.insert(oneIng);
                 // add recipe to corresponding ingredient map
                 if (ingredientMap.find(oneIng) == ingredientMap.end()) {
-                    vector<string> recipeList;
-                    recipeList.push_back(recipe->recipeName);
+                    unordered_set<string> recipeList;
+                    recipeList.insert(recipe->recipeName);
                     ingredientMap[oneIng] = recipeList;
                 }
                 else {
-                    ingredientMap[oneIng].push_back(recipe->recipeName);
+                    //if(ingredientMap[oneIng])
+                    ingredientMap[oneIng].insert(recipe->recipeName);
                 }
             }
         }
@@ -119,10 +120,12 @@ void recipeStorage::readFile() {
             std::cout << ing << std::endl;
         }
          */
-
+        recipeMap[recipe->recipeName] = recipe;
 
         //std::cout << line << std::endl;
     }
+
+    /*
     // print out ingredient map to test
     for (auto& pair: ingredientMap) {
         std::cout << "ingredient: " << pair.first << "\n";
@@ -132,6 +135,7 @@ void recipeStorage::readFile() {
         }
         std::cout << "\n\n";
     }
+     */
 
     data.close();
 }
@@ -167,8 +171,8 @@ void recipeStorage::addChosenIngre(string ingredient) {
 void recipeStorage::chooseIngreUpdater() {
     for (string ingredient : chosenIng) {
         //for chosenRecipe
-        for (int i = 0; i < ingredientMap[ingredient].size(); i++) {
-            chosenRecipe.insert(ingredientMap[ingredient][i]); //duplicate ingredients are ignored
+        for (string recipe: ingredientMap[ingredient]) {
+            chosenRecipe.insert(recipe);
         }
 
         //for clickFreq
@@ -197,15 +201,15 @@ void recipeStorage::chooseIngreUpdater() {
         }
         //adds the recipes containing the ingredient and the value the vectors are sorted by
         for (string aRecipe : recipes) {
-            leastIng.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe].ingList.size()));
-            leastSteps.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe].directions.size()));
+            leastIng.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->ingList.size()));
+            leastSteps.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->directions.size()));
             //number of ingredients in a recipe that have been chosen
             int chosenCounter = 0;
-            for (string ingre : recipeMap[aRecipe].ingList) {
+            for (string ingre : recipeMap[aRecipe]->ingList) {
                 if (chosenIng.find(ingre) != chosenIng.end())
                     chosenCounter++;
             }
-            recipePercent.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe].ingList.size())));
+            recipePercent.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe]->ingList.size())));
         }
     }
 }
@@ -216,8 +220,8 @@ void recipeStorage::addRestrictIngre(string ingredient) {
 void recipeStorage::restrictIngreUpdater() {
     for (string ingredient : restrictedIng) {
         //for chosenRecipe
-        for (int i = 0; i < ingredientMap[ingredient].size(); i++) {
-            chosenRecipe.erase(ingredientMap[ingredient][i]); //ingredients not there are ignored
+        for (string recipe: ingredientMap[ingredient]) {
+            chosenRecipe.erase(recipe);
         }
 
         //set containing recipes needing ingredient
