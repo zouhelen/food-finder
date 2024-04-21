@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <functional>
 #ifndef FOOD_FINDER_DISPLAY_H
 #define FOOD_FINDER_DISPLAY_H
 class Display{
@@ -20,10 +21,11 @@ class Display{
     void welcome();
     void quiz();
     void reccs();
-    void browse(); // implement last
+    //void browse(); // implement last
 public:
-    Display(): bgGreen(230, 250, 245), fontC(20, 131, 143), borderBlue(28, 168, 184){
+    Display(): bgGreen(201, 201, 201), fontC(95, 90, 98), borderBlue(131, 125, 135){
     };
     void render(); // combine everything?
+    std::vector<std::string> choices = {"banana", "beef", "carrot", "cheese", "chicken", "coconut", "cucumber", "egg", "milk", "mushroom", "pork", "potato", "peanut butter", "strawberry", "tomato"};
 };
 #endif //FOOD_FINDER_DISPLAY_H

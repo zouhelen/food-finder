@@ -12,6 +12,6 @@ C:\Users\Helen\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCM
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Found SFML 2.5.1 in C:/Libraries/SFML-2.5.1/lib/cmake/SFML
--- Configuring done (3.9s)
+-- Configuring done (2.9s)
 -- Generating done (0.0s)
 -- Build files have been written to: C:/Users/Helen/.uf/2024_spring/dsa/projectThreee/saturday/food-finder/cmake-build-debug
