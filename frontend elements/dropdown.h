@@ -11,10 +11,10 @@ public:
     void toggle();
     bool isOpen() const;
     sf::RectangleShape menu;
+    std::vector<sf::RectangleShape> rects;
 private:
     std::vector<std::string> options;
     sf::Text select;
-    std::vector<sf::RectangleShape> rects;
     std::vector<sf::Text> optionsText;
     sf::RenderWindow& window;
     sf::Font font;

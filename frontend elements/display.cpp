@@ -290,9 +290,22 @@ void Display::render(){ // puts everything together, onclick stuff
                                ev.mouseButton.y >= d1.menu.getPosition().y && ev.mouseButton.y <= d1.menu.getPosition().y + d1.menu.getSize().y) {
                         d1.toggle();
                     }
+
                     if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
                                ev.mouseButton.y >= d2.menu.getPosition().y && ev.mouseButton.y <= d2.menu.getPosition().y + d2.menu.getSize().y) {
                         d2.toggle();
+                    }
+                    if(d2.isOpen() && d2.rects[0].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
+                        d2.toggle();
+                        cPage = Q;
+                    }
+                    if(d2.isOpen() && d2.rects[1].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
+                        d2.toggle();
+                        cPage = R;
+                    }
+                    if(d2.isOpen() && d2.rects[2].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
+                        d2.toggle();
+                        cPage = B;
                     }
                     if(enter.getSprite().getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         enter.onClick();

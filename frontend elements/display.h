@@ -15,7 +15,8 @@ class Display{
     enum Current{
         W,
         Q,
-        R
+        R,
+        B
     };
 
     Current cPage = W;
