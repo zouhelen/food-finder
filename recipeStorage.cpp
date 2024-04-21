@@ -1,12 +1,11 @@
 #include "recipeStorage.h"
 #include <fstream>
 #include <sstream>
-#include <chrono>
 
 
 /* read file in */
 void recipeStorage::readFile() {
-    std::ifstream data("../testData.csv");
+    std::ifstream data("testData.csv");
 
     // check if file opened successfully
     if (!data.is_open()) {
@@ -170,10 +169,10 @@ void recipeStorage::chooseIngreUpdater() {
         for (int i = 0; i < ingredientMap[ingredient].size(); i++) {
             chosenRecipe.insert(ingredientMap[ingredient][i]); //duplicate ingredients are ignored
         }
-
+        
         //for clickFreq
         bool hasAlrBeenClicked = false;
-        for (auto ingrePair : clickFreq) {
+        for (pair<string, int> ingrePair : clickFreq) {
             if (ingrePair.first == ingredient) {
                 ingrePair.second++;
                 hasAlrBeenClicked = true;
@@ -182,12 +181,13 @@ void recipeStorage::chooseIngreUpdater() {
         if (!hasAlrBeenClicked)
             clickFreq.push_back(pair<string, int> (ingredient, 1));
 
-        
+
         //set containing recipes needing ingredient
         unordered_set<string> recipes;
         for (string recipe : ingredientMap[ingredient]) {
             recipes.insert(recipe);
         }
+        //std::cout << ingredient << recipes.size() << std::endl;
         //for leastIng, leastSteps, and recipePercent
         //removes the recipes from recipes (the set) that are already in leastIng/leastSteps/recipePercent
         for (pair<string, int> recipePair : leastIng) {
@@ -201,11 +201,15 @@ void recipeStorage::chooseIngreUpdater() {
             leastSteps.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe].directions.size()));
             //number of ingredients in a recipe that have been chosen
             int chosenCounter = 0;
+            //for every ingredient in a recipe
             for (string ingre : recipeMap[aRecipe].ingList) {
+                std::cout << ingre << std::endl;
+                //if the ingredient is in chosenIng, chosenCounter++
                 if (chosenIng.find(ingre) != chosenIng.end())
                     chosenCounter++;
             }
-            recipePercent.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe].ingList.size())));
+            //std::cout << chosenCounter << std::endl;
+            //recipePercent.push_back(pair<string, int> (aRecipe, (100*chosenCounter)/(recipeMap[aRecipe].ingList.size())));
         }
     }
 }
@@ -303,7 +307,7 @@ void recipeStorage::clickFreqCountingSort(int placeVal) {
     }
 }
 
-auto recipeStorage::leastIngShell() {
+double recipeStorage::leastIngShell() {
     auto start = std::chrono::high_resolution_clock::now();
     int gap = leastIng.size();
     while (gap > 0) {
@@ -318,7 +322,7 @@ auto recipeStorage::leastIngShell() {
         gap /= 2;
     }
     auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start).count();
+    double duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start).count();
     return duration;
 }
 

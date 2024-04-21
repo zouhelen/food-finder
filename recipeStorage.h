@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <set>
+#include <chrono>
 
 using std::string;
 using std::vector;
@@ -59,7 +60,7 @@ public:
     auto clickFreqRadix(); //performs radix sort on clickFreq
     void clickFreqCountingSort(int placeVal); //helper function for radix sort
 
-    auto leastIngShell();
+    double leastIngShell();
     auto leastIngRadix();
     void leastIngCountingSort(int placeVal);
     

@@ -10,10 +10,16 @@ int main() {
 
     recipes.readFile();
 
-    recipes.addChosenIngre("egg");
-    recipes.addChosenIngre("tomato");
-    recipes.addChosenIngre("brown sugar");
+    recipes.addChosenIngre("eggs");
+    recipes.addChosenIngre("tomatoes");
+    recipes.addChosenIngre("bananas");
     recipes.addChosenIngre("chicken");
+    recipes.chooseIngreUpdater();
+
+    std::cout << recipes.leastIngShell();
+    for (int i = 0; i < recipes.leastIng.size(); i++) {
+        std::cout << recipes.leastIng[i].first << " " << recipes.leastIng[i].second << std::endl;
+    }
 
     return 0;
 }
