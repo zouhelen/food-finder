@@ -82,5 +82,8 @@ public:
     double recipePercentRadix();
     void recipePercentCountingSort(int placeVal);
 
+    // used to display recipe to interface
+    string recipeDetails(string recipeName);
+
 
 };

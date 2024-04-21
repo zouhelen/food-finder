@@ -20,8 +20,9 @@ void recipeStorage::readFile() {
     // read all other recipe lines
     string line;
     string cell;
+    int indexTest=0;
     while (std::getline(data, line)) {
-        std::getline(data, line);
+        //std::getline(data, line);
         string name;
         std::stringstream lineStream(line); // put line into a string stream
         recipeData* recipe = new recipeData; // new recipe struc allocated to heap
@@ -31,9 +32,9 @@ void recipeStorage::readFile() {
         std::getline(lineStream, scrap, ',');
         std::getline(lineStream, name, ',');
         recipe->recipeName = name;
-        /* recupe name test
-        std::cout << "recipe name: " << recipe->recipeName << std::endl;
-        */
+        //recipe name test
+        std::cout << indexTest << ": recipe name: " << recipe->recipeName << std::endl;
+        //
 
         /* load ingredients including measurements */
 
@@ -120,7 +121,7 @@ void recipeStorage::readFile() {
         }
          */
         recipeMap[recipe->recipeName] = recipe;
-
+        indexTest++;
         //std::cout << line << std::endl;
     }
 
@@ -450,8 +451,25 @@ void recipeStorage::updateIngredients(vector<bool> chosenIngre, vector<bool> res
         this->addRestrictIngre("tomato sauce");
         this->addRestrictIngre("Italian tomatoes");
     }
+
     this->chooseIngreUpdater();
+
+    // testing chosen recipes after chosen ingredients considered
+    std::cout << "testing chosen recipes after chosen ingredients considered\n";
+    for (string recipe : chosenRecipe) {
+        std::cout << recipe << "\n";
+    }
+    std::cout << "\n";
+
     this->restrictIngreUpdater();
+
+    // testing chosen recipes after chosen ingredients considered
+    std::cout << "testing chosen recipes after restricted ingredients considered\n";
+    for (string recipe : chosenRecipe) {
+        std::cout << recipe << "\n";
+    }
+    std::cout << "\n";
+    //
 }
 
 // all the sorts
@@ -672,4 +690,19 @@ auto recipePercentShell() {
 
 auto recipePercentRadix() {
 
+}
+
+string recipeStorage::recipeDetails(string recipeName) {
+    string details = "";
+
+    details += "--recipe name--\n" + recipeName + "\n\n";
+    details += "--ingredients--\n";
+    for (string ingredient : recipeMap[recipeName]->ingMeasurements) {
+        details += ingredient + "\n";
+    }
+    details += "\n--directions--\n";
+    for (string direction : recipeMap[recipeName]->directions) {
+        details += direction + "\n";
+    }
+    return details;
 }
