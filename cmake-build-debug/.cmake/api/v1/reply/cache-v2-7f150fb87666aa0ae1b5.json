@@ -659,7 +659,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/FoodFinder"
+			"value" : "C:/Program Files (x86)/food-finder"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -1270,42 +1270,6 @@
 			"value" : "C:/Libraries/SFML-2.5.1/lib/libFLAC.a"
 		},
 		{
-			"name" : "FoodFinder_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/beiyu/food-finder/cmake-build-debug"
-		},
-		{
-			"name" : "FoodFinder_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "FoodFinder_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/beiyu/food-finder"
-		},
-		{
 			"name" : "FreeType_LIB",
 			"properties" : 
 			[
@@ -1451,42 +1415,6 @@
 		},
 		{
 			"name" : "food-finder_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/beiyu/food-finder"
-		},
-		{
-			"name" : "food_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/beiyu/food-finder/cmake-build-debug"
-		},
-		{
-			"name" : "food_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "food_SOURCE_DIR",
 			"properties" : 
 			[
 				{
