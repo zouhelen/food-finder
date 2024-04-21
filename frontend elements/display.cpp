@@ -246,17 +246,15 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     this -> window.draw(submit.getSprite());
 }
 
-std::function<void(void)> Display::swapQuiz(){
-    return [this]() {
-        cPage = Q;
-    };
-}
-
 void Display::reccs() {
+    this -> window.clear(bgGreen);
+    this -> d1.draw();
+    this -> d2.draw();
 }
 
 void Display::browse(){
-
+    this -> window.clear(bgGreen);
+    this -> d2.draw();
 }
 
 std::function<void(void)> Display::changeIngre(int i){
@@ -282,8 +280,12 @@ std::function<void(void)> Display::submitB(){
     };
 }
 
+std::function<void(void)> Display::swapQuiz(){
+    return [this]() {
+        cPage = Q;
+    };
+}
 
-// create methods for each page. submit button reloads to reccs, then a quiz retake option, a see reccs option, and a browse option
 void Display::render(){ // puts everything together, onclick stuff
     icon.loadFromFile("images/icon.png");
 
@@ -309,6 +311,9 @@ void Display::render(){ // puts everything together, onclick stuff
         }
         else if(cPage == R){
             reccs();
+        }
+        else if(cPage == B){
+            browse();
         }
         while (this -> window.pollEvent(this -> ev)) {
             if (ev.type == sf::Event::Closed) {
@@ -437,11 +442,6 @@ void Display::render(){ // puts everything together, onclick stuff
                         if (tomato.getSprite().getGlobalBounds().contains(
                                 static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {
                             tomato.onClick();
-                        }
-                    }
-                    if(quizDone){
-                        for(int i = 0; i < 15; i++){
-                            std::cout << added[i] << " " << removed[i] << std::endl;
                         }
                     }
                 }
