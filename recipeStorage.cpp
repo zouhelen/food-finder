@@ -5,7 +5,7 @@
 
 /* read file in */
 void recipeStorage::readFile() {
-    std::ifstream data("testData.csv");
+    std::ifstream data("../testData.csv");
 
     // check if file opened successfully
     if (!data.is_open()) {
@@ -175,27 +175,6 @@ void recipeStorage::chooseIngreUpdater() {
             chosenRecipe.insert(recipe);
         }
         
-        //for clickFreq
-        //for shell sort
-        bool hasAlrBeenClicked = false;
-        for (pair<string, int> ingrePair : clickFreqS) {
-            if (ingrePair.first == ingredient) {
-                ingrePair.second++;
-                hasAlrBeenClicked = true;
-            }
-        }
-        if (!hasAlrBeenClicked)
-            clickFreqS.push_back(pair<string, int> (ingredient, 1));
-        //for radix sort
-        for (pair<string, int> ingrePair : clickFreqR) {
-            if (ingrePair.first == ingredient) {
-                ingrePair.second++;
-                hasAlrBeenClicked = true;
-            }
-        }
-        if (!hasAlrBeenClicked)
-            clickFreqR.push_back(pair<string, int> (ingredient, 1));
-
 
         //set containing recipes needing this ingredient
         unordered_set<string> recipes;
@@ -286,78 +265,175 @@ void recipeStorage::restrictIngreUpdater() {
     }
 }
 
+void recipeStorage::updateIngredients(vector<bool> chosenIngre, vector<bool> restrictedIngre) {
+    // order of ingredients
+    // 0.banana, 1.beef,  2.carrot, 3.cheese,  4.chicken, 5.coconut, 6.cucumber,
+    // 7.egg, 8.milk, 9.mushroom, 10.pork, 11.potato, 12.peanut butter, 13.strawberry, 14.tomato
+    if (chosenIngre[0]) {
+        this->addChosenIngre("bananas");
+    }
+    if (chosenIngre[1]) {
+        this->addChosenIngre("beef");
+        this->addChosenIngre("ground beef");
+        this->addChosenIngre("corned beef");
+    }
+    if (chosenIngre[2]) {
+        this->addChosenIngre("carrot");
+        this->addChosenIngre("carrots");
+        this->addChosenIngre("carrot chunks");
+    }
+    if (chosenIngre[3]) {
+        this->addChosenIngre("cheese");
+        this->addChosenIngre("Cheddar cheese");
+        this->addChosenIngre("cheddar cheese");
+        this->addChosenIngre("Parmesan cheese");
+        this->addChosenIngre("Mozzarella cheese");
+        this->addChosenIngre("Ricotta cheese");
+        this->addChosenIngre("American cheese");
+        this->addChosenIngre("sharp cheese");
+        this->addChosenIngre("grated cheese");
+        this->addChosenIngre("cottage cheese");
+    }
+    if (chosenIngre[4]) {
+        this->addChosenIngre("chicken");
+        this->addChosenIngre("chicken breasts");
+        this->addChosenIngre("chicken cutlets");
+    }
+    if (chosenIngre[5]) {
+        this->addChosenIngre("coconut");
+        this->addChosenIngre("moist coconut");
+        this->addChosenIngre("flaked coconut");
+    }
+    if (chosenIngre[6]) {
+        this->addChosenIngre("cucumbers");
+    }
+    if (chosenIngre[7]) {
+        this->addChosenIngre("egg");
+        this->addChosenIngre("eggs");
+        this->addChosenIngre("egg yolk");
+        this->addChosenIngre("egg white");
+    }
+    if (chosenIngre[8]) {
+        this->addChosenIngre("milk");
+        this->addChosenIngre("condensed milk");
+        this->addChosenIngre("buttermilk");
+    }
+    if (chosenIngre[9]) {
+        this->addChosenIngre("mushrooms");
+        this->addChosenIngre("fresh mushrooms");
+        this->addChosenIngre("cream of mushroom soup");
+    }
+    if (chosenIngre[10]) {
+        this->addChosenIngre("pork");
+    }
+    if (chosenIngre[11]) {
+        this->addChosenIngre("potatoes");
+    }
+    if (chosenIngre[12]) {
+        this->addChosenIngre("peanut butter");
+    }
+    if (chosenIngre[13]) {
+        this->addChosenIngre("strawberry");
+        this->addChosenIngre("strawberries");
+        this->addChosenIngre("strawberry jello");
+    }
+    if (chosenIngre[14]) {
+        this->addChosenIngre("tomato");
+        this->addChosenIngre("tomatoes");
+        this->addChosenIngre("tomato paste");
+        this->addChosenIngre("tomato juice");
+        this->addChosenIngre("tomato sauce");
+        this->addChosenIngre("Italian tomatoes");
+    }
+
+
+    // restricted ingredients
+    if (restrictedIngre[0]) {
+        this->addRestrictIngre("bananas");
+    }
+    if (restrictedIngre[1]) {
+        this->addRestrictIngre("beef");
+        this->addRestrictIngre("ground beef");
+        this->addRestrictIngre("corned beef");
+        this->addRestrictIngre("beef stock");
+        this->addRestrictIngre("beef bouillon");
+        this->addRestrictIngre("Armour dried beef");
+    }
+    if (restrictedIngre[2]) {
+        this->addRestrictIngre("carrot");
+        this->addRestrictIngre("carrots");
+        this->addRestrictIngre("carrot chunks");
+    }
+    if (restrictedIngre[3]) {
+        this->addRestrictIngre("cheese");
+        this->addRestrictIngre("Cheddar cheese");
+        this->addRestrictIngre("cheddar cheese");
+        this->addRestrictIngre("Parmesan cheese");
+        this->addRestrictIngre("Mozzarella cheese");
+        this->addRestrictIngre("Ricotta cheese");
+        this->addRestrictIngre("American cheese");
+        this->addRestrictIngre("sharp cheese");
+        this->addRestrictIngre("grated cheese");
+        this->addRestrictIngre("cottage cheese");
+    }
+    if (restrictedIngre[4]) {
+        this->addRestrictIngre("cream of chicken soup");
+        this->addRestrictIngre("chicken broth");
+        this->addRestrictIngre("chicken");
+        this->addRestrictIngre("chicken breasts");
+        this->addRestrictIngre("chicken cutlets");
+    }
+    if (restrictedIngre[5]) {
+        this->addRestrictIngre("coconut");
+        this->addRestrictIngre("moist coconut");
+        this->addRestrictIngre("flaked coconut");
+    }
+    if (restrictedIngre[6]) {
+        this->addRestrictIngre("cucumbers");
+    }
+    if (restrictedIngre[7]) {
+        this->addRestrictIngre("egg");
+        this->addRestrictIngre("eggs");
+        this->addRestrictIngre("egg yolk");
+        this->addRestrictIngre("egg white");
+    }
+    if (restrictedIngre[8]) {
+        this->addRestrictIngre("milk");
+        this->addRestrictIngre("condensed milk");
+        this->addRestrictIngre("buttermilk");
+    }
+    if (restrictedIngre[9]) {
+        this->addRestrictIngre("mushrooms");
+        this->addRestrictIngre("fresh mushrooms");
+        this->addRestrictIngre("cream of mushroom soup");
+    }
+    if (restrictedIngre[10]) {
+        this->addRestrictIngre("pork");
+    }
+    if (restrictedIngre[11]) {
+        this->addRestrictIngre("potatoes");
+    }
+    if (restrictedIngre[12]) {
+        this->addRestrictIngre("peanut butter");
+    }
+    if (restrictedIngre[13]) {
+        this->addRestrictIngre("strawberry");
+        this->addRestrictIngre("strawberries");
+        this->addRestrictIngre("strawberry jello");
+    }
+    if (restrictedIngre[14]) {
+        this->addRestrictIngre("tomato");
+        this->addRestrictIngre("tomatoes");
+        this->addRestrictIngre("tomato paste");
+        this->addRestrictIngre("tomato juice");
+        this->addRestrictIngre("tomato sauce");
+        this->addRestrictIngre("Italian tomatoes");
+    }
+    this->chooseIngreUpdater();
+    this->restrictIngreUpdater();
+}
+
 // all the sorts
-double recipeStorage::clickFreqShell() {
-    //start the clock
-    auto start = std::chrono::high_resolution_clock::now();
-    //the gap starts at the vector size
-    int gap = clickFreqS.size();
-    while (gap > 0) {
-        //does an insertions sort for this gap size
-        for (int i = gap; i < clickFreqS.size(); i++) {
-            pair<string, int> temp = clickFreqS[i];
-            int j;
-            //second condition in the second statement makes it greatest to least
-            for (j = i; j >= gap && clickFreqS[j-gap].second < temp.second; j -= gap) {
-                clickFreqS[j] = clickFreqS[j-gap];
-            }
-            clickFreqS[j] = temp;
-        }
-        //gap halves through every passthrough
-        gap /= 2;
-    }
-    //stops the clock
-    auto stop = std::chrono::high_resolution_clock::now();
-    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
-}
-
-double recipeStorage::clickFreqRadix() {
-    //start the clock
-    auto start = std::chrono::high_resolution_clock::now();
-    //finds the maximum number
-    int max = clickFreqR[0].second;
-    for (pair<string, int> pairItr : clickFreqR) {
-        max = std::max(max, pairItr.second);
-    }
-
-    // run helper sort function for each place of each recipe's number of ingredients
-    for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
-        clickFreqCountingSort(placeVal);
-    }
-    //stops the clock
-    auto stop = std::chrono::high_resolution_clock::now();
-    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
-}
-
-void recipeStorage::clickFreqCountingSort(int placeVal) {
-    //initializes count
-    int count[] = {0,0,0,0,0,0,0,0,0,0}; // one slot for each digit 0-9
-    // initialize array of same size and type of clickFreq - used to temporarily store sorted results
-    //will be used to store the ouput that goes into clickFreq
-    pair<string, int> output[clickFreqR.size()];
-    //gets the count of every element
-    for (int i = 0; i < clickFreqR.size(); i++) {
-        count[(clickFreqR[i].second / placeVal) % 10] = count[(clickFreqR[i].second / placeVal) % 10] + 1; // increment count at the index of the digit
-    }
-    //makes the cumulative count and sorts the elements; this is where greatest to least or vice versa is decided
-    for (int j = 8; j >= 0; j--) {
-        count[j] += count[j+1];
-    }
-    //elements are placed into the sorted order
-    for (int k = clickFreqR.size()-1; k >= 0; k--) {
-        output[count[(clickFreqR[k].second / placeVal) % 10] - 1] = clickFreqR[k];
-        count[(clickFreqR[k].second / placeVal) % 10]--;
-    }
-    //transfers output to clickFreq
-    for (int l = 0; l < clickFreqR.size(); l++) {
-        clickFreqR[l] = output[l];        
-    }
-}
-
 double recipeStorage::leastIngShell() {
     //start the clock
     auto start = std::chrono::high_resolution_clock::now();
@@ -498,10 +574,76 @@ void recipeStorage::leastStepsCountingSort(int placeVal) {
     }
 }
 
-auto recipePercentShell() {
+double recipeStorage::recipePercentShell() {
+    //start the clock
+    auto start = std::chrono::high_resolution_clock::now();
+    //the gap starts at the vector size
+    int gap = recipePercentS.size();
+    while (gap > 0) {
+        //does an insertions sort for this gap size
+        for (int i = gap; i < recipePercentS.size(); i++) {
+            pair<string, int> temp = recipePercentS[i];
+            int j;
+            //second condition in the second statement makes it greatest to least
+            for (j = i; j >= gap && recipePercentS[j-gap].second < temp.second; j -= gap) {
+                recipePercentS[j] = recipePercentS[j-gap];
+            }
+            recipePercentS[j] = temp;
+        }
+        //gap halves through every passthrough
+        gap /= 2;
+    }
+    //stops the clock
+    auto stop = std::chrono::high_resolution_clock::now();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
+    return duration;
 
 }
 
-auto recipePercentRadix() {
+double recipeStorage::recipePercentRadix() {
+    //start the clock
+    auto start = std::chrono::high_resolution_clock::now();
+    //finds the maximum number
+    int max = recipePercentR[0].second;
+    for (pair<string, int> pairItr : recipePercentR) {
+        max = std::max(max, pairItr.second);
+    }
+
+    // run helper sort function for each place of each recipe's number of ingredients
+    for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
+        recipePercentCountingSort(placeVal);
+    }
+    //stops the clock
+    auto stop = std::chrono::high_resolution_clock::now();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
+    return duration;
+
+}
+
+void recipeStorage::recipePercentCountingSort(int placeVal) {
+    //initializes count
+    int count[] = {0,0,0,0,0,0,0,0,0,0}; // one slot for each digit 0-9
+    // initialize array of same size and type of recipePercent - used to temporarily store sorted results
+    //will be used to store the ouput that goes into recipePercent
+    pair<string, int> output[recipePercentR.size()];
+    //gets the count of every element
+    for (int i = 0; i < recipePercentR.size(); i++) {
+        count[(recipePercentR[i].second / placeVal) % 10] = count[(recipePercentR[i].second / placeVal) % 10] + 1; // increment count at the index of the digit
+    }
+    //makes the cumulative count and sorts the elements; this is where greatest to least or vice versa is decided
+    for (int j = 8; j >= 0; j--) {
+        count[j] += count[j+1];
+    }
+    //elements are placed into the sorted order
+    for (int k = recipePercentR.size()-1; k >= 0; k--) {
+        output[count[(recipePercentR[k].second / placeVal) % 10] - 1] = recipePercentR[k];
+        count[(recipePercentR[k].second / placeVal) % 10]--;
+    }
+    //transfers output to recipePercent
+    for (int l = 0; l < recipePercentR.size(); l++) {
+        recipePercentR[l] = output[l];        
+    }
 
 }

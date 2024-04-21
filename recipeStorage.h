@@ -31,9 +31,11 @@ public:
     unordered_set<string> restrictedIng; //set of the restricted ingredients
     set<string> chosenRecipe; //set of recipes containing at least 1 chosen ingredient (and no restricted ingredients)
 
+    //ingredient input
+    vector<bool> ingreInput();
+
     //sorted via shell sort
     //contains the names of the ingredients that are chosen
-    vector<pair<string, int>> clickFreqS; //pair: ingredient name, click frequency (greater first)
     vector<pair<string, int>> leastIngS; //pair: recipe name, num of ingredients (lesser first)
     vector<pair<string, int>> leastStepsS; //pair: recipe name, num of steps (lesser first)
     //percentage of recipes' ingredients that are chosen
@@ -41,18 +43,20 @@ public:
     
     //sorted via radix sort
     //contains the names of the ingredients that are chosen
-    vector<pair<string, int>> clickFreqR; //pair: ingredient name, click frequency (greater first)
     vector<pair<string, int>> leastIngR; //pair: recipe name, num of ingredients (lesser first)
     vector<pair<string, int>> leastStepsR; //pair: recipe name, num of steps (lesser first)
     //percentage of recipes' ingredients that are chosen
     vector<pair<string, int>> recipePercentR; //pair: recipe, percent chosen (greater first)
 
+
     // methods
-    void readFile();
+    void readFile(); //reads from the database
     string readBrackSeg(std::istream& input); // short for read segment surrounded by brackets
     string readQuoteSeg(std::istringstream& input); // short for segment surrounded by quotes
 
-    //function called on click that adds to chosenIng
+    //
+
+    //function that adds to chosenIng
     void addChosenIngre(string ingredient);
     //function called when submit button is pressed to add values from unord_maps to the unord_set, set, and vectors
     void chooseIngreUpdater();
@@ -60,25 +64,23 @@ public:
     void addRestrictIngre(string ingredient);
     //function called on click to remove values from unord_maps to the unord_set, set, and vectors
     void restrictIngreUpdater();
+    // combines above functions to parse selected ingredients from front end
+    void updateIngredients(vector<bool> chosenIngre, vector<bool> restrictedIngre);
 
 
     //sorts all the vectors with the corresponding algorithm
     //returns the length of time the function took in nanoseconds
-    double clickFreqShell(); //performs shell sort on clickFreq
-    double clickFreqRadix(); //performs radix sort on clickFreq
-    void clickFreqCountingSort(int placeVal); //helper function for radix sort
-
-    double leastIngShell();
-    double leastIngRadix();
-    void leastIngCountingSort(int placeVal);
+    double leastIngShell(); //performs shell sort on leastIng
+    double leastIngRadix(); //performs radix sort on leastIng
+    void leastIngCountingSort(int placeVal); //helper function for radix sort
     
-    double leastStepsShell();
-    double leastStepsRadix();
-    void leastStepsCountingSort(int placeVal);
+    double leastStepsShell(); //performs shell sort on leastSteps
+    double leastStepsRadix(); //performs radix sort on leastSteps
+    void leastStepsCountingSort(int placeVal); //helper function for radix sort
 
-    double recipePercentShell();
-    double recipePercentRadix();
-    void recipePercentCountingSort(int placeVal);
+    double recipePercentShell(); //performs shell sort on recipePercent
+    double recipePercentRadix(); //performs radix sort on recipePercent
+    void recipePercentCountingSort(int placeVal); //helper function for radix sort
 
 
 };
