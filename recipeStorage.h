@@ -37,8 +37,6 @@ public:
     //percentage of recipes' ingredients that are chosen
     vector<pair<string, int>> recipePercent; //pair: recipe, percent chosen (greater first)
     
-    vector<string> hadIngre; //contains the names of the ingredients that are chosen    
-    
 
     // methods
     void readFile();
@@ -54,10 +52,6 @@ public:
     //function called on click to remove values from unord_maps to the unord_set, set, and vectors
     void restrictIngreUpdater();
 
-    //search recipes
-    void search(); //makes sure all restricted ingredients/recipes aren't chosen
-    //^would need to go through everything--what if a chosen ingredient was unchosen and then was restricted
-    void sortVects(); //sorts all of the vectors
 
     //sorts all the vectors with the corresponding algorithm
     //returns the length of time the function took
