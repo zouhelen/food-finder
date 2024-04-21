@@ -20,7 +20,7 @@ class Display{
     void welcome();
     void quiz();
     void reccs();
-    void browse(); // implement last
+    //void browse(); // implement last
 public:
     Display(): bgGreen(230, 250, 245), fontC(20, 131, 143), borderBlue(28, 168, 184){
     };

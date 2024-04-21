@@ -38,7 +38,17 @@ void Display::welcome(){
 
 
 void Display::quiz() {
+    sf::Text quizText("Food Preferences", font, 150);
+    quizText.setFillColor(fontC);
+    quizText.setPosition(window.getSize().x/4,window.getSize().y/18);
 
+    sf::Text instructText("Left click to add select as an ingredient you have and right click to blacklist an ingredient (like allergies).", font, 30);
+    instructText.setFillColor(borderBlue);
+    instructText.setPosition(window.getSize().x/4.35, window.getSize().y/5);
+
+
+    this -> window.draw(quizText);
+    this -> window.draw(instructText);
 }
 
 void Display::reccs() {
@@ -94,9 +104,10 @@ void Display::render(){ // puts everything together, onclick stuff
             }
         }
         this -> window.clear(bgGreen);
-        welcome();
-        d1.draw();
-        d2.draw();
+        //welcome();
+        quiz();
+        //d1.draw();
+        //d2.draw();
         this -> window.display();
     }
 }
