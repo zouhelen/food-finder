@@ -11,6 +11,14 @@ class Display{
     sf::Event ev;
     sf::Image icon;
 
+    enum Current{
+        W,
+        Q,
+        R
+    };
+
+    Current cPage = W;
+
     std::vector<std::string> sortOptions = {"Most Popular", "Ingredient Number", "Step Number", "% Ingredient Match"};
     std::vector<std::string> menuOptions = {"Quiz", "Your Reccs", "Browse"};
 

@@ -6,12 +6,6 @@
 #include "dropdown.h"
 #include "button.h"
 
-std::function<void(void)> Display::swapPage(){
-    return []() {
-        std::cout << "Page swapped!" << std::endl;
-    };
-}
-
 void Display::welcome(){
     sf::Texture enterB;
     enterB.loadFromFile("images/enter.png");
@@ -30,6 +24,7 @@ void Display::welcome(){
 
     enter.setSprite(enterImg);
 
+    this -> window.clear(bgGreen);
     this -> window.draw(welcomeText);
     this -> window.draw(secondary);
     this -> window.draw(enter.getSprite());
@@ -204,6 +199,8 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     milk.setSprite(milkImg);
     pb.setSprite(pbImg);
 
+    this -> window.clear(bgGreen);
+
     this -> window.draw(quizText);
     this -> window.draw(instructText);
     this -> window.draw(fridge);
@@ -242,6 +239,13 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     this -> d2.draw();
 }
 
+std::function<void(void)> Display::swapPage(){
+    return [this]() {
+        cPage = Q;
+        quiz();
+    };
+}
+
 void Display::reccs() {
 }
 
@@ -263,6 +267,15 @@ void Display::render(){ // puts everything together, onclick stuff
     menuT -> loadFromFile("images/menu.png");
 
     while(this -> window.isOpen()) {
+        if(cPage == W){
+            welcome();
+        }
+        else if(cPage == Q){
+            quiz();
+        }
+        else if(cPage == R){
+            reccs();
+        }
         while (this -> window.pollEvent(this -> ev)) {
             if (ev.type == sf::Event::Closed) {
                 this -> window.close();
@@ -275,27 +288,27 @@ void Display::render(){ // puts everything together, onclick stuff
                 break;
             }
             else if (ev.type == sf::Event::MouseButtonPressed) {
-                if (ev.mouseButton.button == sf::Mouse::Left) {
+                if (ev.mouseButton.button == sf::Mouse::Left || ev.mouseButton.button == sf::Mouse::Right) {
                     if (d1.isOpen()) {
                         d1.toggle();
-                    } else if (ev.mouseButton.x >= d1.menu.getPosition().x && ev.mouseButton.x <= d1.menu.getPosition().x + d1.menu.getSize().x &&
+                    }
+                    else if (ev.mouseButton.x >= d1.menu.getPosition().x && ev.mouseButton.x <= d1.menu.getPosition().x + d1.menu.getSize().x &&
                                ev.mouseButton.y >= d1.menu.getPosition().y && ev.mouseButton.y <= d1.menu.getPosition().y + d1.menu.getSize().y) {
                         d1.toggle();
                     }
                     if (d2.isOpen()) {
                         d2.toggle();
-                    } else if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
+                    }
+                    else if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
                                ev.mouseButton.y >= d2.menu.getPosition().y && ev.mouseButton.y <= d2.menu.getPosition().y + d2.menu.getSize().y) {
                         d2.toggle();
+                    }
+                    if(enter.getSprite().getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
+                        enter.onClick();
                     }
                 }
             }
         }
-        this -> window.clear(bgGreen);
-        //welcome();
-        quiz();
-        //d1.draw();
-        //d2.draw();
         this -> window.display();
     }
 }
