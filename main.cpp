@@ -11,11 +11,24 @@ int main() {
 
     recipes.readFile();
 
-    recipes.addChosenIngre("eggs");
-    recipes.addChosenIngre("tomatoes");
-    recipes.addChosenIngre("bananas");
-    recipes.addChosenIngre("chicken");
-    recipes.chooseIngreUpdater();
+    vector<bool> chosenIngreTest = {true, false, false, true, false, false, false, false, false, false, false, false, false, false, false};
+    vector<bool> restrictedIngreTest = {false, true, false, false, false, false, false, false, false, false, false, false, false, false, false};
+    // order of ingredients
+    // 0.banana, 1.beef,  2.carrot, 3.cheese,  4.chicken, 5.coconut, 6.cucumber,
+    // 7.egg, 8.milk, 9.mushroom, 10.pork, 11.potato, 12.peanut butter, 13.strawberry, 14.tomato
+
+    recipes.updateIngredients(chosenIngreTest, restrictedIngreTest);
+
+    std::cout << "chosen ingredients: \n";
+    for (string chosen : recipes.chosenIng) {
+        std::cout << chosen << "\n";
+    }
+    std::cout << "\n";
+    std::cout << "restricted ingredients: \n";
+    for (string restricted : recipes.restrictedIng) {
+        std::cout << restricted << "\n";
+    }
+    std::cout << "\n";
 
     //std::cout << recipes.recipePercentShell();
     for (int i = 0; i < recipes.recipePercentS.size(); i++) {
@@ -83,7 +96,7 @@ int main() {
         i++;
     }
     */
-    Display display;
-    display.render();
+    //Display display;
+    //display.render();
     return 0;
 }

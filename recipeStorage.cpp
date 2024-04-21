@@ -5,7 +5,7 @@
 
 /* read file in */
 void recipeStorage::readFile() {
-    std::ifstream data("testData.csv");
+    std::ifstream data("../testData.csv");
 
     // check if file opened successfully
     if (!data.is_open()) {
@@ -284,6 +284,174 @@ void recipeStorage::restrictIngreUpdater() {
             }
         }
     }
+}
+
+void recipeStorage::updateIngredients(vector<bool> chosenIngre, vector<bool> restrictedIngre) {
+    // order of ingredients
+    // 0.banana, 1.beef,  2.carrot, 3.cheese,  4.chicken, 5.coconut, 6.cucumber,
+    // 7.egg, 8.milk, 9.mushroom, 10.pork, 11.potato, 12.peanut butter, 13.strawberry, 14.tomato
+    if (chosenIngre[0]) {
+        this->addChosenIngre("bananas");
+    }
+    if (chosenIngre[1]) {
+        this->addChosenIngre("beef");
+        this->addChosenIngre("ground beef");
+        this->addChosenIngre("corned beef");
+    }
+    if (chosenIngre[2]) {
+        this->addChosenIngre("carrot");
+        this->addChosenIngre("carrots");
+        this->addChosenIngre("carrot chunks");
+    }
+    if (chosenIngre[3]) {
+        this->addChosenIngre("cheese");
+        this->addChosenIngre("Cheddar cheese");
+        this->addChosenIngre("cheddar cheese");
+        this->addChosenIngre("Parmesan cheese");
+        this->addChosenIngre("Mozzarella cheese");
+        this->addChosenIngre("Ricotta cheese");
+        this->addChosenIngre("American cheese");
+        this->addChosenIngre("sharp cheese");
+        this->addChosenIngre("grated cheese");
+        this->addChosenIngre("cottage cheese");
+    }
+    if (chosenIngre[4]) {
+        this->addChosenIngre("chicken");
+        this->addChosenIngre("chicken breasts");
+        this->addChosenIngre("chicken cutlets");
+    }
+    if (chosenIngre[5]) {
+        this->addChosenIngre("coconut");
+        this->addChosenIngre("moist coconut");
+        this->addChosenIngre("flaked coconut");
+    }
+    if (chosenIngre[6]) {
+        this->addChosenIngre("cucumbers");
+    }
+    if (chosenIngre[7]) {
+        this->addChosenIngre("egg");
+        this->addChosenIngre("eggs");
+        this->addChosenIngre("egg yolk");
+        this->addChosenIngre("egg white");
+    }
+    if (chosenIngre[8]) {
+        this->addChosenIngre("milk");
+        this->addChosenIngre("condensed milk");
+        this->addChosenIngre("buttermilk");
+    }
+    if (chosenIngre[9]) {
+        this->addChosenIngre("mushrooms");
+        this->addChosenIngre("fresh mushrooms");
+        this->addChosenIngre("cream of mushroom soup");
+    }
+    if (chosenIngre[10]) {
+        this->addChosenIngre("pork");
+    }
+    if (chosenIngre[11]) {
+        this->addChosenIngre("potatoes");
+    }
+    if (chosenIngre[12]) {
+        this->addChosenIngre("peanut butter");
+    }
+    if (chosenIngre[13]) {
+        this->addChosenIngre("strawberry");
+        this->addChosenIngre("strawberries");
+        this->addChosenIngre("strawberry jello");
+    }
+    if (chosenIngre[14]) {
+        this->addChosenIngre("tomato");
+        this->addChosenIngre("tomatoes");
+        this->addChosenIngre("tomato paste");
+        this->addChosenIngre("tomato juice");
+        this->addChosenIngre("tomato sauce");
+        this->addChosenIngre("Italian tomatoes");
+    }
+
+
+    // restricted ingredients
+    if (restrictedIngre[0]) {
+        this->addRestrictIngre("bananas");
+    }
+    if (restrictedIngre[1]) {
+        this->addRestrictIngre("beef");
+        this->addRestrictIngre("ground beef");
+        this->addRestrictIngre("corned beef");
+        this->addRestrictIngre("beef stock");
+        this->addRestrictIngre("beef bouillon");
+        this->addRestrictIngre("Armour dried beef");
+    }
+    if (restrictedIngre[2]) {
+        this->addRestrictIngre("carrot");
+        this->addRestrictIngre("carrots");
+        this->addRestrictIngre("carrot chunks");
+    }
+    if (restrictedIngre[3]) {
+        this->addRestrictIngre("cheese");
+        this->addRestrictIngre("Cheddar cheese");
+        this->addRestrictIngre("cheddar cheese");
+        this->addRestrictIngre("Parmesan cheese");
+        this->addRestrictIngre("Mozzarella cheese");
+        this->addRestrictIngre("Ricotta cheese");
+        this->addRestrictIngre("American cheese");
+        this->addRestrictIngre("sharp cheese");
+        this->addRestrictIngre("grated cheese");
+        this->addRestrictIngre("cottage cheese");
+    }
+    if (restrictedIngre[4]) {
+        this->addRestrictIngre("cream of chicken soup");
+        this->addRestrictIngre("chicken broth");
+        this->addRestrictIngre("chicken");
+        this->addRestrictIngre("chicken breasts");
+        this->addRestrictIngre("chicken cutlets");
+    }
+    if (restrictedIngre[5]) {
+        this->addRestrictIngre("coconut");
+        this->addRestrictIngre("moist coconut");
+        this->addRestrictIngre("flaked coconut");
+    }
+    if (restrictedIngre[6]) {
+        this->addRestrictIngre("cucumbers");
+    }
+    if (restrictedIngre[7]) {
+        this->addRestrictIngre("egg");
+        this->addRestrictIngre("eggs");
+        this->addRestrictIngre("egg yolk");
+        this->addRestrictIngre("egg white");
+    }
+    if (restrictedIngre[8]) {
+        this->addRestrictIngre("milk");
+        this->addRestrictIngre("condensed milk");
+        this->addRestrictIngre("buttermilk");
+    }
+    if (restrictedIngre[9]) {
+        this->addRestrictIngre("mushrooms");
+        this->addRestrictIngre("fresh mushrooms");
+        this->addRestrictIngre("cream of mushroom soup");
+    }
+    if (restrictedIngre[10]) {
+        this->addRestrictIngre("pork");
+    }
+    if (restrictedIngre[11]) {
+        this->addRestrictIngre("potatoes");
+    }
+    if (restrictedIngre[12]) {
+        this->addRestrictIngre("peanut butter");
+    }
+    if (restrictedIngre[13]) {
+        this->addRestrictIngre("strawberry");
+        this->addRestrictIngre("strawberries");
+        this->addRestrictIngre("strawberry jello");
+    }
+    if (restrictedIngre[14]) {
+        this->addRestrictIngre("tomato");
+        this->addRestrictIngre("tomatoes");
+        this->addRestrictIngre("tomato paste");
+        this->addRestrictIngre("tomato juice");
+        this->addRestrictIngre("tomato sauce");
+        this->addRestrictIngre("Italian tomatoes");
+    }
+    this->chooseIngreUpdater();
+    this->restrictIngreUpdater();
 }
 
 // all the sorts
