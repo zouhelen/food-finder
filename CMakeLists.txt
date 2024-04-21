@@ -8,10 +8,10 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
 include_directories(c:/Libraries/SFML-2.5.1/include/SFML)
 
-add_executable(food main.cpp
+add_executable(food display.cpp
         button.cpp
         recipe.cpp
         dropdown.cpp
         recipeStorage.cpp
-        display.cpp)
+        main.cpp)
 target_link_libraries(food sfml-graphics sfml-audio)

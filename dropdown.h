@@ -6,7 +6,7 @@
 
 class dropdown {
 public:
-    dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, const sf::Texture* top);
+    dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, std::string icon);
     void draw();
     void toggle();
     bool isOpen() const;

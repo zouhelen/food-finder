@@ -3,11 +3,13 @@
 #include <vector>
 #include "dropdown.h"
 
-dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, const sf::Texture* top): window(window), options(options), m_isOpen(false) {
+dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, std::string icon): window(window), options(options), m_isOpen(false) {
     sf::Color dblue(77, 208, 225);
     sf::Color lblue(178, 235, 242);
 
     menu.setSize(sf::Vector2f(175.f, 75.f));
+    sf::Texture* top = new sf::Texture();
+    top -> loadFromFile(icon);
     menu.setTexture(top);
     menu.setPosition(x,y);
 

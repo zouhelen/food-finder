@@ -239,6 +239,7 @@ void Display::quiz() { // note: probably a more efficient way to do it, but I go
     this -> window.draw(potato.getSprite());
     this -> window.draw(strawberry.getSprite());
     this -> window.draw(tomato.getSprite());
+    this -> d2.draw();
 }
 
 void Display::reccs() {
@@ -258,11 +259,8 @@ void Display::render(){ // puts everything together, onclick stuff
     sf::Texture* sortT = new sf::Texture();
     sortT -> loadFromFile("images/sort by.png");
 
-    dropdown d1(window, sortOptions, 500.f, 500.f, sortT);
-
     sf::Texture* menuT = new sf::Texture();
     menuT -> loadFromFile("images/menu.png");
-    dropdown d2(window, menuOptions, 5.f, 5.f, menuT);
 
     while(this -> window.isOpen()) {
         while (this -> window.pollEvent(this -> ev)) {
