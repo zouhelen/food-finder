@@ -31,13 +31,21 @@ public:
     unordered_set<string> restrictedIng; //set of the restricted ingredients
     set<string> chosenRecipe; //set of recipes containing at least 1 chosen ingredient (and no restricted ingredients)
 
+    //sorted via shell sort
     //contains the names of the ingredients that are chosen
-    vector<pair<string, int>> clickFreq; //pair: ingredient name, click frequency (greater first)
-    vector<pair<string, int>> leastIng; //pair: recipe name, num of ingredients (lesser first)
-    vector<pair<string, int>> leastSteps; //pair: recipe name, num of steps (lesser first)
+    vector<pair<string, int>> clickFreqS; //pair: ingredient name, click frequency (greater first)
+    vector<pair<string, int>> leastIngS; //pair: recipe name, num of ingredients (lesser first)
+    vector<pair<string, int>> leastStepsS; //pair: recipe name, num of steps (lesser first)
     //percentage of recipes' ingredients that are chosen
-    vector<pair<string, int>> recipePercent; //pair: recipe, percent chosen (greater first)
+    vector<pair<string, int>> recipePercentS; //pair: recipe, percent chosen (greater first)
     
+    //sorted via radix sort
+    //contains the names of the ingredients that are chosen
+    vector<pair<string, int>> clickFreqR; //pair: ingredient name, click frequency (greater first)
+    vector<pair<string, int>> leastIngR; //pair: recipe name, num of ingredients (lesser first)
+    vector<pair<string, int>> leastStepsR; //pair: recipe name, num of steps (lesser first)
+    //percentage of recipes' ingredients that are chosen
+    vector<pair<string, int>> recipePercentR; //pair: recipe, percent chosen (greater first)
 
     // methods
     void readFile();
@@ -55,21 +63,21 @@ public:
 
 
     //sorts all the vectors with the corresponding algorithm
-    //returns the length of time the function took
-    auto clickFreqShell(); //performs shell sort on clickFreq
-    auto clickFreqRadix(); //performs radix sort on clickFreq
+    //returns the length of time the function took in nanoseconds
+    double clickFreqShell(); //performs shell sort on clickFreq
+    double clickFreqRadix(); //performs radix sort on clickFreq
     void clickFreqCountingSort(int placeVal); //helper function for radix sort
 
     double leastIngShell();
-    auto leastIngRadix();
+    double leastIngRadix();
     void leastIngCountingSort(int placeVal);
     
-    auto leastStepsShell();
-    auto leastStepsRadix();
+    double leastStepsShell();
+    double leastStepsRadix();
     void leastStepsCountingSort(int placeVal);
 
-    auto recipePercentShell();
-    auto recipePercentRadix();
+    double recipePercentShell();
+    double recipePercentRadix();
     void recipePercentCountingSort(int placeVal);
 
 
