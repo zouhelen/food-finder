@@ -7,33 +7,33 @@
 #include "frontend elements/display.h"
 
 int main() {
-    recipeStorage recipes = recipeStorage();
-
-    recipes.readFile();
-
-    vector<bool> chosenIngreTest = {true, false, false, true, false, false, false, false, false, false, false, false, false, false, false};
-    vector<bool> restrictedIngreTest = {false, true, false, false, false, false, false, false, false, false, false, false, false, false, false};
-    // order of ingredients
-    // 0.banana, 1.beef,  2.carrot, 3.cheese,  4.chicken, 5.coconut, 6.cucumber,
-    // 7.egg, 8.milk, 9.mushroom, 10.pork, 11.potato, 12.peanut butter, 13.strawberry, 14.tomato
-
-    recipes.updateIngredients(chosenIngreTest, restrictedIngreTest);
-
-    std::cout << "chosen ingredients: \n";
-    for (string chosen : recipes.chosenIng) {
-        std::cout << chosen << "\n";
-    }
-    std::cout << "\n";
-    std::cout << "restricted ingredients: \n";
-    for (string restricted : recipes.restrictedIng) {
-        std::cout << restricted << "\n";
-    }
-    std::cout << "\n";
-
-    //std::cout << recipes.recipePercentShell();
-    for (int i = 0; i < recipes.recipePercentS.size(); i++) {
-        std::cout << recipes.recipePercentS[i].first << " " << recipes.recipePercentS[i].second << std::endl;
-    }
+//    recipeStorage recipes = recipeStorage();
+//
+//    recipes.readFile();
+//
+//    vector<bool> chosenIngreTest = {true, false, false, true, false, false, false, false, false, false, false, false, false, false, false};
+//    vector<bool> restrictedIngreTest = {false, true, false, false, false, false, false, false, false, false, false, false, false, false, false};
+//    // order of ingredients
+//    // 0.banana, 1.beef,  2.carrot, 3.cheese,  4.chicken, 5.coconut, 6.cucumber,
+//    // 7.egg, 8.milk, 9.mushroom, 10.pork, 11.potato, 12.peanut butter, 13.strawberry, 14.tomato
+//
+//    recipes.updateIngredients(chosenIngreTest, restrictedIngreTest);
+//
+//    std::cout << "chosen ingredients: \n";
+//    for (string chosen : recipes.chosenIng) {
+//        std::cout << chosen << "\n";
+//    }
+//    std::cout << "\n";
+//    std::cout << "restricted ingredients: \n";
+//    for (string restricted : recipes.restrictedIng) {
+//        std::cout << restricted << "\n";
+//    }
+//    std::cout << "\n";
+//
+//    //std::cout << recipes.recipePercentShell();
+//    for (int i = 0; i < recipes.recipePercentS.size(); i++) {
+//        std::cout << recipes.recipePercentS[i].first << " " << recipes.recipePercentS[i].second << std::endl;
+//    }
 
     /*recipes.leastIng.push_back({"a", 4});
     recipes.leastIng.push_back({"b", 12});
@@ -51,8 +51,11 @@ int main() {
     for (int i = 0; i < recipes.leastIng.size(); i++) {
         std::cout << i << ": " << recipes.leastIng[i].second << "\n";
     }*/
-    recipes.addRestrictIngre("eggs");
-    recipes.restrictIngreUpdater();
+//    recipes.addRestrictIngre("eggs");
+//    recipes.restrictIngreUpdater();
+
+    Display display;
+    display.render();
     /*for (int i = 0; i < recipes.leastIng.size(); i++) {
         std::cout << i << ": " << recipes.leastIng[i].second << "\n";
     }
@@ -68,8 +71,7 @@ int main() {
         std::cout << i << ": " << recipe << "\n";
         i++;
     }
-    //Display display;
-    //display.render();
+
 
     recipes.clickFreq.push_back({"a", 4});
     recipes.clickFreq.push_back({"b", 12});

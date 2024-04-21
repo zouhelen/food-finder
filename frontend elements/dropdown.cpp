@@ -1,44 +1,43 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include "dropdown.h"
+#include "dropdown.h" // include statements
 
-dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, std::string icon): window(window), options(options), m_isOpen(false) {
-    sf::Color dblue(77, 208, 225);
+dropdown::dropdown(sf::RenderWindow& window, const std::vector<std::string>& options, float x, float y, std::string icon): window(window), options(options), is_Open(false) {
+    sf::Color dblue(77, 208, 225); // initializes colors
     sf::Color lblue(178, 235, 242);
 
-    menu.setSize(sf::Vector2f(175.f, 75.f));
+    menu.setSize(sf::Vector2f(175.f, 75.f)); // set size, texture, and position of dropdown
     sf::Texture* top = new sf::Texture();
     top -> loadFromFile(icon);
     menu.setTexture(top);
     menu.setPosition(x,y);
 
-    this -> font.loadFromFile("Cave-Story.ttf");
+    this -> font.loadFromFile("Cave-Story.ttf"); // load font
 
-    for (size_t i = 0; i < options.size(); ++i) {
-        sf::RectangleShape optionRect(sf::Vector2f(175.f, 75.f));
-        optionRect.setFillColor(lblue);
-        optionRect.setOutlineColor(dblue);
-        optionRect.setOutlineThickness(1.f);
-        optionRect.setPosition(x, y + (i + 1) * 75.f);
+    for (size_t i = 0; i < options.size(); ++i) { // for every option
+        sf::RectangleShape optionR(sf::Vector2f(175.f, 75.f)); // create an option rectangle the size of the menu, set colors and position
+        optionR.setFillColor(lblue);
+        optionR.setOutlineColor(dblue);
+        optionR.setOutlineThickness(1.f);
+        optionR.setPosition(x, y + (i + 1) * 75.f); // justifies in a row under first option
 
-        sf::Text optionText(options[i], font, 27);
-        optionText.setFillColor(dblue);
-        optionText.setOrigin(optionText.getLocalBounds().width / 2.f, optionText.getLocalBounds().height / 2.f);
+        sf::Text optionT(options[i], font, 27); // set option text, color, font, size, and origin
+        optionT.setFillColor(dblue);
+        optionT.setOrigin(optionT.getLocalBounds().width / 2.f, optionT.getLocalBounds().height / 2.f);
 
-        sf::FloatRect textBounds = optionText.getLocalBounds();
-        optionText.setPosition(optionRect.getPosition().x + optionRect.getSize().x / 2.f, optionRect.getPosition().y + optionRect.getSize().y / 2.f - textBounds.height / 2.f);
+        sf::FloatRect textBounds = optionT.getLocalBounds(); // set text position based on bounds
+        optionT.setPosition(optionR.getPosition().x + optionR.getSize().x / 2.f, optionR.getPosition().y + optionR.getSize().y / 2.f - textBounds.height / 2.f);
 
-        rects.push_back(optionRect);
-        optionsText.push_back(optionText);
+        rects.push_back(optionR); // push both back into the vectors storing the menu options
+        optionsText.push_back(optionT);
     }
 }
 
 void dropdown::draw() {
-    window.draw(menu);
-    window.draw(select);
+    window.draw(menu); // draw everything
 
-    if (m_isOpen) {
+    if (is_Open) { // draw options with for loop if its open
         for (const auto& rect : rects) {
             window.draw(rect);
         }
@@ -49,9 +48,9 @@ void dropdown::draw() {
 }
 
 void dropdown::toggle() {
-    m_isOpen = !m_isOpen;
+    is_Open = !is_Open; // set is open to the opposite
 }
 
 bool dropdown::isOpen() const {
-    return m_isOpen;
+    return is_Open; // return if open
 }

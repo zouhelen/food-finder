@@ -176,27 +176,6 @@ void recipeStorage::chooseIngreUpdater() {
             chosenRecipe.insert(recipe);
         }
         
-        //for clickFreq
-        //for shell sort
-        bool hasAlrBeenClicked = false;
-        for (pair<string, int> ingrePair : clickFreqS) {
-            if (ingrePair.first == ingredient) {
-                ingrePair.second++;
-                hasAlrBeenClicked = true;
-            }
-        }
-        if (!hasAlrBeenClicked)
-            clickFreqS.push_back(pair<string, int> (ingredient, 1));
-        //for radix sort
-        for (pair<string, int> ingrePair : clickFreqR) {
-            if (ingrePair.first == ingredient) {
-                ingrePair.second++;
-                hasAlrBeenClicked = true;
-            }
-        }
-        if (!hasAlrBeenClicked)
-            clickFreqR.push_back(pair<string, int> (ingredient, 1));
-
 
         //set containing recipes needing this ingredient
         unordered_set<string> recipes;
@@ -473,77 +452,6 @@ void recipeStorage::updateIngredients(vector<bool> chosenIngre, vector<bool> res
 }
 
 // all the sorts
-double recipeStorage::clickFreqShell() {
-    //start the clock
-    auto start = std::chrono::high_resolution_clock::now();
-    //the gap starts at the vector size
-    int gap = clickFreqS.size();
-    while (gap > 0) {
-        //does an insertions sort for this gap size
-        for (int i = gap; i < clickFreqS.size(); i++) {
-            pair<string, int> temp = clickFreqS[i];
-            int j;
-            //second condition in the second statement makes it greatest to least
-            for (j = i; j >= gap && clickFreqS[j-gap].second < temp.second; j -= gap) {
-                clickFreqS[j] = clickFreqS[j-gap];
-            }
-            clickFreqS[j] = temp;
-        }
-        //gap halves through every passthrough
-        gap /= 2;
-    }
-    //stops the clock
-    auto stop = std::chrono::high_resolution_clock::now();
-    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
-}
-
-double recipeStorage::clickFreqRadix() {
-    //start the clock
-    auto start = std::chrono::high_resolution_clock::now();
-    //finds the maximum number
-    int max = clickFreqR[0].second;
-    for (pair<string, int> pairItr : clickFreqR) {
-        max = std::max(max, pairItr.second);
-    }
-
-    // run helper sort function for each place of each recipe's number of ingredients
-    for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
-        clickFreqCountingSort(placeVal);
-    }
-    //stops the clock
-    auto stop = std::chrono::high_resolution_clock::now();
-    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
-}
-
-void recipeStorage::clickFreqCountingSort(int placeVal) {
-    //initializes count
-    int count[] = {0,0,0,0,0,0,0,0,0,0}; // one slot for each digit 0-9
-    // initialize array of same size and type of clickFreq - used to temporarily store sorted results
-    //will be used to store the ouput that goes into clickFreq
-    pair<string, int> output[clickFreqR.size()];
-    //gets the count of every element
-    for (int i = 0; i < clickFreqR.size(); i++) {
-        count[(clickFreqR[i].second / placeVal) % 10] = count[(clickFreqR[i].second / placeVal) % 10] + 1; // increment count at the index of the digit
-    }
-    //makes the cumulative count and sorts the elements; this is where greatest to least or vice versa is decided
-    for (int j = 8; j >= 0; j--) {
-        count[j] += count[j+1];
-    }
-    //elements are placed into the sorted order
-    for (int k = clickFreqR.size()-1; k >= 0; k--) {
-        output[count[(clickFreqR[k].second / placeVal) % 10] - 1] = clickFreqR[k];
-        count[(clickFreqR[k].second / placeVal) % 10]--;
-    }
-    //transfers output to clickFreq
-    for (int l = 0; l < clickFreqR.size(); l++) {
-        clickFreqR[l] = output[l];        
-    }
-}
-
 double recipeStorage::leastIngShell() {
     //start the clock
     auto start = std::chrono::high_resolution_clock::now();
@@ -684,11 +592,77 @@ void recipeStorage::leastStepsCountingSort(int placeVal) {
     }
 }
 
-auto recipePercentShell() {
+double recipeStorage::recipePercentShell() {
+    //start the clock
+    auto start = std::chrono::high_resolution_clock::now();
+    //the gap starts at the vector size
+    int gap = recipePercentS.size();
+    while (gap > 0) {
+        //does an insertions sort for this gap size
+        for (int i = gap; i < recipePercentS.size(); i++) {
+            pair<string, int> temp = recipePercentS[i];
+            int j;
+            //second condition in the second statement makes it greatest to least
+            for (j = i; j >= gap && recipePercentS[j-gap].second < temp.second; j -= gap) {
+                recipePercentS[j] = recipePercentS[j-gap];
+            }
+            recipePercentS[j] = temp;
+        }
+        //gap halves through every passthrough
+        gap /= 2;
+    }
+    //stops the clock
+    auto stop = std::chrono::high_resolution_clock::now();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
+    return duration;
 
 }
 
-auto recipePercentRadix() {
+double recipeStorage::recipePercentRadix() {
+    //start the clock
+    auto start = std::chrono::high_resolution_clock::now();
+    //finds the maximum number
+    int max = recipePercentR[0].second;
+    for (pair<string, int> pairItr : recipePercentR) {
+        max = std::max(max, pairItr.second);
+    }
+
+    // run helper sort function for each place of each recipe's number of ingredients
+    for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
+        recipePercentCountingSort(placeVal);
+    }
+    //stops the clock
+    auto stop = std::chrono::high_resolution_clock::now();
+    double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    //returns the sorted time
+    return duration;
+
+}
+
+void recipeStorage::recipePercentCountingSort(int placeVal) {
+    //initializes count
+    int count[] = {0,0,0,0,0,0,0,0,0,0}; // one slot for each digit 0-9
+    // initialize array of same size and type of recipePercent - used to temporarily store sorted results
+    //will be used to store the ouput that goes into recipePercent
+    pair<string, int> output[recipePercentR.size()];
+    //gets the count of every element
+    for (int i = 0; i < recipePercentR.size(); i++) {
+        count[(recipePercentR[i].second / placeVal) % 10] = count[(recipePercentR[i].second / placeVal) % 10] + 1; // increment count at the index of the digit
+    }
+    //makes the cumulative count and sorts the elements; this is where greatest to least or vice versa is decided
+    for (int j = 8; j >= 0; j--) {
+        count[j] += count[j+1];
+    }
+    //elements are placed into the sorted order
+    for (int k = recipePercentR.size()-1; k >= 0; k--) {
+        output[count[(recipePercentR[k].second / placeVal) % 10] - 1] = recipePercentR[k];
+        count[(recipePercentR[k].second / placeVal) % 10]--;
+    }
+    //transfers output to recipePercent
+    for (int l = 0; l < recipePercentR.size(); l++) {
+        recipePercentR[l] = output[l];        
+    }
 
 }
 

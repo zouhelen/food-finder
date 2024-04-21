@@ -1,10 +1,10 @@
 #include <functional>
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp> // includes functional for lambda and SFML
 
 #ifndef FOOD_FINDER_BUTTON_H
-#define FOOD_FINDER_BUTTON_H
+#define FOOD_FINDER_BUTTON_H // header guards
 
-class Button{ // constructor for button
+class Button{ // class for button
     sf::Sprite sprite;
     std::function<void(void)> click;
 public:
