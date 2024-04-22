@@ -457,7 +457,17 @@ void recipeStorage::generateRecipeSubset(vector<bool> chosenIngre, vector<bool> 
     //
 }
 
-// all the sorts
+// sorting algorithms
+/*
+ * used these sources to create the shell sort:
+ * https://www.programiz.com/dsa/shell-sort
+ *  https://www.geeksforgeeks.org/shellsort/
+
+ * used these sources to create the radix (and counting) sort:
+ * https://www.programiz.com/dsa/radix-sort
+ * https://www.geeksforgeeks.org/counting-sort/
+ */
+
 double recipeStorage::leastIngShell() {
     //start the clock
     auto start = std::chrono::high_resolution_clock::now();
