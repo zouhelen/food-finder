@@ -279,7 +279,7 @@ void Display::reccs(int currentPage) {
         sf::Vector2f position(210, 100); // Initial position of the first rectangle
         int counter = 0 + currentPage * 16; // Counter to limit the number of recipes to 16
 
-        for (const auto& recipe : recipes.chosenRecipe) {
+        for (const auto& recipe : recipes.sortedRecipes) {
             if (counter >= 16 * (currentPage + 1) ){
                 break;
             }
@@ -340,7 +340,6 @@ std::function<void(void)> Display::submitB(){ // onclick to change page and subm
         for(int i = 0; i < 15; i++){
             std::cout << added[i] << std::endl;
         }
-        recipes.chosenRecipe.clear();
         recipes.chosenIng.clear();
         recipes.generateRecipeSubset(added, removed);
         cPage = R; // change page to reccs, mark the quiz as done
