@@ -168,112 +168,62 @@ string recipeStorage::readQuoteSeg(std::istringstream& inputStream) {
 void recipeStorage::addChosenIngre(string ingredient) {
     chosenIng.insert(ingredient);
 }
-void recipeStorage::chooseIngreUpdater() {
-    //updates the other functions for every chosen ingredient
+
+void recipeStorage::addRestrictIngre(string ingredient) {
+    restrictedIng.insert(ingredient);
+} // replace in gen recipe subset, delete this func
+
+int recipeStorage::percentIngMatch(string recipe) {
+    int numChosenIng = 0;
+    for (string ingredient : recipeMap[recipe]->ingList) {
+        if (chosenIng.find(ingredient) != chosenIng.end()) {
+            numChosenIng++;
+        }
+    }
+    return ((100*numChosenIng) / recipeMap[recipe]->ingList.size());
+}
+
+void recipeStorage::ingreUpdater() {
+    chosenRecipe.clear();
+
+    // updates chosen recipes based on chosen and restricted ingredients
     for (string ingredient : chosenIng) {
         //for chosenRecipe
         for (string recipe: ingredientMap[ingredient]) {
             chosenRecipe.insert(recipe);
-        }
-
-
-        //set containing recipes needing this ingredient
-        unordered_set<string> recipes;
-        for (string recipe : ingredientMap[ingredient]) {
-            recipes.insert(recipe);
-        }
-        //for leastIng, leastSteps, and recipePercent
-        //removes the recipes from recipes (the set) that are already in leastIng/leastSteps/recipePercent so only new values are added
-        //for shell sort
-        for (pair<string, int> recipePair : leastIngS) {
-            if (recipes.find(recipePair.first) != recipes.end()) {
-                recipes.erase(recipePair.first);
-            }
-        }
-        //for radix sort
-        for (pair<string, int> recipePair : leastIngR) {
-            if (recipes.find(recipePair.first) != recipes.end()) {
-                recipes.erase(recipePair.first);
-            }
-        }
-        //adds the recipes containing the ingredient and the value the vectors are sorted by
-        //for every recipe that's not added yet, add it to each vector
-        for (string aRecipe : recipes) {
-            //for shell sort
-            leastIngS.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->ingList.size()));
-            leastStepsS.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->directions.size()));
-            //number of ingredients in a recipe that have been chosen
-            int chosenCounter = 0;
-            for (string ingre : recipeMap[aRecipe]->ingList) {
-                if (chosenIng.find(ingre) != chosenIng.end())
-                    chosenCounter++;
-            }
-            recipePercentS.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe]->ingList.size())));
-            //for radix sort
-            leastIngR.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->ingList.size()));
-            leastStepsR.push_back(pair<string, int> (aRecipe, recipeMap[aRecipe]->directions.size()));
-            //number of ingredients in a recipe that have been chosen
-            recipePercentR.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe]->ingList.size())));
+            //std::cout << "Inserted" << std::endl;
         }
     }
-    //sortedRecipes.clear();
-    //sortedRecipes.resize(chosenRecipe.size());
-}
-
-void recipeStorage::addRestrictIngre(string ingredient) {
-    restrictedIng.insert(ingredient);
-}
-void recipeStorage::restrictIngreUpdater() {
     for (string ingredient: restrictedIng) {
         //for chosenRecipe
         for (string recipe: ingredientMap[ingredient]) {
             chosenRecipe.erase(recipe);
         }
-
-        //set containing recipes needing this ingredient
-        unordered_set<string> recipes;
-        for (string recipe: ingredientMap[ingredient]) {
-            recipes.insert(recipe);
-        }
-        //for leastIng, leastSteps, and recipePercent
-        //removes the recipes containing the ingredient and the value the vectors are sorted by
-        for (string aRecipe: recipes) {
-            //shell sort vectors
-            for (vector<pair<string, int>>::iterator iter = leastIngS.begin(); iter < leastIngS.end(); iter++) {
-                if (aRecipe == (*iter).first)
-                    leastIngS.erase(iter);
-            }
-            for (vector<pair<string, int>>::iterator iter = leastStepsS.begin(); iter < leastStepsS.end(); iter++) {
-                if (aRecipe == (*iter).first)
-                    leastStepsS.erase(iter);
-            }
-            for (vector<pair<string, int>>::iterator iter = recipePercentS.begin();
-                 iter < recipePercentS.end(); iter++) {
-                if (aRecipe == (*iter).first)
-                    recipePercentS.erase(iter);
-            }
-            //radix sort vectors
-            for (vector<pair<string, int>>::iterator iter = leastIngR.begin(); iter < leastIngR.end(); iter++) {
-                if (aRecipe == (*iter).first)
-                    leastIngR.erase(iter);
-            }
-            for (vector<pair<string, int>>::iterator iter = leastStepsR.begin(); iter < leastStepsR.end(); iter++) {
-                if (aRecipe == (*iter).first)
-                    leastStepsR.erase(iter);
-            }
-            for (vector<pair<string, int>>::iterator iter = recipePercentR.begin();
-                 iter < recipePercentR.end(); iter++) {
-                if (aRecipe == (*iter).first)
-                    recipePercentR.erase(iter);
-            }
-        }
     }
-    // initialize empty elements for sorted recipes vector
-    //sortedRecipes.clear();
-    //for (int i = 0; i < chosenRecipe.size(); i++) {
-    //    sortedRecipes.push_back("");
-    //}
-    sortedRecipes.resize(chosenRecipe.size());
+
+    // clear all vectors
+    leastIngS.clear();
+    leastIngR.clear();
+    leastStepsS.clear();
+    leastStepsR.clear();
+    recipePercentS.clear();
+    recipePercentR.clear();
+    sortedRecipes.clear();
+
+    // sets up vectors for sorting recipes
+    for (string recipe : chosenRecipe) {
+        // least ingredient vectors
+        leastIngS.push_back({recipe, recipeMap[recipe]->ingList.size()});
+        leastIngR.push_back({recipe, recipeMap[recipe]->ingList.size()});
+        // least steps vectors
+        leastStepsS.push_back({recipe, recipeMap[recipe]->directions.size()});
+        leastStepsR.push_back({recipe, recipeMap[recipe]->directions.size()});
+        // best ingredient percent match vectors
+        recipePercentS.push_back({recipe, percentIngMatch(recipe)});
+        recipePercentR.push_back({recipe, percentIngMatch(recipe)});
+        // general vector
+        sortedRecipes.push_back(recipe);
+    }
 }
 
 void recipeStorage::generateRecipeSubset(vector<bool> chosenIngre, vector<bool> restrictedIngre) {
@@ -443,9 +393,7 @@ void recipeStorage::generateRecipeSubset(vector<bool> chosenIngre, vector<bool> 
         this->addRestrictIngre("Italian tomatoes");
     }
 
-    this->chooseIngreUpdater();
-
-    this->restrictIngreUpdater();
+    this->ingreUpdater();
 
     // testing chosen recipes after chosen ingredients considered
 //    std::cout << "testing chosen recipes after restricted ingredients considered\n";
@@ -490,6 +438,8 @@ double recipeStorage::leastIngShell() {
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
     // updates general sorted recipes list
+    sortedRecipes.clear();
+    sortedRecipes.resize(chosenRecipe.size());
     for (int i = 0; i < leastIngS.size(); i++) {
         sortedRecipes[i] = leastIngS[i].first;
     }
@@ -513,6 +463,8 @@ double recipeStorage::leastIngRadix() {
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
     // updates general sorted recipes list
+    sortedRecipes.clear();
+    sortedRecipes.resize(chosenRecipe.size());
     for (int i = 0; i < leastIngR.size(); i++) {
         sortedRecipes[i] = leastIngR[i].first;
     }
@@ -566,6 +518,8 @@ double recipeStorage::leastStepsShell() {
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
     // updates general sorted recipes list
+    sortedRecipes.clear();
+    sortedRecipes.resize(chosenRecipe.size());
     for (int i = 0; i < leastStepsS.size(); i++) {
         sortedRecipes[i] = leastStepsS[i].first;
     }
@@ -589,6 +543,8 @@ double recipeStorage::leastStepsRadix() {
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
     // updates general sorted recipes list
+    sortedRecipes.clear();
+    sortedRecipes.resize(chosenRecipe.size());
     for (int i = 0; i < leastStepsR.size(); i++) {
         sortedRecipes[i] = leastStepsR[i].first;
     }
@@ -642,6 +598,8 @@ double recipeStorage::recipePercentShell() {
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
     // updates general sorted recipes list
+    sortedRecipes.clear();
+    sortedRecipes.resize(chosenRecipe.size());
     for (int i = 0; i < recipePercentS.size(); i++) {
         sortedRecipes[i] = recipePercentS[i].first;
     }
@@ -666,6 +624,8 @@ double recipeStorage::recipePercentRadix() {
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
     // updates general sorted recipes list
+    sortedRecipes.clear();
+    sortedRecipes.resize(chosenRecipe.size());
     for (int i = 0; i < leastIngR.size(); i++) {
         sortedRecipes[i] = leastIngR[i].first;
     }
@@ -716,7 +676,6 @@ string recipeStorage::halfRecipeDetails(string recipeName){
     string details = "";
     details += recipeName + "\n\n";
     details += "Ingredients\n";
-    int count = 0;
     int count = 0;
     for (string ingredient : recipeMap[recipeName]->ingMeasurements) {
         if(count > 3){
