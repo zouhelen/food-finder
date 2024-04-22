@@ -699,7 +699,6 @@ string recipeStorage::halfRecipeDetails(string recipeName){
     string details = "";
     details += recipeName + "\n\n";
     details += "Ingredients\n";
-    int count = 0;
     for (string ingredient : recipeMap[recipeName]->ingMeasurements) {
         if(count > 3){
             break;
