@@ -33,7 +33,6 @@ public:
 
     //ingredient input
     int percentIngMatch(string recipe);
-    vector<bool> ingreInput();
 
     vector<string> sortedRecipes; // updates recipe order with sorts
 
@@ -59,12 +58,8 @@ public:
 
     //
 
-    //function that adds to chosenIng
-    void addChosenIngre(string ingredient);
     //function called when submit button is pressed to add values from unord_maps to the unord_set, set, and vectors
     void ingreUpdater();
-    //function called on click that adds to restrictedIng
-    void addRestrictIngre(string ingredient);
     //function called on click to remove values from unord_maps to the unord_set, set, and vectors
     //void restrictIngreUpdater();
     // combines above functions to parse selected ingredients from front end

@@ -27,7 +27,7 @@ class Display{ // toolbox class used to help display
         Percent
     };
 
-    Current cPage = W; // vars to keep track of previous 2 enums
+    Current cPage = W; // vars to keep track of previous 2 enums , default = welcome and percent
     SortCurrent cSort = Percent;
 
     std::vector<std::string> sortOptions = {"Least Ingred Used", "Lowest Steps", "% Ingredient Match"}; // options for sorting and menu
@@ -67,9 +67,11 @@ class Display{ // toolbox class used to help display
     dropdown d1; // dropdown creation
     dropdown d2;
 
-    int current = 0;
+    int current = 0; // tracks current page
 
-    void displayRecipe(std::string currentR);
+    std::vector<sf::RectangleShape> rectangles; // vector of recipe rectangles for recc display page
+
+    void displayRecipe(std::string currentR); // button that renders the recipe page, takes in the name of the recipe to be rendered
     void welcome(); // welcome page
     void quiz(); // quiz page
     void reccs(int currentPage); // page showing the user's recommendations

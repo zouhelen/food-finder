@@ -165,14 +165,6 @@ string recipeStorage::readQuoteSeg(std::istringstream& inputStream) {
 }
 
 
-void recipeStorage::addChosenIngre(string ingredient) {
-    chosenIng.insert(ingredient);
-}
-
-void recipeStorage::addRestrictIngre(string ingredient) {
-    restrictedIng.insert(ingredient);
-} // replace in gen recipe subset, delete this func
-
 int recipeStorage::percentIngMatch(string recipe) {
     int numChosenIng = 0;
     for (string ingredient : recipeMap[recipe]->ingList) {
@@ -230,178 +222,169 @@ void recipeStorage::generateRecipeSubset(vector<bool> chosenIngre, vector<bool> 
     // order of ingredients
     // 0.banana, 1.beef,  2.carrot, 3.cheese,  4.chicken, 5.coconut, 6.cucumber,
     // 7.egg, 8.milk, 9.mushroom, 10.pork, 11.potato, 12.peanut butter, 13.strawberry, 14.tomato
-    chosenIngre.clear();
+    chosenIngre.clear(); // reset quiz choices
     restrictedIngre.clear();
-    if (chosenIngre[0]) {
-        this->addChosenIngre("bananas");
+
+    if (chosenIngre[0]) { // add based off what the user has chosen to either chosen ing or restricted ing
+        chosenIng.insert("bananas");
     }
     if (chosenIngre[1]) {
-        this->addChosenIngre("beef");
-        this->addChosenIngre("ground beef");
-        this->addChosenIngre("corned beef");
+        chosenIng.insert("beef");
+        chosenIng.insert("ground beef");
+        chosenIng.insert("corned beef");
     }
     if (chosenIngre[2]) {
-        this->addChosenIngre("carrot");
-        this->addChosenIngre("carrots");
-        this->addChosenIngre("carrot chunks");
+        chosenIng.insert("carrot");
+        chosenIng.insert("carrots");
+        chosenIng.insert("carrot chunks");
     }
     if (chosenIngre[3]) {
-        this->addChosenIngre("cheese");
-        this->addChosenIngre("Cheddar cheese");
-        this->addChosenIngre("cheddar cheese");
-        this->addChosenIngre("Parmesan cheese");
-        this->addChosenIngre("Mozzarella cheese");
-        this->addChosenIngre("Ricotta cheese");
-        this->addChosenIngre("American cheese");
-        this->addChosenIngre("sharp cheese");
-        this->addChosenIngre("grated cheese");
-        this->addChosenIngre("cottage cheese");
+        chosenIng.insert("cheese");
+        chosenIng.insert("Cheddar cheese");
+        chosenIng.insert("cheddar cheese");
+        chosenIng.insert("Parmesan cheese");
+        chosenIng.insert("Mozzarella cheese");
+        chosenIng.insert("Ricotta cheese");
+        chosenIng.insert("American cheese");
+        chosenIng.insert("sharp cheese");
+        chosenIng.insert("grated cheese");
+        chosenIng.insert("cottage cheese");
     }
     if (chosenIngre[4]) {
-        this->addChosenIngre("chicken");
-        this->addChosenIngre("chicken breasts");
-        this->addChosenIngre("chicken cutlets");
+        chosenIng.insert("chicken");
+        chosenIng.insert("chicken breasts");
+        chosenIng.insert("chicken cutlets");
     }
     if (chosenIngre[5]) {
-        this->addChosenIngre("coconut");
-        this->addChosenIngre("moist coconut");
-        this->addChosenIngre("flaked coconut");
+        chosenIng.insert("coconut");
+        chosenIng.insert("moist coconut");
+        chosenIng.insert("flaked coconut");
     }
     if (chosenIngre[6]) {
-        this->addChosenIngre("cucumbers");
+        chosenIng.insert("cucumbers");
     }
     if (chosenIngre[7]) {
-        this->addChosenIngre("egg");
-        this->addChosenIngre("eggs");
-        this->addChosenIngre("egg yolk");
-        this->addChosenIngre("egg white");
+        chosenIng.insert("egg");
+        chosenIng.insert("eggs");
+        chosenIng.insert("egg yolk");
+        chosenIng.insert("egg white");
     }
     if (chosenIngre[8]) {
-        this->addChosenIngre("milk");
-        this->addChosenIngre("condensed milk");
-        this->addChosenIngre("buttermilk");
+        chosenIng.insert("milk");
+        chosenIng.insert("condensed milk");
+        chosenIng.insert("buttermilk");
     }
     if (chosenIngre[9]) {
-        this->addChosenIngre("mushrooms");
-        this->addChosenIngre("fresh mushrooms");
-        this->addChosenIngre("cream of mushroom soup");
+        chosenIng.insert("mushrooms");
+        chosenIng.insert("fresh mushrooms");
+        chosenIng.insert("cream of mushroom soup");
     }
     if (chosenIngre[11]) {
-        this->addChosenIngre("pork");
+        chosenIng.insert("pork");
     }
     if (chosenIngre[12]) {
-        this->addChosenIngre("potatoes");
+        chosenIng.insert("potatoes");
     }
     if (chosenIngre[10]) {
-        this->addChosenIngre("peanut butter");
+        chosenIng.insert("peanut butter");
     }
     if (chosenIngre[13]) {
-        this->addChosenIngre("strawberry");
-        this->addChosenIngre("strawberries");
-        this->addChosenIngre("strawberry jello");
+        chosenIng.insert("strawberry");
+        chosenIng.insert("strawberries");
+        chosenIng.insert("strawberry jello");
     }
     if (chosenIngre[14]) {
-        this->addChosenIngre("tomato");
-        this->addChosenIngre("tomatoes");
-        this->addChosenIngre("tomato paste");
-        this->addChosenIngre("tomato juice");
-        this->addChosenIngre("tomato sauce");
-        this->addChosenIngre("Italian tomatoes");
+        chosenIng.insert("tomato");
+        chosenIng.insert("tomatoes");
+        chosenIng.insert("tomato paste");
+        chosenIng.insert("tomato juice");
+        chosenIng.insert("tomato sauce");
+        chosenIng.insert("Italian tomatoes");
     }
-
 
     // restricted ingredients
     if (restrictedIngre[0]) {
-        this->addRestrictIngre("bananas");
+        restrictedIng.insert("bananas");
     }
     if (restrictedIngre[1]) {
-        this->addRestrictIngre("beef");
-        this->addRestrictIngre("ground beef");
-        this->addRestrictIngre("corned beef");
-        this->addRestrictIngre("beef stock");
-        this->addRestrictIngre("beef bouillon");
-        this->addRestrictIngre("Armour dried beef");
+        restrictedIng.insert("beef");
+        restrictedIng.insert("ground beef");
+        restrictedIng.insert("corned beef");
+        restrictedIng.insert("beef stock");
+        restrictedIng.insert("beef bouillon");
+        restrictedIng.insert("Armour dried beef");
     }
     if (restrictedIngre[2]) {
-        this->addRestrictIngre("carrot");
-        this->addRestrictIngre("carrots");
-        this->addRestrictIngre("carrot chunks");
+        restrictedIng.insert("carrot");
+        restrictedIng.insert("carrots");
+        restrictedIng.insert("carrot chunks");
     }
     if (restrictedIngre[3]) {
-        this->addRestrictIngre("cheese");
-        this->addRestrictIngre("Cheddar cheese");
-        this->addRestrictIngre("cheddar cheese");
-        this->addRestrictIngre("Parmesan cheese");
-        this->addRestrictIngre("Mozzarella cheese");
-        this->addRestrictIngre("Ricotta cheese");
-        this->addRestrictIngre("American cheese");
-        this->addRestrictIngre("sharp cheese");
-        this->addRestrictIngre("grated cheese");
-        this->addRestrictIngre("cottage cheese");
+        restrictedIng.insert("cheese");
+        restrictedIng.insert("Cheddar cheese");
+        restrictedIng.insert("cheddar cheese");
+        restrictedIng.insert("Parmesan cheese");
+        restrictedIng.insert("Mozzarella cheese");
+        restrictedIng.insert("Ricotta cheese");
+        restrictedIng.insert("American cheese");
+        restrictedIng.insert("sharp cheese");
+        restrictedIng.insert("grated cheese");
+        restrictedIng.insert("cottage cheese");
     }
     if (restrictedIngre[4]) {
-        this->addRestrictIngre("cream of chicken soup");
-        this->addRestrictIngre("chicken broth");
-        this->addRestrictIngre("chicken");
-        this->addRestrictIngre("chicken breasts");
-        this->addRestrictIngre("chicken cutlets");
+        restrictedIng.insert("cream of chicken soup");
+        restrictedIng.insert("chicken broth");
+        restrictedIng.insert("chicken");
+        restrictedIng.insert("chicken breasts");
+        restrictedIng.insert("chicken cutlets");
     }
     if (restrictedIngre[5]) {
-        this->addRestrictIngre("coconut");
-        this->addRestrictIngre("moist coconut");
-        this->addRestrictIngre("flaked coconut");
+        restrictedIng.insert("coconut");
+        restrictedIng.insert("moist coconut");
+        restrictedIng.insert("flaked coconut");
     }
     if (restrictedIngre[6]) {
-        this->addRestrictIngre("cucumbers");
+        restrictedIng.insert("cucumbers");
     }
     if (restrictedIngre[7]) {
-        this->addRestrictIngre("egg");
-        this->addRestrictIngre("eggs");
-        this->addRestrictIngre("egg yolk");
-        this->addRestrictIngre("egg white");
+        restrictedIng.insert("egg");
+        restrictedIng.insert("eggs");
+        restrictedIng.insert("egg yolk");
+        restrictedIng.insert("egg white");
     }
     if (restrictedIngre[8]) {
-        this->addRestrictIngre("milk");
-        this->addRestrictIngre("condensed milk");
-        this->addRestrictIngre("buttermilk");
+        restrictedIng.insert("milk");
+        restrictedIng.insert("condensed milk");
+        restrictedIng.insert("buttermilk");
     }
     if (restrictedIngre[9]) {
-        this->addRestrictIngre("mushrooms");
-        this->addRestrictIngre("fresh mushrooms");
-        this->addRestrictIngre("cream of mushroom soup");
+        restrictedIng.insert("mushrooms");
+        restrictedIng.insert("fresh mushrooms");
+        restrictedIng.insert("cream of mushroom soup");
     }
     if (restrictedIngre[10]) {
-        this->addRestrictIngre("pork");
+        restrictedIng.insert("pork");
     }
     if (restrictedIngre[11]) {
-        this->addRestrictIngre("potatoes");
+        restrictedIng.insert("potatoes");
     }
     if (restrictedIngre[12]) {
-        this->addRestrictIngre("peanut butter");
+        restrictedIng.insert("peanut butter");
     }
     if (restrictedIngre[13]) {
-        this->addRestrictIngre("strawberry");
-        this->addRestrictIngre("strawberries");
-        this->addRestrictIngre("strawberry jello");
+        restrictedIng.insert("strawberry");
+        restrictedIng.insert("strawberries");
+        restrictedIng.insert("strawberry jello");
     }
     if (restrictedIngre[14]) {
-        this->addRestrictIngre("tomato");
-        this->addRestrictIngre("tomatoes");
-        this->addRestrictIngre("tomato paste");
-        this->addRestrictIngre("tomato juice");
-        this->addRestrictIngre("tomato sauce");
-        this->addRestrictIngre("Italian tomatoes");
+        restrictedIng.insert("tomato");
+        restrictedIng.insert("tomatoes");
+        restrictedIng.insert("tomato paste");
+        restrictedIng.insert("tomato juice");
+        restrictedIng.insert("tomato sauce");
+        restrictedIng.insert("Italian tomatoes");
     }
-
     this->ingreUpdater();
-
-    // testing chosen recipes after chosen ingredients considered
-//    std::cout << "testing chosen recipes after restricted ingredients considered\n";
-//    for (string recipe : chosenRecipe) {
-//        std::cout << recipe << "\n";
-//    }
-//    std::cout << "\n";
-    //
 }
 
 // sorting algorithms
@@ -537,7 +520,7 @@ double recipeStorage::leastStepsRadix() {
 
     // run helper sort function for each place of each recipe's number of ingredients
     for (int placeVal = 1; max/placeVal > 0; placeVal *= 10) {
-        leastIngCountingSort(placeVal);
+        leastStepsCountingSort(placeVal);
     }
     //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
@@ -658,7 +641,7 @@ void recipeStorage::recipePercentCountingSort(int placeVal) {
 
 }
 
-string recipeStorage::recipeDetails(string recipeName) {
+string recipeStorage::recipeDetails(string recipeName) { // formats and returns a selected recipe as one string
     string details = "";
 
     details += recipeName + "\n\n";
@@ -668,16 +651,16 @@ string recipeStorage::recipeDetails(string recipeName) {
     }
     details += "\nDirections\n";
     for (string direction : recipeMap[recipeName]->directions) {
+        while (direction.length() > 70) {
+            details += direction.substr(0, 70) + "\n";
+            direction = direction.substr(70);
+        }
         details += direction + "\n";
     }
     return details;
 }
-string recipeStorage::halfRecipeDetails(string recipeName){
+string recipeStorage::halfRecipeDetails(string recipeName){ // formatting for a selected recipe as one string, the half card
     string details = "";
-    while (recipeName.length() > 30) {
-        details += recipeName.substr(0, 30) + "\n";
-        recipeName = recipeName.substr(30);
-    }
     details += recipeName + "\n\n";
     details += "Ingredients\n";
     int count = 0;
