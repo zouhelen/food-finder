@@ -318,8 +318,8 @@ void Display::reccs(int currentPage) {
 
 void Display::displayRecipe(std::string currentR){
     sf::Text recipe(recipes.recipeDetails(currentR), font, 100);
-    failed.setFillColor(fontC);
-    failed.setPosition(window.getSize().x / 4, window.getSize().y / 3);
+    recipe.setFillColor(fontC);
+    recipe.setPosition(window.getSize().x / 4, window.getSize().y / 3);
 
     this->window.clear(bg);
 
