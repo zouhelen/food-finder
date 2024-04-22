@@ -17,3 +17,11 @@
 18	2241	7354628448018283	CMakeFiles/food.dir/main.cpp.obj	10da9041ccbc3afc
 8	2662	7354628452155560	CMakeFiles/food.dir/recipeStorage.cpp.obj	20389743cc7a89ed
 2662	4048	7354628465905438	food.exe	1269f3fad1b40258
+4	1031	7354664071067139	CMakeFiles/food.dir/frontend_elements/display.cpp.obj	eec975e33d8980c5
+13	1056	7354664071319688	CMakeFiles/food.dir/main.cpp.obj	10da9041ccbc3afc
+10	1320	7354664073928103	CMakeFiles/food.dir/recipeStorage.cpp.obj	20389743cc7a89ed
+1320	2049	7354664081129984	food.exe	1269f3fad1b40258
+4	819	7354668921599823	CMakeFiles/food.dir/frontend_elements/display.cpp.obj	eec975e33d8980c5
+819	1477	7354668928086054	food.exe	1269f3fad1b40258
+3	793	7354669174562760	CMakeFiles/food.dir/frontend_elements/display.cpp.obj	eec975e33d8980c5
+793	1625	7354669182821220	food.exe	1269f3fad1b40258

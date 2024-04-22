@@ -283,7 +283,7 @@ std::function<void(void)> Display::swapQuiz(){ // onclick to swap pages
 void Display::render(){ // puts everything together
     icon.loadFromFile("images/icon.png"); // load icon image
 
-    video = sf::VideoMode::getDesktopMode(); // set videomode to be desktop size (might change later)
+    video = sf::VideoMode(1920, 1200); // set videomode to a consistent size
 
     this -> window.create(this -> video, "Food Finder", sf::Style::Titlebar | sf::Style::Close); // create the window
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr()); // set app icon
