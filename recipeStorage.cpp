@@ -445,13 +445,6 @@ void recipeStorage::generateRecipeSubset(vector<bool> chosenIngre, vector<bool> 
 
     this->chooseIngreUpdater();
 
-    // testing chosen recipes after chosen ingredients considered
-//    std::cout << "testing chosen recipes after chosen ingredients considered\n";
-//    for (string recipe : chosenRecipe) {
-//        std::cout << recipe << "\n";
-//    }
-//    std::cout << "\n";
-
     this->restrictIngreUpdater();
 
     // testing chosen recipes after chosen ingredients considered
@@ -723,6 +716,7 @@ string recipeStorage::halfRecipeDetails(string recipeName){
     string details = "";
     details += recipeName + "\n\n";
     details += "Ingredients\n";
+    int count = 0;
     int count = 0;
     for (string ingredient : recipeMap[recipeName]->ingMeasurements) {
         if(count > 3){

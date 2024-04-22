@@ -280,7 +280,7 @@ void Display::reccs(int currentPage) {
         int counter = 0 + currentPage * 16; // Counter to limit the number of recipes to 16
 
         for (const auto& recipe : recipes.sortedRecipes) {
-            if (counter >= 16 * (currentPage + 1) ){
+            if (counter >= (16 * (currentPage + 1)) ){
                 break;
             }
 
