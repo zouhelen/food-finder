@@ -64,6 +64,7 @@ class Display{ // toolbox class used to help display
 
     int current = 0;
 
+    void displayRecipe(std::string currentR);
     void welcome(); // welcome page
     void quiz(); // quiz page
     void reccs(int currentPage); // page showing the user's recommendations

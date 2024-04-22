@@ -316,7 +316,14 @@ void Display::reccs(int currentPage) {
     }
 }
 
+void Display::displayRecipe(std::string currentR){
+    sf::Text recipe(recipes.recipeDetails(currentR), font, 100);
+    failed.setFillColor(fontC);
+    failed.setPosition(window.getSize().x / 4, window.getSize().y / 3);
 
+    this->window.clear(bg);
+
+}
 
 std::function<void(void)> Display::changeIngre(int i){ // onclick to select/deselect the ingredient button
     return [i, this]() { // lambda, passes in an index i and the current display
@@ -405,14 +412,17 @@ void Display::render(){ // puts everything together
                     if(d1.isOpen() && d1.rects[0].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         d1.toggle();
                         cSort = LeastIngre;
+                        continue;
                     }
                     if(d1.isOpen() && d1.rects[1].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         d1.toggle();
                         cSort = LeastSteps;
+                        continue;
                     }
                     if(d1.isOpen() && d1.rects[2].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         d1.toggle();
                         cSort = Percent;
+                        continue;
                     }
                     //toggle menu options for menu dropdown
                     if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
