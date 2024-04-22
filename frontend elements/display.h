@@ -3,6 +3,7 @@
 #include "button.h"
 #include "dropdown.h"
 #include <map> // include statements
+#include "../recipeStorage.h"
 
 #ifndef FOOD_FINDER_DISPLAY_H
 #define FOOD_FINDER_DISPLAY_H
@@ -61,13 +62,17 @@ class Display{ // toolbox class used to help display
     dropdown d1; // dropdown creation
     dropdown d2;
 
+    int current = 0;
+
     void welcome(); // welcome page
     void quiz(); // quiz page
-    void reccs(); // page showing the user's recommendations
-
+    void reccs(int currentPage); // page showing the user's recommendations
 public:
+    recipeStorage recipes = recipeStorage(); // create recipeStorage instance
     // constructor, set all variables initialized with member initializer lists
-    Display(): bg(201, 201, 201), fontC(95, 90, 98), borderBlue(131, 125, 135), enter(swapQuiz()), submit(submitB()), banana(changeIngre(0)), beef(changeIngre(1)), carrot(changeIngre(2)), cheese(changeIngre(3)), chicken(changeIngre(4)), coconut(changeIngre(5)), cucumber(changeIngre(6)), egg(changeIngre(7)), milk(changeIngre(8)), mushroom(changeIngre(9)), pb(changeIngre(10)), pork(changeIngre(11)), potato(changeIngre(12)), strawberry(changeIngre(13)), tomato(changeIngre(14)),d1(window, sortOptions, 1735.f, 5.f, "images/sort by.png"), d2(window, menuOptions, 5.f, 5.f, "images/menu.png"){};
+    Display(): bg(201, 201, 201), fontC(95, 90, 98), borderBlue(131, 125, 135), enter(swapQuiz()), submit(submitB()), banana(changeIngre(0)), beef(changeIngre(1)), carrot(changeIngre(2)), cheese(changeIngre(3)), chicken(changeIngre(4)), coconut(changeIngre(5)), cucumber(changeIngre(6)), egg(changeIngre(7)), milk(changeIngre(8)), mushroom(changeIngre(9)), pb(changeIngre(10)), pork(changeIngre(11)), potato(changeIngre(12)), strawberry(changeIngre(13)), tomato(changeIngre(14)),d1(window, sortOptions, 1735.f, 5.f, "images/sort by.png"), d2(window, menuOptions, 5.f, 5.f, "images/menu.png"){
+        recipes.readFile();
+    };
 
     bool quizDone = false; // tracks when the user is done with quiz
     // tracks the indexes of each of the choices to make it easier for backend

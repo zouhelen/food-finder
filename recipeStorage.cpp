@@ -33,7 +33,7 @@ void recipeStorage::readFile() {
         std::getline(lineStream, name, ',');
         recipe->recipeName = name;
         //recipe name test
-        std::cout << indexTest << ": recipe name: " << recipe->recipeName << std::endl;
+        //std::cout << indexTest << ": recipe name: " << recipe->recipeName << std::endl;
 
 
         /* load ingredients including measurements */
@@ -175,7 +175,7 @@ void recipeStorage::chooseIngreUpdater() {
         for (string recipe: ingredientMap[ingredient]) {
             chosenRecipe.insert(recipe);
         }
-        
+
 
         //set containing recipes needing this ingredient
         unordered_set<string> recipes;
@@ -266,10 +266,12 @@ void recipeStorage::restrictIngreUpdater() {
     }
 }
 
-void recipeStorage::updateIngredients(vector<bool> chosenIngre, vector<bool> restrictedIngre) {
+void recipeStorage::generateRecipeSubset(vector<bool> chosenIngre, vector<bool> restrictedIngre) {
     // order of ingredients
     // 0.banana, 1.beef,  2.carrot, 3.cheese,  4.chicken, 5.coconut, 6.cucumber,
     // 7.egg, 8.milk, 9.mushroom, 10.pork, 11.potato, 12.peanut butter, 13.strawberry, 14.tomato
+    chosenIngre.clear();
+    restrictedIngre.clear();
     if (chosenIngre[0]) {
         this->addChosenIngre("bananas");
     }
@@ -324,13 +326,13 @@ void recipeStorage::updateIngredients(vector<bool> chosenIngre, vector<bool> res
         this->addChosenIngre("fresh mushrooms");
         this->addChosenIngre("cream of mushroom soup");
     }
-    if (chosenIngre[10]) {
+    if (chosenIngre[11]) {
         this->addChosenIngre("pork");
     }
-    if (chosenIngre[11]) {
+    if (chosenIngre[12]) {
         this->addChosenIngre("potatoes");
     }
-    if (chosenIngre[12]) {
+    if (chosenIngre[10]) {
         this->addChosenIngre("peanut butter");
     }
     if (chosenIngre[13]) {
@@ -434,20 +436,20 @@ void recipeStorage::updateIngredients(vector<bool> chosenIngre, vector<bool> res
     this->chooseIngreUpdater();
 
     // testing chosen recipes after chosen ingredients considered
-    std::cout << "testing chosen recipes after chosen ingredients considered\n";
-    for (string recipe : chosenRecipe) {
-        std::cout << recipe << "\n";
-    }
-    std::cout << "\n";
+//    std::cout << "testing chosen recipes after chosen ingredients considered\n";
+//    for (string recipe : chosenRecipe) {
+//        std::cout << recipe << "\n";
+//    }
+//    std::cout << "\n";
 
     this->restrictIngreUpdater();
 
     // testing chosen recipes after chosen ingredients considered
-    std::cout << "testing chosen recipes after restricted ingredients considered\n";
-    for (string recipe : chosenRecipe) {
-        std::cout << recipe << "\n";
-    }
-    std::cout << "\n";
+//    std::cout << "testing chosen recipes after restricted ingredients considered\n";
+//    for (string recipe : chosenRecipe) {
+//        std::cout << recipe << "\n";
+//    }
+//    std::cout << "\n";
     //
 }
 
@@ -518,7 +520,7 @@ void recipeStorage::leastIngCountingSort(int placeVal) {
     }
     //transfers output to leastIng
     for (int l = 0; l < leastIngR.size(); l++) {
-        leastIngR[l] = output[l];        
+        leastIngR[l] = output[l];
     }
 }
 
@@ -588,7 +590,7 @@ void recipeStorage::leastStepsCountingSort(int placeVal) {
     }
     //transfers output to leastSteps
     for (int l = 0; l < leastStepsR.size(); l++) {
-        leastStepsR[l] = output[l];        
+        leastStepsR[l] = output[l];
     }
 }
 
@@ -661,7 +663,7 @@ void recipeStorage::recipePercentCountingSort(int placeVal) {
     }
     //transfers output to recipePercent
     for (int l = 0; l < recipePercentR.size(); l++) {
-        recipePercentR[l] = output[l];        
+        recipePercentR[l] = output[l];
     }
 
 }
@@ -669,14 +671,33 @@ void recipeStorage::recipePercentCountingSort(int placeVal) {
 string recipeStorage::recipeDetails(string recipeName) {
     string details = "";
 
-    details += "--recipe name--\n" + recipeName + "\n\n";
-    details += "--ingredients--\n";
+    details += recipeName + "\n\n";
+    details += "Ingredients\n";
     for (string ingredient : recipeMap[recipeName]->ingMeasurements) {
         details += ingredient + "\n";
     }
-    details += "\n--directions--\n";
+    details += "\nDirections\n";
     for (string direction : recipeMap[recipeName]->directions) {
         details += direction + "\n";
+    }
+    return details;
+}
+string recipeStorage::halfRecipeDetails(string recipeName){
+    string details = "";
+    details += recipeName + "\n\n";
+    details += "Ingredients\n";
+    int count = 0;
+    for (string ingredient : recipeMap[recipeName]->ingMeasurements) {
+        if(count > 3){
+            break;
+        }
+        while (ingredient.length() > 30) {
+            details += ingredient.substr(0, 30) + "\n";
+            ingredient = ingredient.substr(30);
+        }
+
+        details += ingredient + "\n";
+        count ++;
     }
     return details;
 }

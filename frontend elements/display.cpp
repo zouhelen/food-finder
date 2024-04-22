@@ -17,7 +17,7 @@ void Display::welcome(){ // welcome page
 
     sf::Text secondary("Please click enter to begin your preference quiz.", font, 60);
     secondary.setFillColor(borderBlue);
-    secondary.setPosition(window.getSize().x/5, window.getSize().y/2.5);
+    secondary.setPosition(window.getSize().x/4, window.getSize().y/2.5);
 
     this -> window.clear(bg); // clear with background color
     this -> window.draw(welcomeText); // draw elements
@@ -244,12 +244,79 @@ void Display::quiz() { // quiz page, a bit long because can't initialize the but
     this -> window.draw(submit.getSprite()); // draw submit button
 }
 
-void Display::reccs() { // unfinished
-    this -> window.clear(bg);
-    this -> d1.draw();
-    this -> d2.draw();
-    
+void Display::reccs(int currentPage) {
+    this->window.clear(bg);
+
+    if(cSort == Percent){
+        recipes.recipePercentRadix();
+    }
+    else if(cSort == LeastIngre){
+        recipes.leastIngRadix();
+    }
+    else if(cSort == LeastSteps){
+        recipes.leastStepsShell();
+    }
+
+    if (recipes.chosenRecipe.empty()) {
+        // Display a message when there are no recipes
+        sf::Text failed("Nothing to see here...", font, 150);
+        failed.setFillColor(fontC);
+        failed.setPosition(window.getSize().x / 4, window.getSize().y / 3);
+        sf::Texture iconT;
+        iconT.loadFromImage(icon);
+        sf::Sprite iconS;
+        iconS.setPosition(window.getSize().x/2.5, window.getSize().y/2);
+        iconS.setTexture(iconT);
+
+        this -> window.draw(iconS);
+        this->window.draw(failed);
+        this->d1.draw();
+        this->d2.draw();
+    } else {
+        // Draw rectangles and texts for recipes
+        std::vector<sf::RectangleShape> rectangles;
+        std::vector<sf::Text> texts;
+        sf::Vector2f position(210, 100); // Initial position of the first rectangle
+        int counter = 0 + currentPage * 16; // Counter to limit the number of recipes to 16
+
+        for (const auto& recipe : recipes.chosenRecipe) {
+            if (counter >= 16 * (currentPage + 1) ){
+                break;
+            }
+
+            // Create a rectangle for each recipe
+            sf::RectangleShape rect(sf::Vector2f(360, 237.5));
+            rect.setPosition(position);
+            rectangles.push_back(rect);
+
+            // Create text for each recipe
+            sf::Text text(recipes.halfRecipeDetails(recipe), font, 20);
+            text.setFillColor(fontC);
+            text.setCharacterSize(24);
+            text.setPosition(position.x + 10, position.y + 10); // Offset the text inside the rectangle
+            texts.push_back(text);
+
+            position.x += 380; // Increase x-coordinate for the next rectangle
+            if (position.x > window.getSize().x - 380) {
+                position.x = 210; // Reset x-coordinate for the next row
+                position.y += 257.5; // Increase y-coordinate for the next row
+            }
+            counter++;
+        }
+
+        for (const auto& rect : rectangles) {
+            this->window.draw(rect);
+        }
+        for (const auto& text : texts) {
+            this->window.draw(text);
+        }
+
+        this->d1.draw();
+        this->d2.draw();
+    }
 }
+
+
 
 std::function<void(void)> Display::changeIngre(int i){ // onclick to select/deselect the ingredient button
     return [i, this]() { // lambda, passes in an index i and the current display
@@ -269,8 +336,18 @@ std::function<void(void)> Display::changeIngre(int i){ // onclick to select/dese
 
 std::function<void(void)> Display::submitB(){ // onclick to change page and submit the quiz
     return [this]() {
-        cPage = R; // change page to reccs, mark the quiz as done
         quizDone = true;
+        for(int i = 0; i < 15; i++){
+            std::cout << added[i] << std::endl;
+        }
+        recipes.chosenRecipe.clear();
+        recipes.chosenIng.clear();
+        recipes.generateRecipeSubset(added, removed);
+        cPage = R; // change page to reccs, mark the quiz as done
+        for(int i = 0; i < 15; i++){
+            added[i] = false;
+            removed[i] = false;
+        }
     };
 }
 
@@ -304,8 +381,9 @@ void Display::render(){ // puts everything together
             quiz();
         }
         else if(cPage == R){
-            reccs();
+            reccs(current);
         }
+
         while (this -> window.pollEvent(this -> ev)) { // poll for event
             if (ev.type == sf::Event::Closed) { // if closed: close the window and exit
                 this -> window.close();
@@ -321,7 +399,7 @@ void Display::render(){ // puts everything together
                 if (ev.mouseButton.button == sf::Mouse::Left || ev.mouseButton.button == sf::Mouse::Right) { // if its a left or right click
                     // toggle menu options for sort menu
                     if (ev.mouseButton.x >= d1.menu.getPosition().x && ev.mouseButton.x <= d1.menu.getPosition().x + d1.menu.getSize().x &&
-                               ev.mouseButton.y >= d1.menu.getPosition().y && ev.mouseButton.y <= d1.menu.getPosition().y + d1.menu.getSize().y) {
+                        ev.mouseButton.y >= d1.menu.getPosition().y && ev.mouseButton.y <= d1.menu.getPosition().y + d1.menu.getSize().y) {
                         d1.toggle();
                     }
                     // if clicked in one of the options, toggle the enum that chooses which sort
@@ -339,7 +417,7 @@ void Display::render(){ // puts everything together
                     }
                     //toggle menu options for menu dropdown
                     if (ev.mouseButton.x >= d2.menu.getPosition().x && ev.mouseButton.x <= d2.menu.getPosition().x + d2.menu.getSize().x &&
-                               ev.mouseButton.y >= d2.menu.getPosition().y && ev.mouseButton.y <= d2.menu.getPosition().y + d2.menu.getSize().y) {
+                        ev.mouseButton.y >= d2.menu.getPosition().y && ev.mouseButton.y <= d2.menu.getPosition().y + d2.menu.getSize().y) {
                         d2.toggle();
                     }
                     // if clicked in one of the options, toggle enum that chooses page
