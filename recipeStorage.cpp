@@ -216,6 +216,8 @@ void recipeStorage::chooseIngreUpdater() {
             recipePercentR.push_back(pair<string, int> (aRecipe, (100*(chosenCounter))/(recipeMap[aRecipe]->ingList.size())));
         }
     }
+    //sortedRecipes.clear();
+    //sortedRecipes.resize(chosenRecipe.size());
 }
 
 void recipeStorage::addRestrictIngre(string ingredient) {
@@ -267,7 +269,11 @@ void recipeStorage::restrictIngreUpdater() {
         }
     }
     // initialize empty elements for sorted recipes vector
-    sortedRecipes.resize(leastIngS.size());
+    //sortedRecipes.clear();
+    //for (int i = 0; i < chosenRecipe.size(); i++) {
+    //    sortedRecipes.push_back("");
+    //}
+    sortedRecipes.resize(chosenRecipe.size());
 }
 
 void recipeStorage::generateRecipeSubset(vector<bool> chosenIngre, vector<bool> restrictedIngre) {
@@ -513,8 +519,11 @@ double recipeStorage::leastIngRadix() {
     //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
+    // updates general sorted recipes list
+    for (int i = 0; i < leastIngR.size(); i++) {
+        sortedRecipes[i] = leastIngR[i].first;
+    }
+    return duration; // returns time for sorting
 }
 
 void recipeStorage::leastIngCountingSort(int placeVal) {
@@ -586,8 +595,11 @@ double recipeStorage::leastStepsRadix() {
     //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
+    // updates general sorted recipes list
+    for (int i = 0; i < leastStepsR.size(); i++) {
+        sortedRecipes[i] = leastStepsR[i].first;
+    }
+    return duration; // returns time for sorting
 }
 
 void recipeStorage::leastStepsCountingSort(int placeVal) {
@@ -660,9 +672,11 @@ double recipeStorage::recipePercentRadix() {
     //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
-
+    // updates general sorted recipes list
+    for (int i = 0; i < leastIngR.size(); i++) {
+        sortedRecipes[i] = leastIngR[i].first;
+    }
+    return duration; // returns time for sorting
 }
 
 void recipeStorage::recipePercentCountingSort(int placeVal) {
@@ -709,6 +723,7 @@ string recipeStorage::halfRecipeDetails(string recipeName){
     string details = "";
     details += recipeName + "\n\n";
     details += "Ingredients\n";
+    int count = 0;
     for (string ingredient : recipeMap[recipeName]->ingMeasurements) {
         if(count > 3){
             break;
