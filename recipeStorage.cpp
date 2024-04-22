@@ -674,6 +674,10 @@ string recipeStorage::recipeDetails(string recipeName) {
 }
 string recipeStorage::halfRecipeDetails(string recipeName){
     string details = "";
+    while (recipeName.length() > 30) {
+        details += recipeName.substr(0, 30) + "\n";
+        recipeName = recipeName.substr(30);
+    }
     details += recipeName + "\n\n";
     details += "Ingredients\n";
     int count = 0;
