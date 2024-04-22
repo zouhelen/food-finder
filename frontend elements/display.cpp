@@ -251,7 +251,7 @@ void Display::reccs(int currentPage) {
         recipes.recipePercentRadix();
     }
     else if(cSort == LeastIngre){
-        recipes.leastIngRadix();
+        recipes.leastIngShell();
     }
     else if(cSort == LeastSteps){
         recipes.leastStepsShell();
