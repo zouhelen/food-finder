@@ -10,7 +10,6 @@ include_directories(c:/Libraries/SFML-2.5.1/include/SFML)
 
 add_executable(food "frontend elements/display.cpp"
         "frontend elements/button.cpp"
-        "frontend elements/recipe.cpp"
         "frontend elements/dropdown.cpp"
         recipeStorage.cpp
         main.cpp)
