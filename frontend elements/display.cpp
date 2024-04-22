@@ -248,11 +248,7 @@ void Display::reccs() { // unfinished
     this -> window.clear(bg);
     this -> d1.draw();
     this -> d2.draw();
-}
-
-void Display::browse(){ // unfinished
-    this -> window.clear(bg);
-    this -> d2.draw();
+    
 }
 
 std::function<void(void)> Display::changeIngre(int i){ // onclick to select/deselect the ingredient button
@@ -310,9 +306,6 @@ void Display::render(){ // puts everything together
         else if(cPage == R){
             reccs();
         }
-        else if(cPage == B){
-            browse();
-        }
         while (this -> window.pollEvent(this -> ev)) { // poll for event
             if (ev.type == sf::Event::Closed) { // if closed: close the window and exit
                 this -> window.close();
@@ -357,10 +350,6 @@ void Display::render(){ // puts everything together
                     if(d2.isOpen() && d2.rects[1].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         d2.toggle();
                         cPage = R;
-                    }
-                    if(d2.isOpen() && d2.rects[2].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
-                        d2.toggle();
-                        cPage = B;
                     }
                     // onclicks for each submit and enter button, just calls onclick for them if it's in bounds
                     if(enter.getSprite().getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){

@@ -16,8 +16,7 @@ class Display{ // toolbox class used to help display
     enum Current{ // tracks which page the user is on
         W,
         Q,
-        R,
-        B
+        R
     };
 
     enum SortCurrent{ // tracks which sorting method is being used
@@ -30,7 +29,7 @@ class Display{ // toolbox class used to help display
     SortCurrent cSort = Percent;
 
     std::vector<std::string> sortOptions = {"Least Ingred Used", "Lowest Steps", "% Ingredient Match"}; // options for sorting and menu
-    std::vector<std::string> menuOptions = {"Quiz", "Your Reccs", "Browse"};
+    std::vector<std::string> menuOptions = {"Quiz", "Your Reccs"};
 
     std::function<void(void)> swapQuiz(); // lambda functions for button functions
     std::function<void(void)> changeIngre(int i);
@@ -65,7 +64,6 @@ class Display{ // toolbox class used to help display
     void welcome(); // welcome page
     void quiz(); // quiz page
     void reccs(); // page showing the user's recommendations
-    void browse(); // page allowing the user to scroll through all recipe objects
 
 public:
     // constructor, set all variables initialized with member initializer lists

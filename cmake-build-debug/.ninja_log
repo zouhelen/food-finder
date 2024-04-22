@@ -7,3 +7,13 @@
 3	678	7354423212197807	CMakeFiles/food.dir/frontend_elements/display.cpp.obj	eec975e33d8980c5
 7	515	7354409620199952	CMakeFiles/food.dir/frontend_elements/button.cpp.obj	dafa22d7fe2bd3db
 3	571	7354409840178643	CMakeFiles/food.dir/frontend_elements/dropdown.cpp.obj	f2f0297db752779
+12	146	7354427562064373	CMakeFiles/food.dir/frontend_elements/recipe.cpp.obj	634d7452342beceb
+4	655	7354427567153511	CMakeFiles/food.dir/frontend_elements/button.cpp.obj	dafa22d7fe2bd3db
+18	784	7354427568440215	CMakeFiles/food.dir/frontend_elements/dropdown.cpp.obj	f2f0297db752779
+8	897	7354427569576108	CMakeFiles/food.dir/frontend_elements/display.cpp.obj	eec975e33d8980c5
+23	1033	7354427570929616	CMakeFiles/food.dir/main.cpp.obj	10da9041ccbc3afc
+16	1205	7354427572613973	CMakeFiles/food.dir/recipeStorage.cpp.obj	20389743cc7a89ed
+1206	1835	7354427578863345	food.exe	1269f3fad1b40258
+18	2241	7354628448018283	CMakeFiles/food.dir/main.cpp.obj	10da9041ccbc3afc
+8	2662	7354628452155560	CMakeFiles/food.dir/recipeStorage.cpp.obj	20389743cc7a89ed
+2662	4048	7354628465905438	food.exe	1269f3fad1b40258

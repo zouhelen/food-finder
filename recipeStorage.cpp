@@ -34,7 +34,7 @@ void recipeStorage::readFile() {
         recipe->recipeName = name;
         //recipe name test
         std::cout << indexTest << ": recipe name: " << recipe->recipeName << std::endl;
-        //
+
 
         /* load ingredients including measurements */
 
