@@ -17,7 +17,8 @@ class Display{ // toolbox class used to help display
     enum Current{ // tracks which page the user is on
         W,
         Q,
-        R
+        R,
+        Recipe
     };
 
     enum SortCurrent{ // tracks which sorting method is being used
@@ -32,7 +33,10 @@ class Display{ // toolbox class used to help display
     std::vector<std::string> sortOptions = {"Least Ingred Used", "Lowest Steps", "% Ingredient Match"}; // options for sorting and menu
     std::vector<std::string> menuOptions = {"Quiz", "Your Reccs"};
 
+    std::string currentR;
+
     std::function<void(void)> swapQuiz(); // lambda functions for button functions
+    std::function<void(void)> swapReccs();
     std::function<void(void)> changeIngre(int i);
     std::function<void(void)> submitB();
 
@@ -58,6 +62,7 @@ class Display{ // toolbox class used to help display
     Button potato;
     Button strawberry;
     Button tomato;
+    Button backB;
 
     dropdown d1; // dropdown creation
     dropdown d2;
@@ -71,7 +76,7 @@ class Display{ // toolbox class used to help display
 public:
     recipeStorage recipes = recipeStorage(); // create recipeStorage instance
     // constructor, set all variables initialized with member initializer lists
-    Display(): bg(255, 253, 237), fontC(92, 72, 55), borderBlue(247, 211, 173), enter(swapQuiz()), submit(submitB()), banana(changeIngre(0)), beef(changeIngre(1)), carrot(changeIngre(2)), cheese(changeIngre(3)), chicken(changeIngre(4)), coconut(changeIngre(5)), cucumber(changeIngre(6)), egg(changeIngre(7)), milk(changeIngre(8)), mushroom(changeIngre(9)), pb(changeIngre(10)), pork(changeIngre(11)), potato(changeIngre(12)), strawberry(changeIngre(13)), tomato(changeIngre(14)),d1(window, sortOptions, 1735.f, 5.f, "images/sort by.png"), d2(window, menuOptions, 5.f, 5.f, "images/menu.png"){
+    Display(): bg(255, 253, 237), fontC(92, 72, 55), borderBlue(247, 211, 173), enter(swapQuiz()), submit(submitB()), banana(changeIngre(0)), beef(changeIngre(1)), carrot(changeIngre(2)), cheese(changeIngre(3)), chicken(changeIngre(4)), coconut(changeIngre(5)), cucumber(changeIngre(6)), egg(changeIngre(7)), milk(changeIngre(8)), mushroom(changeIngre(9)), pb(changeIngre(10)), pork(changeIngre(11)), potato(changeIngre(12)), strawberry(changeIngre(13)), tomato(changeIngre(14)), backB(swapReccs()), d1(window, sortOptions, 1735.f, 5.f, "images/sort by.png"), d2(window, menuOptions, 5.f, 5.f, "images/menu.png"){
         recipes.readFile();
     };
 

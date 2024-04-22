@@ -304,6 +304,17 @@ void Display::reccs(int currentPage) {
             counter++;
         }
 
+        sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+        for (size_t i = 0; i < rectangles.size(); ++i) {
+            if (rectangles[i].getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+                // Swap to recipe page when a recipe is clicked
+                displayRecipe(recipes.sortedRecipes[currentPage * 16 + i].name);
+                cPage = Recipe;
+                currentR = recipes.sortedRecipes[currentPage * 16 + i].name;
+                break; // Exit loop after handling one click
+            }
+        }
+
         for (const auto& rect : rectangles) {
             this->window.draw(rect);
         }
@@ -321,8 +332,16 @@ void Display::displayRecipe(std::string currentR){
     recipe.setFillColor(fontC);
     recipe.setPosition(window.getSize().x / 4, window.getSize().y / 3);
 
-    this->window.clear(bg);
+    sf::Texture backB;
+    backB.loadFromFile("images/back.png");
+    sf::Sprite back;
+    back.setPosition(190.f, 90.f);
+    back.setTexture(backB);
+    backB.setSprite(back);
 
+    this -> window.clear(bg);
+    this -> window.draw(backB.getSprite());
+    this -> window.draw(recipe);
 }
 
 std::function<void(void)> Display::changeIngre(int i){ // onclick to select/deselect the ingredient button
@@ -363,6 +382,12 @@ std::function<void(void)> Display::swapQuiz(){ // onclick to swap pages
     };
 }
 
+std::function<void(void)> swapReccs(){
+    return[this](){
+        cPage = R;
+    }
+}
+
 void Display::render(){ // puts everything together
     icon.loadFromFile("images/icon.png"); // load icon image
 
@@ -388,6 +413,9 @@ void Display::render(){ // puts everything together
         }
         else if(cPage == R){
             reccs(current);
+        }
+        else if(cPage == Recipe){
+            displayRecipe(currentR);
         }
 
         while (this -> window.pollEvent(this -> ev)) { // poll for event
@@ -444,6 +472,9 @@ void Display::render(){ // puts everything together
                     }
                     if(submit.getSprite().getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
                         submit.onClick();
+                    }
+                    if(backB.getSprite().getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
+                        backB.onClick();
                     }
 
                     // if the page is on quiz, and it's not done, toggle whichever ingredient button the user clicks with the built-in onclick function
