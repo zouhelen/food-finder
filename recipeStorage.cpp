@@ -222,7 +222,7 @@ void recipeStorage::addRestrictIngre(string ingredient) {
     restrictedIng.insert(ingredient);
 }
 void recipeStorage::restrictIngreUpdater() {
-    for (string ingredient : restrictedIng) {
+    for (string ingredient: restrictedIng) {
         //for chosenRecipe
         for (string recipe: ingredientMap[ingredient]) {
             chosenRecipe.erase(recipe);
@@ -230,12 +230,12 @@ void recipeStorage::restrictIngreUpdater() {
 
         //set containing recipes needing this ingredient
         unordered_set<string> recipes;
-        for (string recipe : ingredientMap[ingredient]) {
+        for (string recipe: ingredientMap[ingredient]) {
             recipes.insert(recipe);
         }
         //for leastIng, leastSteps, and recipePercent
         //removes the recipes containing the ingredient and the value the vectors are sorted by
-        for (string aRecipe : recipes) {
+        for (string aRecipe: recipes) {
             //shell sort vectors
             for (vector<pair<string, int>>::iterator iter = leastIngS.begin(); iter < leastIngS.end(); iter++) {
                 if (aRecipe == (*iter).first)
@@ -245,7 +245,8 @@ void recipeStorage::restrictIngreUpdater() {
                 if (aRecipe == (*iter).first)
                     leastStepsS.erase(iter);
             }
-            for (vector<pair<string, int>>::iterator iter = recipePercentS.begin(); iter < recipePercentS.end(); iter++) {
+            for (vector<pair<string, int>>::iterator iter = recipePercentS.begin();
+                 iter < recipePercentS.end(); iter++) {
                 if (aRecipe == (*iter).first)
                     recipePercentS.erase(iter);
             }
@@ -258,12 +259,15 @@ void recipeStorage::restrictIngreUpdater() {
                 if (aRecipe == (*iter).first)
                     leastStepsR.erase(iter);
             }
-            for (vector<pair<string, int>>::iterator iter = recipePercentR.begin(); iter < recipePercentR.end(); iter++) {
+            for (vector<pair<string, int>>::iterator iter = recipePercentR.begin();
+                 iter < recipePercentR.end(); iter++) {
                 if (aRecipe == (*iter).first)
                     recipePercentR.erase(iter);
             }
         }
     }
+    // initialize empty elements for sorted recipes vector
+    sortedRecipes.resize(leastIngS.size());
 }
 
 void recipeStorage::generateRecipeSubset(vector<bool> chosenIngre, vector<bool> restrictedIngre) {
@@ -476,8 +480,11 @@ double recipeStorage::leastIngShell() {
     //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
+    // updates general sorted recipes list
+    for (int i = 0; i < leastIngS.size(); i++) {
+        sortedRecipes[i] = leastIngS[i].first;
+    }
+    return duration; // returns time for sorting
 }
 
 double recipeStorage::leastIngRadix() {
@@ -546,8 +553,11 @@ double recipeStorage::leastStepsShell() {
     //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
+    // updates general sorted recipes list
+    for (int i = 0; i < leastStepsS.size(); i++) {
+        sortedRecipes[i] = leastStepsS[i].first;
+    }
+    return duration; // returns time for sorting
 }
 
 double recipeStorage::leastStepsRadix() {
@@ -616,8 +626,11 @@ double recipeStorage::recipePercentShell() {
     //stops the clock
     auto stop = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
-    //returns the sorted time
-    return duration;
+    // updates general sorted recipes list
+    for (int i = 0; i < recipePercentS.size(); i++) {
+        sortedRecipes[i] = recipePercentS[i].first;
+    }
+    return duration; // returns the time for sorting
 
 }
 

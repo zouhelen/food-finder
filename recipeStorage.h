@@ -34,6 +34,8 @@ public:
     //ingredient input
     vector<bool> ingreInput();
 
+    vector<string> sortedRecipes; // updates recipe order with sorts
+
     //sorted via shell sort
     //contains the names of the ingredients that are chosen
     vector<pair<string, int>> leastIngS; //pair: recipe name, num of ingredients (lesser first)
@@ -65,7 +67,7 @@ public:
     //function called on click to remove values from unord_maps to the unord_set, set, and vectors
     void restrictIngreUpdater();
     // combines above functions to parse selected ingredients from front end
-    void updateIngredients(vector<bool> chosenIngre, vector<bool> restrictedIngre);
+    void generateRecipeSubset(vector<bool> chosenIngre, vector<bool> restrictedIngre);
 
 
     //sorts all the vectors with the corresponding algorithm
@@ -84,6 +86,7 @@ public:
 
     // used to display recipe to interface
     string recipeDetails(string recipeName);
+    string halfRecipeDetails(string recipeName);
 
 
 };
