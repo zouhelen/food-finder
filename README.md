@@ -13,12 +13,6 @@ Food Finder is a program that lists recipes based on what ingredients you have a
 
 <h3>Running</h3>
 
-* Open an IDE of your choice (it will be demonstrated in CLion)
+* Open the food-finder project in an IDE of your choice (CLion is recommended)
 
-* In your IDE, open the food-finder folder and trust it
-
-* When CLion opens the Open Project Wizard, just press OK
-
-* Use an IDE of your choice (CLion recommended) to open the directory of Food Finder
-
-* Run main.cpp
+* Run the program
