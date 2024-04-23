@@ -254,7 +254,7 @@ void Display::reccs(int currentPage) {
         recipes.leastIngShell();
     }
     else if(cSort == LeastSteps){
-        recipes.leastStepsShell();
+        recipes.leastStepsRadix();
     }
 
     if (recipes.sortedRecipes.empty()) { // if its empty, display an error message
@@ -561,4 +561,6 @@ void Display::render(){ // puts everything together
         }
         this -> window.display(); // display the window
     }
+    // manage memory
+    recipes.destructMap();
 }

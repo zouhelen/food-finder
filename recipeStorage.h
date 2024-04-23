@@ -84,5 +84,7 @@ public:
     string recipeDetails(string recipeName);
     string halfRecipeDetails(string recipeName);
 
+    // destructor
+    void destructMap();
 
 };
