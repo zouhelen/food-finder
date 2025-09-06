@@ -1,4 +1,4 @@
-<h1> COP3530 Project 3 - Food Finder</h1>
+<h1>🥪 Food Finder 🍛</h1>
 
 Food Finder is a program that lists recipes based on what ingredients you have and what ingredients you can't use.
 
